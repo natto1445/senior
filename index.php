@@ -1,3 +1,6 @@
+<?php include('condb/condb.php');?>
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +23,19 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+	<script src="js/sweetalert.min.js"></script>
 </head>
 <body>
+	<?php if (isset($_SESSION['status'])) : ?>
+        <script>
+            swal({
+                title: "<?php echo $_SESSION['status']; ?>",
+                icon: "<?php echo $_SESSION['status_code']; ?>",
+                button: "OK",
+            });
+        </script>
+        <?php  unset($_SESSION['status']); ?>
+    <?php endif ?>
 	
 	<div class="limiter">
 		<div class="container-login100">
@@ -30,13 +44,13 @@
 					<img src="images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="login/checklogin.php" method="POST">
 					<span class="login100-form-title">
 						User Login
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid username is required: max 13">
-						<input class="input100" type="text" name="user" placeholder="User">
+						<input class="input100" type="text" name="usrID" placeholder="User">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user-circle" aria-hidden="true"></i>
@@ -44,7 +58,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="password" placeholder="Password" >
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -69,7 +83,6 @@
 					<div class="text-center p-t-136">
 						<a class="txt2" href="#">
 							หากไม่มี User ให้ติดต่อ Admin
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>
 				</form>
