@@ -24,7 +24,7 @@ $gen = mysqli_query($con, $sql);
     <!-- bootstrap css -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- style css -->
-    <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <link rel="stylesheet" href="../css/styles.css">
     <!-- Responsive-->
     <link rel="stylesheet" href="../css/responsive.css">
 
@@ -50,7 +50,7 @@ $gen = mysqli_query($con, $sql);
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4>เพิ่มข้อมูลรถแท็กซี่
+                    <h4><b>แก้ไขข้อมูลรถแท็กซี่</b>
                         <a class="text-danger" style="float: right; padding-left: 15px" href="../managerData/index_taxi.php"><i class="fa fa-times" aria-hidden="true"></i></a>
                         <!-- <a class="text-secondary" style="float: right;" href="../managerData/edit_taxi.php"><i class="fa fa-refresh" aria-hidden="true"></i></a> -->
                     </h4>

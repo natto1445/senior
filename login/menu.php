@@ -39,11 +39,11 @@ include('../condb/condb.php');
                 </a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="../managerData/index_user.php">ข้อมูลผู้ใช้งาน</a>
-                  <a class="dropdown-item" href="#">ข้อมูลบริษัท</a>
+                  <a class="dropdown-item" href="../managerData/index_company.php">ข้อมูลบริษัท</a>
                   <a class="dropdown-item" href="../managerData/index_brand.php">ข้อมูลยี่ห้อรถ</a>
                   <a class="dropdown-item" href="../managerData/index_generate.php">ข้อมูลรุ่นรถ</a>
                   <a class="dropdown-item" href="../managerData/index_taxi.php">ข้อมูลรถแท็กซี่</a>
-                  <a class="dropdown-item" href="#">ข้อมูลผู้เช่า</a>
+                  <a class="dropdown-item" href="../managerData/index_customer.php">ข้อมูลผู้เช่า</a>
                 </div>
               </li>
             <?php
@@ -59,9 +59,9 @@ include('../condb/condb.php');
               </a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="../managerData/index_brand.php">ข้อมูลยี่ห้อรถ</a>
-                <a class="dropdown-item" href="#">ข้อมูลรุ่นรถ</a>
-                <a class="dropdown-item" href="#">ข้อมูลรถแท็กซี่</a>
-                <a class="dropdown-item" href="#">ข้อมูลผู้เช่า</a>
+                <a class="dropdown-item" href="../managerData/index_generate.php">ข้อมูลรุ่นรถ</a>
+                <a class="dropdown-item" href="../managerData/index_taxi.php">ข้อมูลรถแท็กซี่</a>
+                <a class="dropdown-item" href="../managerData/index_customer.php">ข้อมูลผู้เช่า</a>
               </div>
             </li>
             <?php
