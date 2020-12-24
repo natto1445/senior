@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>user index</title> 
+    <title>generate index</title> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
@@ -26,9 +26,9 @@
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4>ข้อมูลผู้ใช้งาน
-                        <a class="text-success" style="float: right; padding-left: 15px" href="../managerData/create_user.php"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-                        <a class="text-secondary" style="float: right;" href="" ><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                    <h4>ข้อมูลรุ่นรถ
+                        <a class="text-success" style="float: right; padding-left: 15px" href="../managerData/create_generate.php"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                        <a class="text-secondary" style="float: right;" href="../managerData/index_generate.php" ><i class="fa fa-refresh" aria-hidden="true"></i></a>
                     </h4>
                 </div>
                 <?php if (isset($_SESSION['status'])) : ?>
@@ -45,32 +45,22 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th width="15%" align="center">รหัสผู้ใช้งาน</th>
-                            <th width="20%" align="center">ชื่อ - นามสกุล</th>
-                            <th width="10%" align="center">ตำแหน่ง</th>
-                            <th width="20%" align="center">E-mail</th>
-                            <th width="10%" align="center">เบอร์โทร</th>
-                            <th width="5%" align="center">เพศ</th>
-                            <th width="5%" align="center">แก้ไข</th>
+                            <th width="20%" align="center">ชื่อยี่ห้อ</th>
+                            <th width="20%" align="center">ชื่อรุ่น</th>
                             <th width="5%" align="center">ลบ</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                        $query = "SELECT * FROM tbuser ORDER BY id DESC"; 
+                        $query = "SELECT * FROM tbgenerate ORDER BY id DESC"; 
                         $result = mysqli_query($con, $query);
                         
                         while($row = mysqli_fetch_array($result)) { 
                     ?>
                         <tr>
-                            <td><?php echo $row['usrID'];?></td>
-                            <td><?php echo $row['usrName'];?></td>
-                            <td><?php echo $row['level'];?></td>
-                            <td><?php echo $row['email'];?></td>
-                            <td><?php echo $row['numPhone'];?></td>
-                            <td align="center"><?php echo $row['gender'];?></td>
-                            <td align="center"><a class="text-warning" href="../managerData/edit_user.php?id=<?php echo $row['usrID'];?>" onclick="return confirm('คุณต้องการแก้ไขข้อมูล <?php echo $row['usrName']; ?>')"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-                            <td align="center"><a class="text-danger" href="../managerData/delete_user.php?id=<?php echo $row['usrID'];?>" onclick="return confirm('คุณต้องการลบข้อมูล <?php echo $row['usrName']; ?>')"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td width="20%"><?php echo $row['eBrands'];?></td>
+                            <td width="20%"><?php echo $row['generate'];?></td>
+                            <td width="5%"><a class="text-danger" href="../managerData/delete_generate.php?id=<?php echo $row['generate'];?>" onclick="return confirm('คุณต้องการลบข้อมูลรุ่นรถ <?php echo $row['generate']; ?> ?')"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                         </tr>
                     <?php  
                         }            

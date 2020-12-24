@@ -17,7 +17,7 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <!-- Responsive-->
     <link rel="stylesheet" href="../css/responsive.css">
 
@@ -25,7 +25,7 @@
 
 </head>
 
-<body style="background-image: url('images/bg.jpg');">
+<body>
     <div class="menu">
         <?php include '../login/menu.php'; ?>
     </div>

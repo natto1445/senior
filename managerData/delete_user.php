@@ -21,8 +21,8 @@
             header('Location: ../managerData/index_user.php');
         }
         else{
-        echo "<script type='text/javascript'>";
-        echo "alert('Error back to delete again');";
-        echo "</script>";
+            $_SESSION['status'] = "ลบข้อมูลไม่สำเร็จ !";
+            $_SESSION['status_code'] = "error";
+            header('Location: ../managerData/index_user.php');
     }
 ?>

@@ -11,13 +11,13 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <!-- Responsive-->
     <link rel="stylesheet" href="../css/responsive.css">
     <script src="../js/sweetalert.min.js"></script>
 </head>
 
-<body style="background-image: url('images/bg.jpg');">
+<body>
     <div class="menu">
         <?php include '../login/menu.php';?>
     </div>
@@ -45,18 +45,18 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th width="20%" align="center">ชื่อแบรนด์อังกฤษ</th>
-                            <th width="20%" align="center">ชื่อแบรนด์อังกฤษ</th>
+                            <th width="20%" align="center">ชื่อยี่ห้อ อังกฤษ</th>
+                            <th width="20%" align="center">ชื่อยี่ห้อ ไทย</th>
                             <th width="5%" align="center">แก้ไข</th>
                             <th width="5%" align="center">ลบ</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                        $query = "SELECT * FROM tbbrands "; 
+                        $query = "SELECT * FROM tbbrands ORDER BY id DESC"; 
                         $result = mysqli_query($con, $query);
                         
-                        while($row = mysqli_fetch_array($result)) { 
+                        while($row = mysqli_fetch_array($result)) {
                     ?>
                         <tr>
                             <td width="20%"><?php echo $row['eBrands'];?></td>

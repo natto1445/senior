@@ -9,7 +9,7 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <!-- Responsive-->
     <link rel="stylesheet" href="../css/responsive.css">
 
@@ -17,7 +17,7 @@
 
 </head>
 
-<body style="background-image: url('images/bg.jpg');">
+<body>
     <div class="menu">
         <?php include '../login/menu.php'; ?>
     </div>
@@ -63,7 +63,7 @@
                         <div class="form-group col-md-5">
                             <label for="level">ตำแหน่ง</label>
                             <select id="level" name="level" class="form-control">
-                                <option selected disabled>เลือกตำแหน่ง</option>
+                                <option selected disabled>-กรุณาเลือกตำแหน่ง-</option>
                                 <option value="admin">แอดมิน</option>
                                 <option value="employee">พนักงาน</option>
                             </select>
@@ -71,7 +71,7 @@
                         <div class="form-group col-md-5">
                             <label for="gender">เพศ</label>
                             <select id="gender" name="gender" class="form-control">
-                                <option selected disabled>เลือกเพศ</option>
+                                <option selected disabled>-กรุณาเลือกเพศ-</option>
                                 <option value="ชาย">ชาย</option>
                                 <option value="หญิง">หญิง</option>
                             </select>

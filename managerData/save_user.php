@@ -18,6 +18,7 @@
             $_SESSION['status'] = "มีรหัสผู้ใช้งานนี้แล้ว !";
             $_SESSION['status_code'] = "error";
             header('Location: ../managerData/create_user.php');
+            die();
         }
 
     //เพิ่มข้อมูล
