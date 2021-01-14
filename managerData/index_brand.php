@@ -26,8 +26,8 @@
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4>ข้อมูลยี่ห้อรถ
-                        <a class="text-success" style="float: right; padding-left: 15px" href="../managerData/create_brand.php"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    <h4><b>ข้อมูลยี่ห้อรถ</b>
+                        <a class="text-success" style="float: right; padding-left: 15px" href="../managerData/create_brand.php"><i class="fa fa-car" aria-hidden="true"></i></a>
                         <a class="text-secondary" style="float: right;" href="../managerData/index_brand.php" ><i class="fa fa-refresh" aria-hidden="true"></i></a>
                     </h4>
                 </div>

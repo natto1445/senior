@@ -26,8 +26,8 @@
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4>ข้อมูลรถแท็กซี่
-                        <a class="text-success" style="float: right; padding-left: 15px" href="../managerData/create_taxi.php"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    <h4><b>ข้อมูลรถแท็กซี่</b>
+                        <a class="text-success" style="float: right; padding-left: 15px" href="../managerData/create_taxi.php"><i class="fa fa-car" aria-hidden="true"></i></a>
                         <a class="text-secondary" style="float: right;" href="../managerData/index_taxi.php" ><i class="fa fa-refresh" aria-hidden="true"></i></a>
                     </h4>
                 </div>
@@ -56,7 +56,7 @@
                                 <tr>
                                     <td rowspan="3" style="width: 240px;"><img src="../images/taxi/<?php echo $row['carPic'];?>" class="img-thumbnail" alt="taxi" width="100%"></td>
                                     <td style="padding-left: 20px;">ยี่ห้อ : <?php echo $row['carBrand'];?></td>
-                                    <td style="padding-left: 20px;">รุ่น : <?php echo $row['carID'];?></td>
+                                    <td style="padding-left: 20px;">รุ่น : <?php echo $row['carGen'];?></td>
                                 </tr>
                                 <tr>
                                     
