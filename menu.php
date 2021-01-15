@@ -96,15 +96,8 @@ if ($level == "admin" || $level == "employee") {
           <?php
           if ($level == "admin") {
           ?>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
-                รายงาน
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">รายงาน 1</a>
-                <a class="dropdown-item" href="#">รายงาน 2</a>
-                <a class="dropdown-item" href="#">รายงาน 3</a>
-              </div>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="report/index_report.php">รายงาน</a>
             </li>
           <?php
           }
