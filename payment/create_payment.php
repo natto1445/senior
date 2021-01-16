@@ -158,12 +158,13 @@ $date = date('Y');
                         </div>
                         <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;">
-                                <textarea id="text_rePair" name="text_rePair" rows="4" cols="50">**หากมีการซ่อมให้ระบุงานซ่อม พร้อมราคา 50%**</textarea>
+                                <textarea id="text_rePair" name="text_rePair" rows="4" cols="50">**หากมีการซ่อมให้ระบุงานซ่อม**</textarea>
                             </div>
                         </div>
                         <div class="col-sm-4 border">
-                            <div align="center" style="font-size: 14pt;">
-                                <input type="text" id="price_rePair" name="price_rePair" size="5" value="0">
+                            <div align="right" style="font-size: 14pt;">
+                                <b>ราคาเต็ม</b> <input type="text" id="price_rePair100" name="price_rePair100" size="5" value="0"> <br><br>
+                                <b>ราคาที่ผู้เช่าจ่าย</b> <input type="text" id="price_rePair" name="price_rePair" size="5" value="0" readonly>
                                 <input type="hidden" id="repair" name="repair" value="">
                             </div>
                         </div>
@@ -192,8 +193,10 @@ $date = date('Y');
     <script>
         $(document).ready(function() {
 
-            $("#price_rePair").change(function() {
-                let price_rePair = $(this).val()
+            $("#price_rePair100").change(function() {
+                let price_rePai0r100 = $(this).val()
+                let price_rePair = price_rePai0r100/2
+                $("#price_rePair").val(price_rePair);
                 let total = parseFloat(price_rePair) + parseFloat(balance);
                 $("#total").html(total + " -.");
                 $("#total2").val(total + " -.");

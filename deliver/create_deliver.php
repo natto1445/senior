@@ -107,16 +107,16 @@ $datenow = date('Y-m-d');
                         <form action="save_deliver.php" method="post">
                             <div class="form-row col-md-12">
                                 <div class="form-group col-md-2">
-                                    <img class="card-img-bottom img-thumbnail" src="../images/customer/<?php echo $row['cusPic']; ?>" alt="cusImg" style="width: 150px;">
+                                    <img class="card-img-bottom img-thumbnail" src="../images/customer/<?php echo $row['cusPic']; ?>" alt="cusImg" style="height: 150px;">
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <img class="card-img-bottom img-thumbnail" src="../images/taxi/<?php echo $row['carPic']; ?>" alt="taxiImg" style="width: 150px;">
+                                    <img class="card-img-bottom img-thumbnail" src="../images/taxi/<?php echo $row['carPic']; ?>" alt="taxiImg" style="height: 150px;">
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-3" style="padding-top: 30px;">
                                     <label for="delDate">วันที่ส่งมอบ</label>
                                     <input type="text" class="form-control" name="delDate" id="delDate" value="<?php echo $datenow ?>" readonly>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-3" style="padding-top: 30px;">
                                     <label for="hirNum">เลขที่สัญญา</label>
                                     <input type="text" class="form-control" name="hirNum" id="hirNum" value="<?php echo $row['hirNum']; ?>" readonly>
                                 </div>

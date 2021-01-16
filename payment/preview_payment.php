@@ -100,7 +100,7 @@ $mpdf = new \Mpdf\Mpdf([
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" align="center"><br>
+                                    <td colspan="3" align="center" style="padding-top: 50px;"><br>
                                         <h3><b>ใบเสร็จรับเงิน</b></h3>
                                     </td>
                                 </tr>
@@ -120,14 +120,14 @@ $mpdf = new \Mpdf\Mpdf([
                                                 </tr>
                                                 <tr align="left">
                                                     <th width="10%" style="vertical-align: middle;"></th>
-                                                    <th width="35%" style="vertical-align: middle;"><b>ชื่อผู้เช่า</b> <?php echo $row['cusCard'] ?></th>
+                                                    <th width="35%" style="vertical-align: middle; padding-top: 7px;"><b>ชื่อผู้เช่า</b> <?php echo $row['cusCard'] ?></th>
                                                     <th width="10%" style="vertical-align: middle;"><b></b></th>
                                                     <th width="35%" style="vertical-align: middle;"><b>พนักงานรับเงิน</b> <?php echo $row['usrID'] ?></th>
                                                     <th width="10%" style="vertical-align: middle;"><b></b></th>
                                                 </tr>
                                                 <tr align="left">
                                                     <th width="10%" style="vertical-align: middle;"></th>
-                                                    <th width="35%" style="vertical-align: middle;"><b>วันที่เริ่มเช่า</b> <?php echo $row['hirStart'] ?></th>
+                                                    <th width="35%" style="vertical-align: middle; padding-top: 7px;"><b>วันที่เริ่มเช่า</b> <?php echo $row['hirStart'] ?></th>
                                                     <th width="10%" style="vertical-align: middle;"><b></b></th>
                                                     <th width="35%" style="vertical-align: middle;"><b>วันที่สิ้นสุด</b> <?php echo $row['hirEnd'] ?></th>
                                                     <th width="10%" style="vertical-align: middle;"><b></b></th>
@@ -141,8 +141,11 @@ $mpdf = new \Mpdf\Mpdf([
                                 </tr>
                                 <tr>
                                     <td colspan="3" align="center">
-                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style='font-size:16.0pt; font-family:"TH SarabunPSK",sans-serif'>
+                                        <table border="1" cellpadding="0" cellspacing="0" width="80%" style='font-size:16.0pt; font-family:"TH SarabunPSK",sans-serif'>
                                             <tbody>
+                                                <hr style="width: 80%;">
+                                                <hr style="width: 80%;">
+                                                <br>
                                                 <tr align="center">
                                                     <td width="50%" style="vertical-align: middle;" align="center"><b>รายการ</b></td>
                                                     <td width="50%" style="vertical-align: middle;" align="center"><b>ยอดเงิน</b></td>
@@ -151,53 +154,53 @@ $mpdf = new \Mpdf\Mpdf([
                                                     <td style="padding-top: 30px;"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 120px"><b>รถแท็กซี่</b> <?php echo $row['carNum'] ?></td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"><?php echo $row['carRent'] ?> -.</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px"><b>รถแท็กซี่</b> <?php echo $row['carNum'] ?></td>
+                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['carRent'] ?> -.</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 120px">จำนวนวัน</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"><?php echo $row['numDay'] ?> วัน</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">จำนวนวัน</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['numDay'] ?> วัน</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 120px">รามค่าเช่า</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"><?php echo $row['hirTotal'] ?> -.</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">รามค่าเช่า</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['hirTotal'] ?> -.</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 120px"><u>หัก</u> ค่ามัดจำ 50%</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"><?php echo $row['hirDeposit'] ?> -.</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px"><u>หัก</u> ค่ามัดจำ 50%</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['hirDeposit'] ?> -.</td>
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-top: 30px;"></td>
                                                     <td style="padding-top: 30px;"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 120px">ค้างชำระ</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"><?php echo $row['hirDeposit'] ?> -.</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">ค้างชำระ</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['hirDeposit'] ?> -.</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 120px">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"><?php echo $row['Fines'] ?> -.</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['Fines'] ?> -.</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 120px">
+                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">
                                                         <?php
-                                                        if ($row['text_rePair'] == "**หากมีการซ่อมให้ระบุงานซ่อม พร้อมราคา 50%**") {
+                                                        if ($row['text_rePair'] == "**หากมีการซ่อมให้ระบุงานซ่อม**") {
                                                             echo "ไม่มีการซ่อมรถ";
                                                         } else {
                                                             echo $row['text_rePair'];
                                                         }
                                                         ?>
                                                     </td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"><?php echo $row['price_rePair'] ?> -.</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['price_rePair'] ?> -.</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 120px">ยอดชำระสุทธิ</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"><?php echo $row['total2'] ?> -.</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">ยอดชำระสุทธิ</td>
+                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['total2'] ?> -.</td>
 
                                                 </tr>
                                                 <tr>
                                                     <td></td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 225px" align="right"> <?php echo convertAmountToLetter($row['total2']); ?></td>
+                                                    <td width="50%" style="vertical-align: middle;" align="center"> <?php echo convertAmountToLetter($row['total2']); ?></td>
                                                 </tr>
                                             </tbody>
                                         </table>

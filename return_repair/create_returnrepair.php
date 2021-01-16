@@ -100,7 +100,7 @@ $datenow = date('Y-m-d');
                     <div class="form-row col-md-10">
                         <div class="col-md-4">
                             <label for="name" class="control-label">รูปรถแท็กซี่</label>
-                            <img src="../images/taxi/<?php echo $row['carPic']; ?>" id="preview" class="img-fluid img-thumbnail" style="width: 240px;height: 240px"><br><br>
+                            <img src="../images/taxi/<?php echo $row['carPic']; ?>" id="preview" class="img-fluid img-thumbnail" style="width: 280px;height: 240px"><br><br>
                         </div>
                     </div>
                     <div class="form-row col-md-8">

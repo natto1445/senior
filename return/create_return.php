@@ -2,7 +2,7 @@
 include('../condb/condb.php');
 
 //Load Establishment list from database
-$sql = "SELECT * FROM tbcontract WHERE hirStatus='จองรถ' AND deliver='1'";
+$sql = "SELECT * FROM tbcontract JOIN tbtaxi ON tbcontract.carID=tbtaxi.carID WHERE hirStatus='จองรถ' AND deliver='1'";
 $contract = mysqli_query($con, $sql);
 
 $query = "SELECT MAX(id) as maxid from tbreturn";
@@ -80,11 +80,11 @@ $time = date('H:i:s');
                 <form action="find_contract.php" method="post">
                     <div class="form-row col-md-10">
                         <div class="form-group col-md-3">
-                            <label for="hirNum_find">สัญญาเช่า</label>
+                            <label for="hirNum_find">ทะเบียนรถ</label>
                             <select class="form-control" name="hirNum_find" id="hirNum_find">
-                                <option selected disabled value="">-กรุณาเลือกสัญญาเช่า-</option>
+                                <option selected disabled value="">-กรุณาเลือกทะเบียน-</option>
                                 <?php while ($data = mysqli_fetch_assoc($contract)) { ?>
-                                    <option value="<?php echo $data["hirNum"] ?>"><?php echo $data["hirNum"] ?></option>
+                                    <option value="<?php echo $data["hirNum"] ?>"><?php echo $data["carNum"] ?></option>
                                 <?php } ?>
                             </select>
                             <input type="hidden" class="form-control" name="usrID" id="usrID" value="<?php echo $_SESSION["usrName"] ?>" readonly>
