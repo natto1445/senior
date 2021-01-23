@@ -3,6 +3,7 @@ include('../condb/condb.php');
 include('../includes/helper.php');
 include('../layout/header.php');
 
+$search     = request('search');
 $start_date = request('start_date');
 $end_date   = request('end_date');
 $page       = request('page', 1);
@@ -15,12 +16,20 @@ $select = "SELECT tbcontract.*,tbcustomer.cusName,tbuser.usrName,tbtaxi.carNum "
 $from   = "FROM tbcontract ";
 $join   = "JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID ";
 $where = [];
+
+// ชื่อพนักงาน tbuser.usrName เลขที่สัญญา tbcontract.hirNum เลขที่ชำระเงิน เลขที่ส่งซ่อม
+if($search){
+    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+}
 if($start_date){
     $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
 }
 if($end_date){
     $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
 }
+
+
+
 if(count($where)){
     $where = "WHERE ".implode(" AND ", $where);
 }else{
@@ -43,6 +52,10 @@ include('../layout/header.php');
         <div class="col-md-12">
             <form method="GET" action="hir_report.php">
                 <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label class="sr-only" for="search">ค้นหา</label>
+                        <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
+                    </div>
                     <div class="col-auto">
                         <label class="sr-only" for="start_date">วันเริ่มต้น</label>
                         <input type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
@@ -129,7 +142,7 @@ include('../layout/header.php');
                     }else{
                     ?>
                         <li class="page-item">
-                            <a class="page-link" href="<?php echo queryString(['page'=>($page-1),'start_date'=>$start_date,'end_date'=>$end_date]); ?>" rel="prev">&laquo;</a>
+                            <a class="page-link" href="<?php echo queryString(['page'=>($page-1),'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" rel="prev">&laquo;</a>
                         </li>
                     <?php 
                     }
@@ -141,14 +154,14 @@ include('../layout/header.php');
                         <?php
                         }else{
                         ?>
-                            <li class="page-item"><a class="page-link" href="<?php echo queryString(['page'=>$pagerang,'start_date'=>$start_date,'end_date'=>$end_date]); ?>"><?php echo $pagerang; ?></a></li>
+                            <li class="page-item"><a class="page-link" href="<?php echo queryString(['page'=>$pagerang,'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>"><?php echo $pagerang; ?></a></li>
                         <?php
                         }
                     }
 
                     if($hasMorePages){
                     ?>
-                        <li class="page-item"><a class="page-link" href="<?php echo queryString(['page'=>($page+1),'start_date'=>$start_date,'end_date'=>$end_date]); ?>" rel="next">&raquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="<?php echo queryString(['page'=>($page+1),'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" rel="next">&raquo;</a></li>
                     <?php 
                 }else{
                     ?>
