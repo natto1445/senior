@@ -1,12 +1,35 @@
 <?php 
+include('../condb/condb.php');
 include('../includes/helper.php');
 include('../vendor/autoload.php');
+
+$start_date = request('start_date');
+$end_date   = request('end_date');
+
+// ดึงข้อมูล
+$select = "SELECT tbcontract.*,tbcustomer.cusName,tbuser.usrName,tbtaxi.carNum ";
+$from   = "FROM tbcontract ";
+$join   = "JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID ";
+$where = [];
+if($start_date){
+    $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
+}
+if($end_date){
+    $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
+}
+if(count($where)){
+    $where = "WHERE ".implode(" AND ", $where);
+}else{
+    $where = "";
+}
+
+$order  = "ORDER BY tbcontract.id DESC ";
+$query  = $select.$from.$join.$where.$order;
 
 header("Content-type:application/pdf");
 header("Content-disposition: attachment;filename=YOURFILE.pdf");
 
 $mpdf = new \Mpdf\Mpdf();
-// ob_start(); // Start get HTML code
 $html = '
 <!DOCTYPE html>
 <html>
@@ -32,34 +55,41 @@ $html = '
 		</style>
 	</head>
 	<body>
-		<h1>ตัวอย่างในการเก็บโค้ด HTML มาเป็น PDF</h1>
+		<h1>รายงานสัญญาเช่า</h1>
 		<table>
-			<tr>
-				<th>ชื่อ</th>
-				<th>ที่อยู่</th>
-				<th>ประเทศ</th>
-			</tr>
-			<tr>
-				<td>น้องไก่ คนงาม</td>
-				<td>ลำพูน</td>
-				<td>ไทย</td>
-			</tr>
-			<tr>
-				<td>นายรักเรียน</td>
-				<td>Francisco Chang</td>
-				<td>Mexico</td>
-			</tr>
-			<tr>
-				<td>นายรักดี</td>
-				<td>Roland Mendel</td>
-				<td>Austria</td>
-			</tr>
-		</table>
-	</body>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>เลขสัญญา</th>
+                    <th>ชื่อผู้เช่า</th>
+                    <th>วันที่เริ่ม</th>
+                    <th>วันที่สิ้นสุด</th>
+                    <th>ชื่อพนักงาน</th>
+                    <th>ทะเบียนรถ</th>
+                    <th>ราคารถ</th>
+                    <th>จำนวนวัน</th>
+                </tr>
+            </thead>
+            <tbody>';
+$result = $con->query($query);
+while($contract = $result->fetch_assoc()){
+    $html .= '
+    <tr>
+        <td>'.$contract['id'].'</td>
+        <td>'.$contract['hirNum'].'</td>
+        <td>'.$contract['cusName'].'</td>
+        <td>'.$contract['hirStart'].'</td>
+        <td>'.$contract['hirEnd'].'</td>
+        <td>'.$contract['usrName'].'</td>
+        <td>'.$contract['carNum'].'</td>
+        <td>'.$contract['carRent'].'</td>
+        <td>'.$contract['numDay'].'</td>
+    </tr>';
+}
+$html .= '</tbody>
+</table>
+</body>
 </html>';
-// $html = ob_get_contents();  // ทำการเก็บค่า HTML จากคำสั่ง ob_start()
 
-// ob_end_flush();
-$mpdf->WriteHTML($html);    // ทำการสร้าง PDF ไฟล์
-$mpdf->Output('test.pdf',"I"); // ให้ทำการบันทึกโค้ด HTML เป็น PDF โดยบันทึกเป็นไฟล์ชื่อ MyPDF.pdf
-?>
+$mpdf->WriteHTML($html);
+$mpdf->Output('test.pdf',"I");
