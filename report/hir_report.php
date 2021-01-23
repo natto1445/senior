@@ -1,8 +1,7 @@
 <?php 
+include('../condb/condb.php');
 include('../includes/helper.php');
 include('../layout/header.php');
-
-$pdo = new DB();
 
 $start_date = request('start_date');
 $end_date   = request('end_date');
@@ -31,26 +30,12 @@ if(count($where)){
 $order  = "ORDER BY tbcontract.id DESC ";
 $limit  = "LIMIT $perPage ";
 $offset = "OFFSET $offset ";
-$sql    = $select.$from.$join.$where.$order.$limit.$offset;
-$contracts = $pdo->query($sql)->get();
+$query  = $select.$from.$join.$where.$order.$limit.$offset;
 
-// ดึงจำนวนแถวทั้งหมด
-$select = "SELECT count(*) as aggregate ";
-$sql    = $select.$from.$join.$where;
-$total  = $pdo->query($sql)->count();
-
-$lastPage = 1;
-$max = (int) ceil($total / $perPage);
-if($max > 1){
-    $lastPage = $max;
-}
-$hasPages = $lastPage > 1;
-$onFirstPage = $page <= 1;
-$hasMorePages = $page < $lastPage;
-
+include('../layout/header.php');
 ?>
 <div class="menu">
-    <?php include '../login/menu.php'; ?>
+    <?php include '../layout/menu.php'; ?>
 </div>
 <div class="container">
     <h4 class="mt-3 mb-3">รายงานสัญญาเช่า</h4>
@@ -69,11 +54,9 @@ $hasMorePages = $page < $lastPage;
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
-                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#staticBackdrop">
+                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน
                         </button>
-
-                        
                     </div>
                 </div>
             </form>
@@ -97,18 +80,19 @@ $hasMorePages = $page < $lastPage;
                 </thead>
                 <tbody>
                     <?php 
-                    foreach($contracts as $contract){
+                    $result = $con->query($query);
+                    while($contract = $result->fetch_assoc()){
                     ?>
                     <tr>
-                        <td><?php echo $contract->id; ?></td>
-                        <td><?php echo $contract->hirNum; ?></td>
-                        <td><?php echo $contract->cusName; ?></td>
-                        <td><?php echo $contract->hirStart; ?></td>
-                        <td><?php echo $contract->hirEnd; ?></td>
-                        <td><?php echo $contract->usrName; ?></td>
-                        <td><?php echo $contract->carNum; ?></td>
-                        <td><?php echo $contract->carRent; ?></td>
-                        <td><?php echo $contract->numDay; ?></td>
+                        <td><?php echo $contract['id']; ?></td>
+                        <td><?php echo $contract['hirNum']; ?></td>
+                        <td><?php echo $contract['cusName']; ?></td>
+                        <td><?php echo $contract['hirStart']; ?></td>
+                        <td><?php echo $contract['hirEnd']; ?></td>
+                        <td><?php echo $contract['usrName']; ?></td>
+                        <td><?php echo $contract['carNum']; ?></td>
+                        <td><?php echo $contract['carRent']; ?></td>
+                        <td><?php echo $contract['numDay']; ?></td>
                     </tr>
                     <?php 
                     }
@@ -117,6 +101,23 @@ $hasMorePages = $page < $lastPage;
             </table>
 
             <?php 
+            // Pagination 
+            
+            $select = "SELECT count(*) as total ";
+            $query  = $select.$from.$join.$where;
+            $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
+            $row    = mysqli_fetch_object($result);
+            $total  = $row->total;
+
+            $lastPage = 1;
+            $max = (int) ceil($total / $perPage);
+            if($max > 1){
+                $lastPage = $max;
+            }
+            $hasPages = $lastPage > 1;
+            $onFirstPage = $page <= 1;
+            $hasMorePages = $page < $lastPage;
+
             if($hasPages){
             ?>
                 <ul class="pagination">
@@ -165,23 +166,24 @@ $hasMorePages = $page < $lastPage;
 </div>
 
 <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <iframe src="/contract/ContractReport.pdf" title="report" style="width: 100%;min-height: 450px;"></iframe>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                                <button type="button" class="btn btn-primary">พิมพ์รายงาน</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+<div class="modal fade" id="reportModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">รายงาน</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe src="hir_report_pdf.php" name="report" style="width: 100%;min-height: 600px;"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                <button type="button" class="btn btn-primary" onClick="window.frames['report'].print();">พิมพ์รายงาน</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php include('../layout/footer.php'); ?>
