@@ -29,7 +29,26 @@ $query  = $select.$from.$join.$where.$order;
 header("Content-type:application/pdf");
 header("Content-disposition: attachment;filename=YOURFILE.pdf");
 
-$mpdf = new \Mpdf\Mpdf();
+$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+$fontDirs = $defaultConfig['fontDir'];
+
+$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+$fontData = $defaultFontConfig['fontdata'];
+
+$mpdf = new \Mpdf\Mpdf([
+    'fontDir' => array_merge($fontDirs, [
+        __DIR__ . '../tmp',
+    ]),
+    'fontdata' => $fontData + [
+        'sarabun' => [
+            'R' => 'THSarabunNew.ttf',
+            'I' => 'THSarabunNew Italic.ttf',
+            'B' => 'THSarabunNew Bold.ttf',
+            'BI' => 'THSarabunNew BoldItalic.ttf',
+        ]
+    ],
+    'default_font' => 'sarabun'
+]);
 $html = '
 <!DOCTYPE html>
 <html>
