@@ -8,7 +8,7 @@ include('../condb/condb.php');  //ไฟล์เชื่อมต่อกั�
 //สร้างตัวแปรสำหรับรับค่า retID จากไฟล์แสดงข้อมูล
 $payID = $_REQUEST["id"];
 
-$sql = "SELECT * FROM tbpayment WHERE payID='$payID'";
+$sql = "SELECT * FROM tbpayment JOIN tbtaxi ON tbpayment.carID=tbtaxi.carID JOIN tbcustomer ON tbpayment.cusCard=tbcustomer.cusCard JOIN tbreturn ON tbpayment.hirNum=tbreturn.hirNum WHERE tbpayment.payID='$payID'";
 $query = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($query);
 ?>
@@ -63,36 +63,29 @@ $row = mysqli_fetch_array($query);
 
                         </div>
                         <div class="col-md-5">
-                            <div align="left" style="font-size: 16pt;"><b>เลขที่ใบเสร็จ</b> <?php echo $row['payID'] ?> </div>
-                            <input type="hidden" name="payID" value="PAY-<?php echo $date ?>-00<?php echo $data['maxid'] + 1 ?>">
-                            <input type="hidden" name="hirNum" value="<?php echo $row['hirNum'] ?>">
+                            <div align="left" style="font-size: 16pt;"><b>เลขที่ใบเสร็จ</b> <?php echo $payID ?> </div>
                         </div>
                     </div>
                     <div class="row" style="padding-top: 3px;">
                         <div class="col-md-4">
                             <div style="font-size: 16pt; padding-left: 10px;"><b>ชื่อผู้เช่า</b> <?php echo $row['cusName'] ?> </div>
-                            <input type="hidden" name="cusCard" value="<?php echo $row['cusCard'] ?>">
                         </div>
                         <div class="col-md-3">
 
                         </div>
                         <div class="col-md-5">
                             <div align="left" style="font-size: 16pt;"><b>พนักงานรับเงิน</b> <?php echo $_SESSION['usrName'] ?> </div>
-                            <input type="hidden" name="usrID" value="<?php echo $_SESSION['usrID'] ?>">
                         </div>
                     </div>
                     <div class="row" style="padding-top: 3px;">
                         <div class="col-md-4">
                             <div style="font-size: 16pt; padding-left: 10px;"><b>วันที่เริ่มเช่า</b> <?php echo $row['hirStart'] ?> </div>
-                            <input type="hidden" name="hirStart" value="<?php echo $row['hirStart'] ?>">
                         </div>
                         <div class="col-md-3">
                             <div style="font-size: 16pt; padding-left: 10px;"><b>วันที่สิ้นสุด</b> <?php echo $row['hirEnd'] ?> </div>
-                            <input type="hidden" name="hirEnd" value="<?php echo $row['hirEnd'] ?>">
                         </div>
                         <div class="col-md-5">
                             <div align="left" style="font-size: 16pt;"><b>จำนวนวัน</b> <?php echo $row['numDay'] ?> <b>วัน</b></div>
-                            <input type="hidden" name="numDay" value="<?php echo $row['numDay'] ?>">
                         </div>
                     </div>
                     <div class="row" style="padding-top: 15px;">
@@ -104,7 +97,6 @@ $row = mysqli_fetch_array($query);
                         </div>
                         <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;"><b>รถแท็กซี่</b> <?php echo $row['carNum'] ?></div>
-                            <input type="hidden" name="carID" value="<?php echo $row['carID'] ?>">
                         </div>
                         <div class="col-sm-4 border">
                             <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['carRent'] ?> -.</div>
@@ -119,15 +111,13 @@ $row = mysqli_fetch_array($query);
                             <div align="left" style="font-size: 14pt; padding-left: 150px;">รวมค่าเช่า</div>
                         </div>
                         <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirTotal'] ?> -.</div>
-                            <input type="hidden" name="totalhir" value="<?php echo $row['carRent'] * $row['numDay'] ?>">
+                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirDeposit'] * 2 ?> -.</div>
                         </div>
                         <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;"><u>หัก</u> ค่ามัดจำ 50%</div>
                         </div>
                         <div class="col-sm-4 border">
                             <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirDeposit'] ?> -.</div>
-                            <input type="hidden" name="hirDeposit" value="<?php echo $row['hirDeposit'] ?>">
                         </div>
                     </div>
                     <div class="row" style="padding-top: 24px;">
@@ -136,34 +126,38 @@ $row = mysqli_fetch_array($query);
                         </div>
                         <div class="col-sm-4 border">
                             <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirDeposit'] ?> -.</div>
-                            <input type="hidden" name="balance_hirDeposit" value="<?php echo $row['hirDeposit'] ?>">
                         </div>
                         <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</div>
                         </div>
                         <div class="col-sm-4 border">
                             <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['Fines'] ?> -.</div>
-                            <input type="hidden" name="Fines" value="<?php echo $row['Fines'] ?>">
                         </div>
                         <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;">
-                                <textarea id="text_rePair" name="text_rePair" rows="4" cols="50">**หากมีการซ่อมให้ระบุงานซ่อม**</textarea>
+                                <textarea id="text_rePair" name="text_rePair" rows="4" cols="50" readonly><?php if ($row['text_rePair'] == "**หากมีการซ่อมให้ระบุงานซ่อม**") {
+                                                                                                        echo "ไม่มีการซ่อมรถ";
+                                                                                                    } else {
+                                                                                                        echo $row['text_rePair'];
+                                                                                                    } ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-4 border">
                             <div align="right" style="font-size: 14pt;">
-                                <b>ราคาเต็ม</b> <input type="text" id="price_rePair100" name="price_rePair100" size="5" value="0"> <br><br>
-                                <b>ราคาที่ผู้เช่าจ่าย</b> <input type="text" id="price_rePair" name="price_rePair" size="5" value="0" readonly>
-                                <input type="hidden" id="repair" name="repair" value="">
+                                <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['price_rePair'] ?> -.</div>
                             </div>
+                        </div>
+                        <div class="col-sm-8 border">
+                            <div align="left" style="font-size: 14pt; padding-left: 150px;"></div>
+                        </div>
+                        <div class="col-sm-4 border">
+                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['total2'] ?> -.</b></div>
                         </div>
                         <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;">ยอดชำระสุทธิ</div>
                         </div>
                         <div class="col-sm-4 border">
-                            <input type="hidden" id="balance" name="balance" value="<?php echo $row['hirDeposit'] + $row['Fines'] ?>">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;" id="total">-.</b></div>
-                            <input type="hidden" id="total2" name="total2" value="">
+                            <div align="right" style="font-size: 14pt; padding-right: 50px;"><?php echo convertAmountToLetter($row['total2']); ?>-.</b></div>
                         </div>
                     </div>
                     <br>
@@ -173,7 +167,7 @@ $row = mysqli_fetch_array($query);
             </div>
             <br>
             <div>
-                <button type="submit" class="btn btn-success">บันทึก</button>
+                <button type="submit" class="btn btn-success">พิมพ์</button>
                 <!-- <button type="submit" class="btn btn-primary">พิมพ์</button> -->
             </div>
         </form>
@@ -184,7 +178,7 @@ $row = mysqli_fetch_array($query);
 
             $("#price_rePair100").change(function() {
                 let price_rePai0r100 = $(this).val()
-                let price_rePair = price_rePai0r100/2
+                let price_rePair = price_rePai0r100 / 2
                 $("#price_rePair").val(price_rePair);
                 let total = parseFloat(price_rePair) + parseFloat(balance);
                 $("#total").html(total + " -.");
@@ -217,3 +211,66 @@ $row = mysqli_fetch_array($query);
 </body>
 
 </html>
+
+<?php
+function convertAmountToLetter($number)
+{
+    if (empty($number)) return "";
+    $number = strval($number);
+    $txtnum1 = array('ศูนย์', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า', 'สิบ');
+    $txtnum2 = array('', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน');
+    $number = str_replace(",", "", $number);
+    $number = str_replace(" ", "", $number);
+    $number = str_replace("บาท", "", $number);
+    $number = explode(".", $number);
+    if (sizeof($number) > 2) {
+        return '';
+        exit;
+    }
+    $strlen = strlen($number[0]);
+    $convert = '';
+    for ($i = 0; $i < $strlen; $i++) {
+        $n = substr($number[0], $i, 1);
+        if ($n != 0) {
+            if ($i == ($strlen - 1) && $n == 1) {
+                $convert .= 'เอ็ด';
+            } elseif ($i == ($strlen - 2) && $n == 2) {
+                $convert .= 'ยี่';
+            } elseif ($i == ($strlen - 2) && $n == 1) {
+                $convert .= '';
+            } else {
+                $convert .= $txtnum1[$n];
+            }
+            $convert .= $txtnum2[$strlen - $i - 1];
+        }
+    }
+    $convert .= 'บาท';
+    if (sizeof($number) == 1) {
+        $convert .= 'ถ้วน';
+    } else {
+        if ($number[1] == '0' || $number[1] == '00' || $number[1] == '') {
+            $convert .= 'ถ้วน';
+        } else {
+            $number[1] = substr($number[1], 0, 2);
+            $strlen = strlen($number[1]);
+            for ($i = 0; $i < $strlen; $i++) {
+                $n = substr($number[1], $i, 1);
+                if ($n != 0) {
+                    if ($i > 0 && $n == 1) {
+                        $convert .= 'เอ็ด';
+                    } elseif ($i == 0 && $n == 2) {
+                        $convert .= 'ยี่';
+                    } elseif ($i == 0 && $n == 1) {
+                        $convert .= '';
+                    } else {
+                        $convert .= $txtnum1[$n];
+                    }
+                    $convert .= $i == 0 ? $txtnum2[1] : '';
+                }
+            }
+            $convert .= 'สตางค์';
+        }
+    }
+    return $convert . PHP_EOL;
+}
+?>
