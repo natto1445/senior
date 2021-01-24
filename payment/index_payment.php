@@ -75,11 +75,69 @@ include('../condb/condb.php');
                         <br>
                     <?php
                     }
+                    //mysqli_close($con);
+                    ?>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card bg-light text-dark">
+            <div class="card-body" style="width: 100%;">
+                <div>
+                    <h4>
+                        <b>สัญญาที่ชำระแล้ว</b>
+                    </h4>
+                </div>
+                <br>
+                <div>
+                    <?php
+                    $sql = "SELECT * FROM tbcontract  JOIN tbreturn ON tbcontract.hirNum = tbreturn.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbcontract.usrID = tbuser.usrID JOIN tbpayment ON tbpayment.hirNum=tbcontract.hirNum WHERE tbcontract.deliver='ชำระแล้ว' ORDER BY tbreturn.id DESC";
+                    $result_sql = mysqli_query($con, $sql);
+
+                    while ($data = mysqli_fetch_array($result_sql)) {
+                    ?>
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <table class="table-borderless">
+                                    <tbody>
+                                        <thead>
+                                            <tr>
+                                                <td style="width: 12%;"><b>เลขที่ชำระ</b></td>
+                                                <td style="width: 12%;"><b>เลขสัญญา</b></td>
+                                                <td style="width: 13%;"><b>ชื่อผู้เช่า</b></td>
+                                                <td style="padding-left: 10px; width: 15%;"><b>ทะเบียนรถ</b></td>
+                                                <td style="padding-left: 10px;"><b>วันที่เริ่มเช่า</b></td>
+                                                <td style="width: 10%; padding-left: 10px;"><b>วันที่คืนรถ</b></td>
+                                                <td style="width: 8%; padding-left: 10px;"><b>ค่าปรับ</b></td>
+                                                <td style="padding-left: 10px;"><b>ยอดสุทธิ</b></td>
+                                                <td style="padding-left: 10px;"><b>สถานะ</b></td>
+                                            </tr>
+                                        </thead>
+                                        <tr>
+                                            <td style="width: 12%;"><?php echo $data['payID']; ?></td>
+                                            <td style="width: 12%;"><?php echo $data['hirNum']; ?></td>
+                                            <td style="width: 13%;"><?php echo $data['cusName']; ?></td>
+                                            <td style="padding-left: 10px; width: 15%;"><?php echo $data['carNum']; ?></td>
+                                            <td style="padding-left: 10px;"><?php echo $data['hirStart']; ?></td>
+                                            <td style="width: 10%; padding-left: 10px;"><?php echo $data['retDate']; ?></td>
+                                            <td style="width: 8%; padding-left: 10px;"><?php echo $data['Fines']; ?></td>
+                                            <td style="padding-left: 10px;"><?php echo $data['total']; ?></td>
+                                            <td style="padding-left: 10px;"><?php echo $data['deliver']; ?></td>
+                                            <td style="padding-left: 30px;"> <a class="btn btn-success" href="../payment/print_payment.php?id=<?php echo $data['payID']; ?>" onclick="return confirm('คุณต้องการพิมพ์ใบเสร็จ <?php echo $data['payID']; ?> อีกครั้งใช่ไหม ?')"><i class="fa fa-file-text-o" aria-hidden="true"></i></a> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                    <?php
+                    }
                     mysqli_close($con);
                     ?>
                 </div>
             </div>
         </div>
+
     </div>
 </body>
 

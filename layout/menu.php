@@ -5,6 +5,7 @@ $sql2 = "SELECT * FROM tbcompany";
 $query2 = mysqli_query($con, $sql2);
 $row2 = mysqli_fetch_array($query2);
 
+$level = $_SESSION['level'];
 $name = $_SESSION['usrID'];
 
 if(in_array($_SESSION['level'], ['admin','employee'])) {
