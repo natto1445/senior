@@ -7,10 +7,34 @@ include('../condb/condb.php');  //ไฟล์เชื่อมต่อกั�
 
 //สร้างตัวแปรสำหรับรับค่า retID จากไฟล์แสดงข้อมูล
 $payID = $_REQUEST["id"];
+$date = date('d-m-Y');
 
-$sql = "SELECT * FROM tbpayment JOIN tbtaxi ON tbpayment.carID=tbtaxi.carID JOIN tbcustomer ON tbpayment.cusCard=tbcustomer.cusCard JOIN tbreturn ON tbpayment.hirNum=tbreturn.hirNum WHERE tbpayment.payID='$payID'";
+$sql = "SELECT * FROM tbpayment JOIN tbtaxi ON tbpayment.carID=tbtaxi.carID JOIN tbcustomer ON tbpayment.cusCard=tbcustomer.cusCard JOIN tbreturn ON tbpayment.hirNum=tbreturn.hirNum Join tbcontract ON tbpayment.hirNum=tbcontract.hirNum WHERE tbpayment.payID='$payID'";
 $query = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($query);
+
+require_once __DIR__ . '../../vendor/autoload.php';
+
+$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+$fontDirs = $defaultConfig['fontDir'];
+
+$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+$fontData = $defaultFontConfig['fontdata'];
+
+$mpdf = new \Mpdf\Mpdf([
+    'fontDir' => array_merge($fontDirs, [
+        __DIR__ . '../tmp',
+    ]),
+    'fontdata' => $fontData + [
+        'sarabun' => [
+            'R' => 'THSarabunNew.ttf',
+            'I' => 'THSarabunNew Italic.ttf',
+            'B' => 'THSarabunNew Bold.ttf',
+            'BI' => 'THSarabunNew BoldItalic.ttf',
+        ]
+    ],
+    'default_font' => 'sarabun'
+]);
 ?>
 
 <!DOCTYPE html>
@@ -48,129 +72,120 @@ $row = mysqli_fetch_array($query);
         <?php unset($_SESSION['status']); ?>
     <?php endif ?>
 
+    <?php
+    ob_start();
+    ?>
     <div class="container">
         <br>
-        <form action="save_payment.php" method="post">
-            <div class="card text-dark">
-                <div class="card-body" style="width: 100%;">
-                    <div align="center" style="font-size: 22pt;"><img src="../images/company/<?php echo $row2['comLogo']; ?>" class="img-thumbnail" alt="customer" width="10%"></div>
-                    <div align="center" style="font-size: 22pt; padding-top: 5px;"><b>ใบเสร็จรับเงิน</b></div>
-                    <div class="row" style="padding-top: 10px;">
-                        <div class="col-md-4">
-                            <div style="font-size: 16pt; padding-left: 10px;"><b>ชื่อร้าน</b> <?php echo $row2['comName'] ?> </div>
-                        </div>
-                        <div class="col-md-3">
-
-                        </div>
-                        <div class="col-md-5">
-                            <div align="left" style="font-size: 16pt;"><b>เลขที่ใบเสร็จ</b> <?php echo $payID ?> </div>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top: 3px;">
-                        <div class="col-md-4">
-                            <div style="font-size: 16pt; padding-left: 10px;"><b>ชื่อผู้เช่า</b> <?php echo $row['cusName'] ?> </div>
-                        </div>
-                        <div class="col-md-3">
-
-                        </div>
-                        <div class="col-md-5">
-                            <div align="left" style="font-size: 16pt;"><b>พนักงานรับเงิน</b> <?php echo $_SESSION['usrName'] ?> </div>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top: 3px;">
-                        <div class="col-md-4">
-                            <div style="font-size: 16pt; padding-left: 10px;"><b>วันที่เริ่มเช่า</b> <?php echo $row['hirStart'] ?> </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div style="font-size: 16pt; padding-left: 10px;"><b>วันที่สิ้นสุด</b> <?php echo $row['hirEnd'] ?> </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div align="left" style="font-size: 16pt;"><b>จำนวนวัน</b> <?php echo $row['numDay'] ?> <b>วัน</b></div>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top: 15px;">
-                        <div class="col-sm-8 border">
-                            <div align="center" style="font-size: 14pt; padding-left: 10px;"><b>รายการ</b> </div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="center" style="font-size: 14pt; padding-left: 10px;"><b>ยอดเงิน</b></div>
-                        </div>
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;"><b>รถแท็กซี่</b> <?php echo $row['carNum'] ?></div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['carRent'] ?> -.</div>
-                        </div>
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;">จำนวนวัน</div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['numDay'] ?> วัน</div>
-                        </div>
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;">รวมค่าเช่า</div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirDeposit'] * 2 ?> -.</div>
-                        </div>
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;"><u>หัก</u> ค่ามัดจำ 50%</div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirDeposit'] ?> -.</div>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top: 24px;">
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;">ค้างชำระ</div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirDeposit'] ?> -.</div>
-                        </div>
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['Fines'] ?> -.</div>
-                        </div>
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;">
-                                <textarea id="text_rePair" name="text_rePair" rows="4" cols="50" readonly><?php if ($row['text_rePair'] == "**หากมีการซ่อมให้ระบุงานซ่อม**") {
-                                                                                                        echo "ไม่มีการซ่อมรถ";
-                                                                                                    } else {
-                                                                                                        echo $row['text_rePair'];
-                                                                                                    } ?></textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt;">
-                                <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['price_rePair'] ?> -.</div>
-                            </div>
-                        </div>
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;"></div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['total2'] ?> -.</b></div>
-                        </div>
-                        <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;">ยอดชำระสุทธิ</div>
-                        </div>
-                        <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 50px;"><?php echo convertAmountToLetter($row['total2']); ?>-.</b></div>
-                        </div>
-                    </div>
-                    <br>
-                    <div align="center" style="font-size: 12pt; padding-top: 5px;">ขอบคุณที่ใช้บริการ...</div>
-
-                </div>
-            </div>
+        <div class="card text-dark">
             <br>
-            <div>
-                <button type="submit" class="btn btn-success">พิมพ์</button>
-                <!-- <button type="submit" class="btn btn-primary">พิมพ์</button> -->
-            </div>
-        </form>
+            <table align="center">
+                <tr>
+                    <td colspan="2" style="font-size: 14pt;" align="right">วันที่ออกใบเสร็จ <?php echo $date ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size: 22pt; padding-top: 5px;" align="center"><img src="../images/company/<?php echo $row2['comLogo']; ?>" class="img-thumbnail" alt="customer" width="15%"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size: 22pt; padding-top: 10px;" align="center"><b>ใบเสร็จรับเงิน</b></td>
+                </tr>
+                <tr style="width: 100%;">
+                    <td style="font-size: 16pt; padding-left: 10px;" width="70%"><b>ชื่อร้าน</b> <?php echo $row2['comName'] ?></td>
+                    <td style="font-size: 16pt;" width="40%"><b>เลขที่ใบเสร็จ</b> <?php echo $payID ?></td>
+                </tr>
+                <tr style="width: 100%;">
+                    <td style="font-size: 16pt; padding-left: 10px;" width="60%"><b>ชื่อผู้เช่า</b> <?php echo $row['cusName'] ?></td>
+                    <td style="font-size: 16pt;" width="30%"><b>พนักงานรับเงิน</b> <?php echo $_SESSION['usrName'] ?></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 16pt; padding-left: 10px;" width="60%"><b>วันที่เริ่มเช่า</b> <?php echo $row['hirStart'] ?></td>
+                    <td style="font-size: 16pt;" width="30%"><b>วันที่สิ้นสุด</b> <?php echo $row['hirEnd'] ?></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 16pt; padding-left: 10px;" width="60%"><b>จำนวนวัน</b> <?php echo $row['numDay'] ?> <b>วัน</b></td>
+                    <td style="font-size: 16pt;" width="30%"></td>
+                </tr>
+            </table>
+            <br>
+            <table align="center" border="1">
+                <tr>
+                    <th style="font-size: 14pt; text-align: center;" width="60px">ลำดับ</th>
+                    <th style="font-size: 14pt; text-align: center;" width="320px">รายละเอียด</th>
+                    <th style="font-size: 14pt; text-align: center;" width="210px">ราคา</th>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">1</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><b>รถแท็กซี่</b> <?php echo $row['carNum'] ?></td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['carRent'] ?> -.</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">2</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">รูปแบบการเช่า</td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirPattern'] ?></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">3</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">จำนวนวัน</td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['numDay'] ?> วัน</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">4</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">รวมค่าเช่า</td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] * 2 ?> -.</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">5</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><u>หัก</u> ค่ามัดจำ 50%</td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] ?> -.</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">6</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">ค้างชำระ</td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] ?> -.</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">7</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['Fines'] ?> -.</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">8</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><b>งานซ่อม</b> <?php if ($row['text_rePair'] == "**หากมีการซ่อมให้ระบุงานซ่อม**") {
+                                                                                                                        echo "ไม่มีการซ่อมรถ";
+                                                                                                                    } else {
+                                                                                                                        echo $row['text_rePair'];
+                                                                                                                    } ?></td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['price_rePair'] ?> -.</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">9</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"></td>
+                    <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['total2'] ?> -.</b></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14pt; text-align: center;" width="60px">10</td>
+                    <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">ยอดชำระสุทธิ</td>
+                    <td style="font-size: 14pt; text-align: center;" width="210px"><?php echo convertAmountToLetter($row['total2']); ?>-.</b></td>
+                </tr>
+            </table>
+            <br>
+            <table align="center">
+                <tr>
+                    <td colspan="2" style="font-size: 14pt; padding-top: 10px;" align="center"><b>ของคุณที่ใช้บริการ...</b></td>
+                </tr>
+            </table>
+            <br><br>
+        </div>
+        <?php
+        $html = ob_get_contents();
+        $mpdf->WriteHTML($html);
+        $mpdf->Output("print_payment.pdf");
+        ob_end_flush();
+        ?>
+    </div>
+    <br>
+    <div class="container">
+        <a class="btn btn-success" href="print_payment.pdf"><i class="fa fa-print" aria-hidden="true"> Download </i></a>
     </div>
     <br>
     <script>
