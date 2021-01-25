@@ -12,9 +12,9 @@ $perPage = 10;
 $offset = ($page-1) * $perPage;
 
 // ดึงข้อมูล
-$select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbpayment.numDay,tbpayment.balance_hirDeposit,tbpayment.Fines,tbpayment.repair,tbpayment.price_repair,tbpayment.total2 ";
-$from   = "FROM tbpayment ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID ";
+$select = "SELECT tbrepair.id,tbrepair.repID,tbuser.usrName,tbrepair.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbrepair.text_repair,tbrepair.price_repair,tbrepair.dateRepair, tbrepair.dateSuc,tbrepair.repairStatus ";
+$from   = "FROM tbrepair ";
+$join   = "JOIN tbcontract ON tbcontract.hirNum = tbrepair.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID ";
 $where = [];
 
 
@@ -34,7 +34,7 @@ if(count($where)){
     $where = "";
 }
 
-$order  = "ORDER BY tbpayment.id DESC ";
+$order  = "ORDER BY tbrepair.id DESC ";
 $limit  = "LIMIT $perPage ";
 $offset = "OFFSET $offset ";
 $query  = $select.$from.$join.$where.$order.$limit.$offset;
@@ -45,7 +45,7 @@ include('../layout/header.php');
     <?php include '../layout/menu.php'; ?>
 </div>
 <div class="container">
-    <h4 class="mt-3 mb-3">รายงานชำระเงิน</h4>
+    <h4 class="mt-3 mb-3">รายงานส่งซ่อมรถ</h4>
     
     <div class="row">
         <div class="col-md-12">
@@ -83,16 +83,16 @@ include('../layout/header.php');
                 <thead>
                     <tr>
                         <th>ลำดับ</th>
-                        <th>เลขที่ชำระเงิน</th>
+                        <th>เลขที่ส่งซ่อม</th>
+                        <th>ชื่อพนักงาน</th>
                         <th>เลขที่สัญญา</th>
                         <th>ชื่อผู้เช่า</th>
                         <th>ทะเบียนรถที่เช่า</th>
-                        <th>จำนวนวันที่เช่า</th>
-                        <th>ยอดคงเหลือที่ต้องจ่าย</th>
-                        <th>ค่าปรับคืนช้า</th>
-                        <th>การซ่อม</th>
+                        <th>งานซ่อม</th>
                         <th>ราคาซ่อม</th>
-                        <th>รวมค่าเช่าสุทธิ</th>
+                        <th>วันที่ส่งซ่อม</th>
+                        <th>วันที่คาดว่าจะได้รถ</th>
+                        <th>สถานการณ์ซ่อม</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,16 +102,16 @@ include('../layout/header.php');
                         ?>
                         <tr>
                             <td><?php echo $payment['id']; ?></td>
-                            <td><?php echo $payment['payID']; ?></td>
+                            <td><?php echo $payment['repID']; ?></td>
+                            <td><?php echo $payment['usrName']; ?></td>
                             <td><?php echo $payment['hirnum']; ?></td>
                             <td><?php echo $payment['cusName']; ?></td>
                             <td><?php echo $payment['carNum']; ?></td>
-                            <td><?php echo $payment['numDay']; ?></td>
-                            <td><?php echo $payment['balance_hirDeposit']; ?></td>
-                            <td><?php echo $payment['Fines']; ?></td>
-                            <td><?php echo $payment['repair']; ?></td>
+                            <td><?php echo $payment['text_repair']; ?></td>
                             <td><?php echo $payment['price_repair']; ?></td>
-                            <td><?php echo $payment['total2']; ?></td>
+                            <td><?php echo $payment['dateRepair']; ?></td>
+                            <td><?php echo $payment['dateSuc']; ?></td>
+                            <td><?php echo $payment['repairStatus']; ?></td>
                         </tr>
                         <?php 
                         }
@@ -214,7 +214,7 @@ include('../layout/header.php');
                 </button>
             </div>
             <div class="modal-body">
-                <iframe src="payment_report_pdf.php<?php echo queryString(['search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" name="report" style="width: 100%;min-height: 600px;"></iframe>
+                <iframe src="repair_report_pdf.php<?php echo queryString(['search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" name="report" style="width: 100%;min-height: 600px;"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
