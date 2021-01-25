@@ -46,6 +46,7 @@ include('../layout/header.php');
 </div>
 <div class="container">
     <h4 class="mt-3 mb-3">รายงานส่งหมอบรถ</h4>
+    <!--
     <div class="row">
         <div class="col-md-12">
             <form method="GET" action="hir_report.php">
@@ -73,6 +74,7 @@ include('../layout/header.php');
             </form>
         </div>
     </div>
+    -->
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-bordered">
@@ -88,20 +90,25 @@ include('../layout/header.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                    $result = $con->query($query);
-                    while($deliver = $result->fetch_assoc()){
-                    ?>
-                    <tr>
-                        <td><?php echo $deliver['id']; ?></td>
-                        <td><?php echo $deliver['delID']; ?></td>
-                        <td><?php echo $deliver['delDate']; ?></td>
-                        <td><?php echo $deliver['hirnum']; ?></td>
-                        <td><?php echo $deliver['cusName']; ?></td>
-                        <td><?php echo $deliver['carNum']; ?></td>
-                        <td><?php echo $deliver['usrName']; ?></td>
-                    </tr>
-                    <?php 
+                    <?php
+                    if($result = $con->query($query)){
+                        while($deliver = $result->fetch_assoc()){
+                        ?>
+                        <tr>
+                            <td><?php echo $deliver['id']; ?></td>
+                            <td><?php echo $deliver['delID']; ?></td>
+                            <td><?php echo $deliver['delDate']; ?></td>
+                            <td><?php echo $deliver['hirnum']; ?></td>
+                            <td><?php echo $deliver['cusName']; ?></td>
+                            <td><?php echo $deliver['carNum']; ?></td>
+                            <td><?php echo $deliver['usrName']; ?></td>
+                        </tr>
+                        <?php 
+                        }
+                    }else{
+                        ?>
+                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <?php
                     }
                     ?>
                 </tbody>

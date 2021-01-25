@@ -94,24 +94,25 @@ include('../layout/header.php');
                 </thead>
                 <tbody>
                     <?php 
-                    $result = $con->query($query);
-                    while($contract = $result->fetch_assoc()){
-                    ?>
-                    <tr>
-                        <td><?php echo $contract['id']; ?></td>
-                        <td><?php echo $contract['hirNum']; ?></td>
-                        <td><?php echo $contract['cusName']; ?></td>
-                        <td><?php echo $contract['hirDate']; ?></td>
-                        <td><?php echo $contract['hirStart']; ?></td>
-                        <td><?php echo $contract['hirEnd']; ?></td>
-                        <td><?php echo $contract['hirPattren']; ?></td>
-                        <td><?php echo $contract['usrName']; ?></td>
-                        <td><?php echo $contract['carNum']; ?></td>
-                        <td><?php echo $contract['numDay']; ?></td>
-                        <td><?php echo ($contract['hirDeposit']*2); ?></td>
-                        <td><?php echo $contract['hirStatus']; ?></td>
-                    </tr>
-                    <?php 
+                    if($result = $con->query($query)){
+                        while($contract = $result->fetch_assoc()){
+                        ?>
+                        <tr>
+                            <td><?php echo $contract['id']; ?></td>
+                            <td><?php echo $contract['hirNum']; ?></td>
+                            <td><?php echo $contract['cusName']; ?></td>
+                            <td><?php echo $contract['hirDate']; ?></td>
+                            <td><?php echo $contract['hirStart']; ?></td>
+                            <td><?php echo $contract['hirEnd']; ?></td>
+                            <td><?php echo $contract['hirPattren']; ?></td>
+                            <td><?php echo $contract['usrName']; ?></td>
+                            <td><?php echo $contract['carNum']; ?></td>
+                            <td><?php echo $contract['numDay']; ?></td>
+                            <td><?php echo ($contract['hirDeposit']*2); ?></td>
+                            <td><?php echo $contract['hirStatus']; ?></td>
+                        </tr>
+                        <?php 
+                        }
                     }
                     ?>
                 </tbody>

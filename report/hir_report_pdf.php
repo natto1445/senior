@@ -98,23 +98,26 @@ $html = '
                 </tr>
             </thead>
             <tbody>';
-$result = $con->query($query);
-while($contract = $result->fetch_assoc()){
-    $html .= '
-    <tr>
-        <td>'.$contract['id'].'</td>
-        <td>'.$contract['hirNum'].'</td>
-        <td>'.$contract['cusName'].'</td>
-        <td>'.$contract['hirDate'].'</td>
-        <td>'.$contract['hirStart'].'</td>
-        <td>'.$contract['hirEnd'].'</td>
-        <td>'.$contract['hirPattren'].'</td>
-        <td>'.$contract['usrName'].'</td>
-        <td>'.$contract['carNum'].'</td>
-        <td>'.$contract['numDay'].'</td>
-        <td>'.($contract['hirDeposit']*2).'</td>
-        <td>'.$contract['hirStatus'].'</td>
-    </tr>';
+if($result = $con->query($query)){
+    while($contract = $result->fetch_assoc()){
+        $html .= '
+        <tr>
+            <td>'.$contract['id'].'</td>
+            <td>'.$contract['hirNum'].'</td>
+            <td>'.$contract['cusName'].'</td>
+            <td>'.$contract['hirDate'].'</td>
+            <td>'.$contract['hirStart'].'</td>
+            <td>'.$contract['hirEnd'].'</td>
+            <td>'.$contract['hirPattren'].'</td>
+            <td>'.$contract['usrName'].'</td>
+            <td>'.$contract['carNum'].'</td>
+            <td>'.$contract['numDay'].'</td>
+            <td>'.($contract['hirDeposit']*2).'</td>
+            <td>'.$contract['hirStatus'].'</td>
+        </tr>';
+    }
+}else{
+    $html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
 }
 $html .= '</tbody>
 </table>

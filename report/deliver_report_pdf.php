@@ -93,19 +93,22 @@ $html = '
                 </tr>
             </thead>
             <tbody>';
-$result = $con->query($query);
-while($contract = $result->fetch_assoc()){
-    $html .= '
-    <tr>
-        <td>'.$deliver['id'].'</td>
-        <td>'.$deliver['delID'].'</td>
-        <td>'.$deliver['delDate'].'</td>
-        <td>'.$deliver['hirnum'].'</td>
-        <td>'.$deliver['cusName'].'</td>
-        <td>'.$deliver['carNum'].'</td>
-        <td>'.$deliver['usrName'].'</td>
-    </tr>';
-}
+            if( $result = $con->query($query)){
+                while($contract = $result->fetch_assoc()){
+                    $html .= '
+                    <tr>
+                        <td>'.$deliver['id'].'</td>
+                        <td>'.$deliver['delID'].'</td>
+                        <td>'.$deliver['delDate'].'</td>
+                        <td>'.$deliver['hirnum'].'</td>
+                        <td>'.$deliver['cusName'].'</td>
+                        <td>'.$deliver['carNum'].'</td>
+                        <td>'.$deliver['usrName'].'</td>
+                    </tr>';
+                }
+            }else{
+                $html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+            }
 $html .= '</tbody>
 </table>
 </body>
