@@ -94,7 +94,7 @@ $html = '
             </thead>
             <tbody>';
             if( $result = $con->query($query)){
-                while($contract = $result->fetch_assoc()){
+                while($deliver = $result->fetch_assoc()){
                     $html .= '
                     <tr>
                         <td>'.$deliver['id'].'</td>
