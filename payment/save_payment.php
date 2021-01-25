@@ -4,6 +4,7 @@ include("../condb/condb.php");
 
 //print_r($_POST);
 
+$date_payment = $_POST["date_payment"];
 $payID = $_POST["payID"]; //เลขที่ชำระ...
 $hirNum = $_POST["hirNum"]; //เลขที่สัญญา...
 $cusCard = $_POST["cusCard"]; //รหัสลูกค้า...
@@ -33,11 +34,11 @@ if ($row > 0) {
     die();
 }
 
-//echo ($text_rePair);
+//echo ($date_payment);
 
-$sql = "INSERT INTO tbpayment (payID,hirNum,cusCard,usrID,hirStart,
+$sql = "INSERT INTO tbpayment (payID,date_payment,hirNum,cusCard,usrID,hirStart,
     hirEnd,numDay,carID,totalhir,hirDeposit,balance_hirDeposit,Fines,text_rePair,repair,price_rePair,balance,total2) VALUES
-    ('$payID','$hirNum','$cusCard','$usrID','$hirStart','$hirEnd',
+    ('$payID','$date_payment','$hirNum','$cusCard','$usrID','$hirStart','$hirEnd',
     '$numDay','$carID','$totalhir','$hirDeposit','$balance_hirDeposit','$Fines','$text_rePair','$repair','$price_rePair','$balance','$total2')";
 $query = mysqli_query($con, $sql);
 
@@ -49,7 +50,7 @@ if ($repair == "มีการซ่อมรถ") {
     $query3 = mysqli_query($con, $sql3);
 }
 
-if ($text_rePair != "**หากมีการซ่อมให้ระบุงานซ่อม พร้อมราคา 50%**") {
+if ($text_rePair != "**หากมีการซ่อมให้ระบุงานซ่อม**") {
     $sql4 = "UPDATE tbtaxi SET payID='$payID' WHERE carID='$carID'";
     $query4 = mysqli_query($con, $sql4);
 }

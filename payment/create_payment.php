@@ -21,6 +21,7 @@ $pay = mysqli_query($con, $sql3);
 $data = mysqli_fetch_array($pay);
 
 $date = date('Y');
+$date_payment = date('Y-m-d');
 
 ?>
 
@@ -66,6 +67,18 @@ $date = date('Y');
                 <div class="card-body" style="width: 100%;">
                     <div align="center" style="font-size: 22pt;"><img src="../images/company/<?php echo $row2['comLogo']; ?>" class="img-thumbnail" alt="customer" width="10%"></div>
                     <div align="center" style="font-size: 22pt; padding-top: 5px;"><b>ใบเสร็จรับเงิน</b></div>
+                    <div class="row" style="padding-top: 10px;">
+                        <div class="col-md-4">
+                            <div style="font-size: 16pt; padding-left: 10px;"></div>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-5">
+                            <div align="left" style="font-size: 16pt;"><b>วันที่ชำระเงิน</b> <?php echo $date_payment ?></div>
+                            <input type="hidden" name="date_payment" value="<?php echo $date_payment ?>">
+                        </div>
+                    </div>
                     <div class="row" style="padding-top: 10px;">
                         <div class="col-md-4">
                             <div style="font-size: 16pt; padding-left: 10px;"><b>ชื่อร้าน</b> <?php echo $row2['comName'] ?> </div>

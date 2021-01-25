@@ -140,6 +140,7 @@ $datenow = date('Y-m-d');
                                 <div class="form-group col-md-3">
                                     <label for="carNum">เลขทะเบียนรถ</label>
                                     <input type="text" class="form-control" name="carNum" id="carNum" value="<?php echo $row['carNum']; ?>" readonly>
+                                    <input type="hidden" class="form-control" name="carID" id="carID" value="<?php echo $row['carID']; ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-1">
                                     <label for="button">ปล่อยรถ</label>

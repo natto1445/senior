@@ -61,12 +61,12 @@ $row2 = mysqli_fetch_array($result2);
 </head>
 
 <body>
+    <?php
+    ob_start();
+    ?>
     <div class="container">
         <br>
         <div class="card">
-            <?php
-            ob_start();
-            ?>
             <div class="card-body" style="width: 100%;">
                 <div align="center" style="font-size: 28pt;">สัญญาเช่ารถยนต์</div>
                 <div align="right" style="font-size: 18pt;">สัญญาเลขที่&nbsp;&nbsp;&nbsp;&nbsp;<u><?php echo $row['hirNum']; ?></u></div>
