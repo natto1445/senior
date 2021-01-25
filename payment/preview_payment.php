@@ -17,6 +17,7 @@ $pay = mysqli_query($con, $sql3);
 $data = mysqli_fetch_array($pay);
 
 $date = date('Y');
+$date2 = date('d-m-Y')
 
 ?>
 
@@ -82,167 +83,131 @@ $mpdf = new \Mpdf\Mpdf([
 
     <?php if (isset($_SESSION['payID'])) :
         $payID = $_SESSION["payID"];
-        $sql = "SELECT * FROM tbpayment JOIN tbcontract ON tbpayment.hirNum=tbcontract.hirNum JOIN tbreturn ON tbcontract.hirNum=tbreturn.hirNum JOIN tbtaxi ON tbpayment.carID=tbtaxi.carID WHERE tbpayment.payID = '$payID'";
+        $sql = "SELECT * FROM tbpayment JOIN tbcustomer ON tbpayment.cusCard=tbcustomer.cusCard JOIN tbcontract ON tbpayment.hirNum=tbcontract.hirNum JOIN tbreturn ON tbcontract.hirNum=tbreturn.hirNum JOIN tbtaxi ON tbpayment.carID=tbtaxi.carID WHERE tbpayment.payID = '$payID'";
         $query = mysqli_query($con, $sql);
 
         while ($row = mysqli_fetch_assoc($query)) {
     ?>
+            <?php
+            ob_start();
+            ?>
             <div class="container">
-                <div class="col-12 container">
-
-                    <div id="div_print">
-
-                        <table width="97%" border="0" cellspacing="0" cellpadding="0" align="center" style='font-size:16.0pt; font-family:"TH SarabunPSK",sans-serif'>
-                            <tbody>
-                                <tr>
-                                    <td>&nbsp;<br><br><br></td>
-                                    <td width="30%" rowspan="2" align="center"><img width="50%" src="../images/company/<?php echo $row2['comLogo']; ?>" alt="logo" style="padding-top: 1px"></td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" align="center" style="padding-top: 50px;"><br>
-                                        <h3><b>ใบเสร็จรับเงิน</b></h3>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">&emsp;</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style='font-size:16.0pt; font-family:"TH SarabunPSK",sans-serif'>
-                                            <thead>
-                                                <tr align="left">
-                                                    <th width="10%" style="vertical-align: middle;"></th>
-                                                    <th width="35%" style="vertical-align: middle;"><?php echo $row2['comName'] ?></th>
-                                                    <th width="10%" style="vertical-align: middle;"><b></b></th>
-                                                    <th width="35%" style="vertical-align: middle;"><b>เลขที่ใบเสร็จ</b> <?php echo $payID ?> </th>
-                                                    <th width="10%" style="vertical-align: middle;"><b></b></th>
-                                                </tr>
-                                                <tr align="left">
-                                                    <th width="10%" style="vertical-align: middle;"></th>
-                                                    <th width="35%" style="vertical-align: middle; padding-top: 7px;"><b>ชื่อผู้เช่า</b> <?php echo $row['cusCard'] ?></th>
-                                                    <th width="10%" style="vertical-align: middle;"><b></b></th>
-                                                    <th width="35%" style="vertical-align: middle;"><b>พนักงานรับเงิน</b> <?php echo $row['usrID'] ?></th>
-                                                    <th width="10%" style="vertical-align: middle;"><b></b></th>
-                                                </tr>
-                                                <tr align="left">
-                                                    <th width="10%" style="vertical-align: middle;"></th>
-                                                    <th width="35%" style="vertical-align: middle; padding-top: 7px;"><b>วันที่เริ่มเช่า</b> <?php echo $row['hirStart'] ?></th>
-                                                    <th width="10%" style="vertical-align: middle;"><b></b></th>
-                                                    <th width="35%" style="vertical-align: middle;"><b>วันที่สิ้นสุด</b> <?php echo $row['hirEnd'] ?></th>
-                                                    <th width="10%" style="vertical-align: middle;"><b></b></th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top: 30px;"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" align="center">
-                                        <table border="1" cellpadding="0" cellspacing="0" width="80%" style='font-size:16.0pt; font-family:"TH SarabunPSK",sans-serif'>
-                                            <tbody>
-                                                <hr style="width: 80%;">
-                                                <hr style="width: 80%;">
-                                                <br>
-                                                <tr align="center">
-                                                    <td width="50%" style="vertical-align: middle;" align="center"><b>รายการ</b></td>
-                                                    <td width="50%" style="vertical-align: middle;" align="center"><b>ยอดเงิน</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-top: 30px;"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px"><b>รถแท็กซี่</b> <?php echo $row['carNum'] ?></td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['carRent'] ?> -.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">จำนวนวัน</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['numDay'] ?> วัน</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">รามค่าเช่า</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['hirTotal'] ?> -.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px"><u>หัก</u> ค่ามัดจำ 50%</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['hirDeposit'] ?> -.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-top: 30px;"></td>
-                                                    <td style="padding-top: 30px;"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">ค้างชำระ</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['hirDeposit'] ?> -.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['Fines'] ?> -.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">
-                                                        <?php
-                                                        if ($row['text_rePair'] == "**หากมีการซ่อมให้ระบุงานซ่อม**") {
-                                                            echo "ไม่มีการซ่อมรถ";
-                                                        } else {
-                                                            echo $row['text_rePair'];
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['price_rePair'] ?> -.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%" style="vertical-align: middle; padding-left : 80px">ยอดชำระสุทธิ</td>
-                                                    <td width="50%" style="vertical-align: middle; padding-right : 170px" align="right"><?php echo $row['total2'] ?> -.</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td width="50%" style="vertical-align: middle;" align="center"> <?php echo convertAmountToLetter($row['total2']); ?></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" align="center"><br><b>ขอบคุณที่ใช้บริการ...</b></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <br>
-                        <br>
-                    </div>
-                </div>
                 <br>
-            </div>
-            <div class="container">
-                <div class="container">
-                    <div>
-                        <input name="b_print" type="button" onClick="printdiv('div_print');" value=" Download " class="btn btn--m btn--orange btn--raised" lx-ripple style="background: #3366FF;color: #f9f9f9">
-                    </div>
+                <div class="card text-dark">
+                    <br>
+                    <table align="center">
+                        <tr>
+                            <td colspan="2" style="font-size: 14pt;" align="right">วันที่ออกใบเสร็จ <?php echo $date2 ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="font-size: 22pt; padding-top: 5px;" align="center"><img src="../images/company/<?php echo $row2['comLogo']; ?>" class="img-thumbnail" alt="customer" width="15%"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="font-size: 22pt; padding-top: 10px;" align="center"><b>ใบเสร็จรับเงิน</b></td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td style="font-size: 16pt; padding-left: 10px;" width="70%"><b>ชื่อร้าน</b> <?php echo $row2['comName'] ?></td>
+                            <td style="font-size: 16pt;" width="40%"><b>เลขที่ใบเสร็จ</b> <?php echo $payID ?></td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td style="font-size: 16pt; padding-left: 10px;" width="60%"><b>ชื่อผู้เช่า</b> <?php echo $row['cusName'] ?></td>
+                            <td style="font-size: 16pt;" width="30%"><b>พนักงานรับเงิน</b> <?php echo $_SESSION['usrName'] ?></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 16pt; padding-left: 10px;" width="60%"><b>วันที่เริ่มเช่า</b> <?php echo $row['hirStart'] ?></td>
+                            <td style="font-size: 16pt;" width="30%"><b>วันที่สิ้นสุด</b> <?php echo $row['hirEnd'] ?></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 16pt; padding-left: 10px;" width="60%"><b>จำนวนวัน</b> <?php echo $row['numDay'] ?> <b>วัน</b></td>
+                            <td style="font-size: 16pt;" width="30%"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table align="center" border="1">
+                        <tr>
+                            <th style="font-size: 14pt; text-align: center;" width="60px">ลำดับ</th>
+                            <th style="font-size: 14pt; text-align: center;" width="320px">รายละเอียด</th>
+                            <th style="font-size: 14pt; text-align: center;" width="210px">ราคา</th>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">1</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><b>รถแท็กซี่</b> <?php echo $row['carNum'] ?></td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['carRent'] ?> -.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">2</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">รูปแบบการเช่า</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirPattern'] ?></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">3</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">จำนวนวัน</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['numDay'] ?> วัน</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">4</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">รวมค่าเช่า</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] * 2 ?> -.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">5</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><u>หัก</u> ค่ามัดจำ 50%</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] ?> -.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">6</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">ค้างชำระ</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] ?> -.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">7</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['Fines'] ?> -.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">8</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><b>งานซ่อม</b> <?php if ($row['text_rePair'] == "**หากมีการซ่อมให้ระบุงานซ่อม**") {
+                                                                                                                                echo "ไม่มีการซ่อมรถ";
+                                                                                                                            } else {
+                                                                                                                                echo $row['text_rePair'];
+                                                                                                                            } ?></td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['price_rePair'] ?> -.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">9</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"></td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['total2'] ?> -.</b></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14pt; text-align: center;" width="60px">10</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">ยอดชำระสุทธิ</td>
+                            <td style="font-size: 14pt; text-align: center;" width="210px"><?php echo convertAmountToLetter($row['total2']); ?>-.</b></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table align="center">
+                        <tr>
+                            <td colspan="2" style="font-size: 14pt; padding-top: 10px;" align="center"><b>ของคุณที่ใช้บริการ...</b></td>
+                        </tr>
+                    </table>
                     <br><br>
                 </div>
+                <?php
+                $html = ob_get_contents();
+                $mpdf->WriteHTML($html);
+                $mpdf->Output("print_payment1.pdf");
+                ob_end_flush();
+                ?>
             </div>
+            <br>
+            <div class="container">
+                <a class="btn btn-success" href="print_payment1.pdf"><i class="fa fa-print" aria-hidden="true"> Download </i></a>
+            </div>
+            <br>
     <?php
         }
     endif
     ?>
-    <script>
-        function printdiv(printpage) {
-            var headstr = "<html><head><title></title></head><body>";
-            var footstr = "</body>";
-            var newstr = document.all.item(printpage).innerHTML;
-            var oldstr = document.body.innerHTML;
-            document.body.innerHTML = headstr + newstr + footstr;
-            w = window.open("", "_blank", "k");
-            w.document.write(headstr + newstr + footstr);
-            window.print();
-            document.body.innerHTML = oldstr;
-            return false;
-        }
-    </script>
 </body>
 
 </html>

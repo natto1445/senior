@@ -183,6 +183,7 @@ $datenow = date('Y-m-d');
                         </table>
                     </div>
                 </div>
+                <br>
                 <?php unset($_SESSION["data_found"]) ?>
         <?php }
         endif ?>
