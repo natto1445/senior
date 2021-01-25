@@ -100,16 +100,16 @@ include('../layout/header.php');
                         while($carReturn = $result->fetch_assoc()){
                         ?>
                         <tr>
-                            <td><?php echo $deliver['id']; ?></td>
-                            <td><?php echo $deliver['retID']; ?></td>
-                            <td><?php echo $deliver['recDate']; ?></td>
-                            <td><?php echo $deliver['retDate']; ?></td>
-                            <td><?php echo $deliver['hirnum']; ?></td>
-                            <td><?php echo $deliver['cusName']; ?></td>
-                            <td><?php echo $deliver['carNum']; ?></td>
-                            <td><?php echo $deliver['usrName']; ?></td>
-                            <td><?php echo $deliver['dateRate']; ?></td>
-                            <td><?php echo $deliver['Fines']; ?></td>
+                            <td><?php echo $carReturn['id']; ?></td>
+                            <td><?php echo $carReturn['retID']; ?></td>
+                            <td><?php echo $carReturn['recDate']; ?></td>
+                            <td><?php echo $carReturn['retDate']; ?></td>
+                            <td><?php echo $carReturn['hirnum']; ?></td>
+                            <td><?php echo $carReturn['cusName']; ?></td>
+                            <td><?php echo $carReturn['carNum']; ?></td>
+                            <td><?php echo $carReturn['usrName']; ?></td>
+                            <td><?php echo $carReturn['dateRate']; ?></td>
+                            <td><?php echo $carReturn['Fines']; ?></td>
                         </tr>
                         <?php 
                         }
