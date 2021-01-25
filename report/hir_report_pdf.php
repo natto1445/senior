@@ -3,6 +3,7 @@ include('../condb/condb.php');
 include('../includes/helper.php');
 include('../vendor/autoload.php');
 
+$search     = request('search');
 $start_date = request('start_date');
 $end_date   = request('end_date');
 

@@ -28,8 +28,6 @@ if($end_date){
     $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
 }
 
-
-
 if(count($where)){
     $where = "WHERE ".implode(" AND ", $where);
 }else{
