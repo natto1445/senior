@@ -11,6 +11,10 @@ $select = "SELECT tbcontract.*,tbcustomer.cusName,tbuser.usrName,tbtaxi.carNum "
 $from   = "FROM tbcontract ";
 $join   = "JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID ";
 $where = [];
+// ชื่อพนักงาน tbuser.usrName เลขที่สัญญา tbcontract.hirNum เลขที่ชำระเงิน เลขที่ส่งซ่อม
+if($search){
+    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+}
 if($start_date){
     $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
 }
@@ -78,15 +82,18 @@ $html = '
 		<table>
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>เลขสัญญา</th>
+                    <th>ลำดับ</th>
+                    <th>เลขที่สัญญา</th>
                     <th>ชื่อผู้เช่า</th>
-                    <th>วันที่เริ่ม</th>
-                    <th>วันที่สิ้นสุด</th>
+                    <th>วันที่ทำสัญญา</th>
+                    <th>วันที่เริ่มเช่า</th>
+                    <th>วันที่สิ้นสุดการเช่า</th>
+                    <th>รูปแบบการเช่า</th>
                     <th>ชื่อพนักงาน</th>
-                    <th>ทะเบียนรถ</th>
-                    <th>ราคารถ</th>
-                    <th>จำนวนวัน</th>
+                    <th>ทะเบียนรถที่เช่า</th>
+                    <th>จำนวนวันที่เช่า</th>
+                    <th>ราคาเช่าทั้งหมด</th>
+                    <th>สถานะสัญญา</th>
                 </tr>
             </thead>
             <tbody>';
@@ -97,12 +104,15 @@ while($contract = $result->fetch_assoc()){
         <td>'.$contract['id'].'</td>
         <td>'.$contract['hirNum'].'</td>
         <td>'.$contract['cusName'].'</td>
+        <td>'.$contract['hirDate'].'</td>
         <td>'.$contract['hirStart'].'</td>
         <td>'.$contract['hirEnd'].'</td>
+        <td>'.$contract['hirPattren'].'</td>
         <td>'.$contract['usrName'].'</td>
         <td>'.$contract['carNum'].'</td>
-        <td>'.$contract['carRent'].'</td>
         <td>'.$contract['numDay'].'</td>
+        <td>'.($contract['hirDeposit']*2).'</td>
+        <td>'.$contract['hirStatus'].'</td>
     </tr>';
 }
 $html .= '</tbody>

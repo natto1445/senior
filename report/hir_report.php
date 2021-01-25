@@ -80,15 +80,18 @@ include('../layout/header.php');
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>เลขสัญญา</th>
+                        <th>ลำดับ</th>
+                        <th>เลขที่สัญญา</th>
                         <th>ชื่อผู้เช่า</th>
-                        <th>วันที่เริ่ม</th>
-                        <th>วันที่สิ้นสุด</th>
+                        <th>วันที่ทำสัญญา</th>
+                        <th>วันที่เริ่มเช่า</th>
+                        <th>วันที่สิ้นสุดการเช่า</th>
+                        <th>รูปแบบการเช่า</th>
                         <th>ชื่อพนักงาน</th>
-                        <th>ทะเบียนรถ</th>
-                        <th>ราคารถ</th>
-                        <th>จำนวนวัน</th>
+                        <th>ทะเบียนรถที่เช่า</th>
+                        <th>จำนวนวันที่เช่า</th>
+                        <th>ราคาเช่าทั้งหมด</th>
+                        <th>สถานะสัญญา</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,12 +103,15 @@ include('../layout/header.php');
                         <td><?php echo $contract['id']; ?></td>
                         <td><?php echo $contract['hirNum']; ?></td>
                         <td><?php echo $contract['cusName']; ?></td>
+                        <td><?php echo $contract['hirDate']; ?></td>
                         <td><?php echo $contract['hirStart']; ?></td>
                         <td><?php echo $contract['hirEnd']; ?></td>
+                        <td><?php echo $contract['hirPattren']; ?></td>
                         <td><?php echo $contract['usrName']; ?></td>
                         <td><?php echo $contract['carNum']; ?></td>
-                        <td><?php echo $contract['carRent']; ?></td>
                         <td><?php echo $contract['numDay']; ?></td>
+                        <td><?php echo ($contract['hirDeposit']*2); ?></td>
+                        <td><?php echo $contract['hirStatus']; ?></td>
                     </tr>
                     <?php 
                     }
@@ -154,7 +160,9 @@ include('../layout/header.php');
                         <?php
                         }else{
                         ?>
-                            <li class="page-item"><a class="page-link" href="<?php echo queryString(['page'=>$pagerang,'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>"><?php echo $pagerang; ?></a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="<?php echo queryString(['page'=>$pagerang,'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>"><?php echo $pagerang; ?></a>
+                            </li>
                         <?php
                         }
                     }
@@ -189,7 +197,7 @@ include('../layout/header.php');
                 </button>
             </div>
             <div class="modal-body">
-                <iframe src="hir_report_pdf.php" name="report" style="width: 100%;min-height: 600px;"></iframe>
+                <iframe src="hir_report_pdf.php<?php echo queryString(['search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" name="report" style="width: 100%;min-height: 600px;"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
