@@ -28,7 +28,7 @@ if(count($where)){
     $where = "";
 }
 
-$order  = "ORDER BY tbcontract.id DESC ";
+$order  = "ORDER BY tbdelivers.id DESC ";
 $query  = $select.$from.$join.$where.$order;
 
 header("Content-type:application/pdf");
@@ -79,7 +79,7 @@ $html = '
 		</style>
 	</head>
 	<body>
-		<h1>รายงานสัญญาเช่า</h1>
+		<h1>รายงานส่งหมอบรถ</h1>
 		<table>
             <thead>
                 <tr>
