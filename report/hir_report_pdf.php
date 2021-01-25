@@ -32,7 +32,7 @@ $order  = "ORDER BY tbcontract.id DESC ";
 $query  = $select.$from.$join.$where.$order;
 
 header("Content-type:application/pdf");
-header("Content-disposition: attachment;filename=YOURFILE.pdf");
+header("Content-disposition: attachment;filename=contract_report.pdf");
 
 $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
 $fontDirs = $defaultConfig['fontDir'];

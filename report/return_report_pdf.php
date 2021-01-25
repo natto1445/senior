@@ -8,11 +8,11 @@ $start_date = request('start_date');
 $end_date   = request('end_date');
 
 // ดึงข้อมูล
-$select = "SELECT tbdelivers.id,tbdelivers.delID,tbdelivers.delDate,tbdelivers.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbuser.usrName ";
-$from   = "FROM tbdelivers ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbdelivers.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbdelivers.usrID";
+$select = "SELECT tbreturn.id,tbreturn.retID,tbreturn.recDate,tbreturn.retDate,tbreturn.hirnum,tbcustomer.cusName,tbtaxi.carNum,usrName.tbuser,tbreturn.dateRate,tbreturn.Fines ";
+$from   = "FROM tbreturn ";
+$join   = "JOIN tbcontract ON tbcontract.hirNum = tbreturn.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbreturn.usrID";
 $where = [];
-// ชื่อพนักงาน tbuser.usrName เลขที่สัญญา tbcontract.hirNum เลขที่ชำระเงิน เลขที่ส่งซ่อม
+
 if($search){
     $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
 }
@@ -28,11 +28,11 @@ if(count($where)){
     $where = "";
 }
 
-$order  = "ORDER BY tbdelivers.id DESC ";
+$order  = "ORDER BY tbreturn.id DESC ";
 $query  = $select.$from.$join.$where.$order;
 
 header("Content-type:application/pdf");
-header("Content-disposition: attachment;filename=YOURFILE.pdf");
+header("Content-disposition: attachment;filename=return_report.pdf");
 
 $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
 $fontDirs = $defaultConfig['fontDir'];
