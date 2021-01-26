@@ -91,7 +91,17 @@ include('../condb/condb.php');
                 <br>
                 <div>
                     <?php
-                    $sql = "SELECT * FROM tbcontract  JOIN tbreturn ON tbcontract.hirNum = tbreturn.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbcontract.usrID = tbuser.usrID JOIN tbpayment ON tbpayment.hirNum=tbcontract.hirNum WHERE tbcontract.deliver='ชำระแล้ว' ORDER BY tbreturn.id DESC";
+                    $limit = 4;  //set  Number of entries to show in a page.
+                    // Look for a GET variable page if not found default is 1.        
+                    if (isset($_GET["page"])) {
+                        $page  = $_GET["page"];
+                    } else {
+                        $page = 1;
+                    }
+                    //determine the sql LIMIT starting number for the results on the displaying page  
+                    $page_index = ($page - 1) * $limit;      // 0
+
+                    $sql = "SELECT * FROM tbcontract  JOIN tbreturn ON tbcontract.hirNum = tbreturn.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbcontract.usrID = tbuser.usrID JOIN tbpayment ON tbpayment.hirNum=tbcontract.hirNum WHERE tbcontract.deliver='ชำระแล้ว' ORDER BY tbreturn.id DESC LIMIT $page_index, $limit";
                     $result_sql = mysqli_query($con, $sql);
 
                     while ($data = mysqli_fetch_array($result_sql)) {
@@ -132,6 +142,18 @@ include('../condb/condb.php');
                         <br>
                     <?php
                     }
+                    $all_data = mysqli_query($con, "select count(*) from tbcontract");
+                    $user_count = mysqli_fetch_row($all_data);
+                    $total_records = $user_count[0];
+                    $total_pages = ceil($total_records / $limit);
+                    if ($page >= 2) {
+                        echo "<a href='index_payment.php?page=" . ($page - 1) . "' class='btn customBtn2'>ย้อนหลับ</a>";
+                    }
+
+                    if ($page < $total_pages) {
+                        echo "<a href='index_payment.php?page=" . ($page + 1) . "' class='btn customBtn2'>ถัดไป</a>";
+                    }
+                    
                     mysqli_close($con);
                     ?>
                 </div>

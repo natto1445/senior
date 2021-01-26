@@ -10,7 +10,6 @@ $name = $_SESSION['usrID'];
 
 if(in_array($_SESSION['level'], ['admin','employee'])) {
 ?>
-
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #333399;">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <!-- Brand -->
