@@ -2,8 +2,9 @@
 session_start();
 include("../condb/condb.php");
 
-//print_r($_POST);
+print_r($_POST);
 
+$carID = $_POST["carID"];
 $retID = $_POST["retID"]; //เลขที่รับคืน...
 $hirNum = $_POST["hirNum"]; //เลขที่สัญญา...
 $hirEnd = $_POST["hirEnd"]; //วันที่ต้องคืน...
@@ -29,11 +30,13 @@ $query = mysqli_query($con, $sql);
 $sql2 = "UPDATE tbcustomer SET cusStatus='ยังไม่เช่า' WHERE cusCard='$cusCard'";
 $query2 = mysqli_query($con, $sql2);
 
-/* อัพเดตสถานะสัญญา */
 $sql3 = "UPDATE tbcontract SET deliver='รอชำระเงิน',hirStatus='เสร็จสิ้น' WHERE hirNum='$hirNum'";
 $query3 = mysqli_query($con, $sql3);
 
-if ($query && $query2 && $query3) {
+$sql4 = "UPDATE tbtaxi SET check_status='0' WHERE carID='$carID'";
+$query4 = mysqli_query($con, $sql4);
+
+if ($query && $query2 && $query3 && $query4) {
     $_SESSION["status"] = "รับคืนรถสำเร็จ";
     $_SESSION["status_code"] = "success";
     header("location:create_return.php");

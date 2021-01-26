@@ -15,6 +15,7 @@ include('../condb/condb.php');
     <link rel="stylesheet" href="../css/styles.css">
     <!-- Responsive-->
     <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/dataTables.bootstrap4.min.css" />
     <script src="../js/sweetalert.min.js"></script>
 </head>
 
@@ -56,37 +57,32 @@ include('../condb/condb.php');
                 <?php endif ?>
                 <div>
                     <?php
-                    $limit = 4;  //set  Number of entries to show in a page.
-                    // Look for a GET variable page if not found default is 1.        
-                    if (isset($_GET["page"])) {
-                        $page  = $_GET["page"];
-                    } else {
-                        $page = 1;
-                    }
-                    //determine the sql LIMIT starting number for the results on the displaying page  
-                    $page_index = ($page - 1) * $limit;      // 0
 
-                    $query = "SELECT * FROM tbcontract  JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID ORDER BY tbcontract.id DESC LIMIT $page_index, $limit";
+                    $query = "SELECT * FROM tbcontract  JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID ORDER BY tbcontract.id DESC";
                     $result = mysqli_query($con, $query);
 
-                    while ($row = mysqli_fetch_array($result)) {
+
                     ?>
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <table class="table-borderless">
-                                    <tbody>
-                                        <thead>
-                                            <tr>
-                                                <td style="width: 13%;"><b>เลขสัญญา</b></td>
-                                                <td style="width: 15%;"><b>ชื่อผู้เช่า</b></td>
-                                                <td style="padding-left: 10px;"><b>วันที่เริ่ม</b></td>
-                                                <td style="padding-left: 10px;"><b>วันที่สิ้นสุด</b></td>
-                                                <td style="width: 15%; padding-left: 10px;"><b>ชื่อพนักงาน</b></td>
-                                                <td style="width: 15%; padding-left: 10px;"><b>ทะเบียนรถ</b></td>
-                                                <td style="padding-left: 10px;"><b>ราคารถ</b></td>
-                                                <td style="padding-left: 10px;"><b>จำนวนวัน</b></td>
-                                            </tr>
-                                        </thead>
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <table class="table-borderless" id="example">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 13%;"><b>เลขสัญญา</b></th>
+                                        <th style="width: 15%;"><b>ชื่อผู้เช่า</b></th>
+                                        <th style="padding-left: 10px;"><b>วันที่เริ่ม</b></th>
+                                        <th style="padding-left: 10px;"><b>วันที่สิ้นสุด</b></th>
+                                        <th style="width: 15%; padding-left: 10px;"><b>ชื่อพนักงาน</b></th>
+                                        <th style="width: 15%; padding-left: 10px;"><b>ทะเบียนรถ</b></th>
+                                        <th style="padding-left: 10px;"><b>ราคารถ</b></th>
+                                        <th style="padding-left: 10px;"><b>จำนวนวัน</b></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    while ($row = mysqli_fetch_array($result)) {
+                                    ?>
                                         <tr>
                                             <td style="width: 13%;"><?php echo $row['hirNum']; ?></td>
                                             <td style="width: 15%;"><?php echo $row['cusName']; ?></td>
@@ -98,32 +94,29 @@ include('../condb/condb.php');
                                             <td style="padding-left: 10px;"><?php echo $row['numDay']; ?></td>
                                             <td style="padding-left: 30px;"> <a class="btn btn-success" href="../contract/preview.php?id=<?php echo $row['hirNum']; ?>" onclick="return confirm('คุณต้องการพิมพ์สัญญาเช่า <?php echo $row['hirNum']; ?> ?')"><i class="fa fa-print" aria-hidden="true"></i></a> </td>
                                         </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
-                        <br>
+                    </div>
+                    <br>
                     <?php
-                    }
-                    $all_data = mysqli_query($con, "select count(*) from tbcontract");
-                    $user_count = mysqli_fetch_row($all_data);
-                    $total_records = $user_count[0];
-                    $total_pages = ceil($total_records / $limit);
-                    if ($page >= 2) {
-                        echo "<a href='index_contract.php?page=" . ($page - 1) . "' class='btn customBtn2'>ย้อนหลับ</a>";
-                    }
-
-                    if ($page < $total_pages) {
-                        echo "<a href='index_contract.php?page=" . ($page + 1) . "' class='btn customBtn2'>ถัดไป</a>";
-                    }
-
                     mysqli_close($con);
                     ?>
                 </div>
             </div>
         </div>
     </div>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/jquery.dataTables.min.js"></script>
+    <script src="bootstrap/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 </body>
 
 </html>

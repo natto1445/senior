@@ -2,7 +2,7 @@
     session_start();
     include("../condb/condb.php");
 
-    //print_r($_POST);
+    //print_r($_POST); 
 
     $hirNum = $_POST["hirNum"];
     $hirDate = $_POST["hirDate"];
@@ -18,16 +18,17 @@
     $hirDeposit = $_POST["hirDeposit"];
     $hirStatus = $_POST["hirStatus"];
     $hirCarID = $_POST["hirCarID"];
+    $hirCarID = $_POST["hirCarID"];
     $deliver = "0";
 
-    /* บันทึกข้อมูลสัญญาเช่า */
+    
     $sql = "INSERT INTO tbcontract (hirNum,cusCard,hirDate,hirStart,hirEnd,hirPattern,
     timeStart,timeEnd,usrID,carID,numDay,hirDeposit,carRent,hirStatus,deliver) VALUES
     ('$hirNum','$cusCard','$hirDate','$hirStart','$hirEnd','$hirPattern','$timeStart',
     '$timeEnd','$usrID','$hirCarID','$numDay','$hirDeposit','$carRent','$hirStatus','$deliver')";
     $query = mysqli_query($con,$sql);
 
-    /* อัพเดตสถานะลูกค้า */
+    
     $sql2 = "UPDATE tbcustomer SET cusStatus='เช่าแล้ว' WHERE cusCard='$cusCard'";
     $query2 = mysqli_query($con,$sql2);
 

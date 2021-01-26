@@ -53,7 +53,7 @@ $datenow = date('Y-m-d');
     <?php if (isset($_SESSION["save_contract_msg"])) : ?>
         <script>
             swal({
-                title: "<?php echo $_SESSION['save_contract_msg']; ?>",  
+                title: "<?php echo $_SESSION['save_contract_msg']; ?>",
                 icon: "<?php echo $_SESSION['save_contract_msg1']; ?>",
                 button: "OK",
             });
@@ -368,7 +368,7 @@ $datenow = date('Y-m-d');
             </div>
         </div>
     </div>
-
+    <br>
     <!-- check ชื่อผู้เช่า -->
     <script>
         $(document).ready(function() {

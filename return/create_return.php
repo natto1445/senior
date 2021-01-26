@@ -128,6 +128,7 @@ $time = date('H:i:s');
                                 <div class="form-group col-md-2">
                                     <label for="carNum">ทะเบียนรถ</label>
                                     <input type="text" class="form-control" name="carNum" id="carNum" value="<?php echo $row['carNum']; ?>" readonly>
+                                    <input type="hidden" class="form-control" name="carID" id="carID" value="<?php echo $row['carID']; ?>" readonly>
                                 </div>
                             </div>
 
