@@ -12,15 +12,15 @@ $select = "SELECT tbdelivers.id,tbdelivers.delID,tbdelivers.delDate,tbdelivers.h
 $from   = "FROM tbdelivers ";
 $join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbdelivers.hirNum LEFT JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard LEFT JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbdelivers.usrID ";
 $where = [];
-// ชื่อพนักงาน tbuser.usrName เลขที่สัญญา tbcontract.hirNum เลขที่ชำระเงิน เลขที่ส่งซ่อม
+
 if($search){
-    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+    $where[] = " (tbdelivers.delID LIKE '%$search%' OR tbuser.usrName LIKE '%$search%') ";
 }
 if($start_date){
-    $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
+    $where[] = " DATE(tbdelivers.delDate) >= '$start_date' ";
 }
 if($end_date){
-    $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
+    $where[] = " DATE(tbdelivers.delDate) <= '$end_date' ";
 }
 if(count($where)){
     $where = "WHERE ".implode(" AND ", $where);

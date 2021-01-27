@@ -19,13 +19,13 @@ $where = [];
 
 
 if($search){
-    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+    $where[] = " (tbdelivers.delID LIKE '%$search%' OR tbuser.usrName LIKE '%$search%') ";
 }
 if($start_date){
-    $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
+    $where[] = " DATE(tbdelivers.delDate) >= '$start_date' ";
 }
 if($end_date){
-    $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
+    $where[] = " DATE(tbdelivers.delDate) <= '$end_date' ";
 }
 
 if(count($where)){
@@ -49,24 +49,24 @@ include('../layout/header.php');
     
     <div class="row">
         <div class="col-md-12">
-            <form method="GET" action="hir_report.php">
+            <form method="GET" action="deliver_report.php">
                 <div class="form-row align-items-center">
-                    <!-- 
+                    
                     <div class="col-auto">
                         <label class="sr-only" for="search">ค้นหา</label>
                         <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="start_date">วันเริ่มต้น</label>
+                        <label class="sr-only" for="start_date">วันที่ส่งหมอบ</label>
                         <input type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="end_date">วันสิ้นสุด</label>
+                        <label class="sr-only" for="end_date">วันสิ้นสุดส่งหมอบ</label>
                         <input type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
                     </div>
-                    -->
+                    
                     <div class="col-auto">
-                        <!-- <button type="submit" class="btn btn-primary mb-2">ค้นหา</button> -->
+                        <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
                         <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน
