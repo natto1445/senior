@@ -14,13 +14,13 @@ $join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbrepair.hirNum LEFT JOIN
 $where = [];
 
 if($search){
-    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+    $where[] = " (tbrepair.repID LIKE '%$search%' OR tbuser.usrName LIKE '%$search%') ";
 }
 if($start_date){
-    $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
+    $where[] = " DATE(tbrepair.dateRepair) >= '$start_date' ";
 }
 if($end_date){
-    $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
+    $where[] = " DATE(tbrepair.dateRepair) <= '$end_date' ";
 }
 if(count($where)){
     $where = "WHERE ".implode(" AND ", $where);

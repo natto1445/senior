@@ -13,14 +13,15 @@ $from   = "FROM tbreturn_repair ";
 $join   = "JOIN tbrepair ON tbrepair.repID = tbreturn_repair.repID JOIN tbcontract ON tbcontract.hirNum = tbrepair.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID ";
 $where = [];
 
+
 if($search){
-    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+    $where[] = " (tbreturn_repair.returnID LIKE '%$search%' OR tbtaxi.carNum LIKE '%$search%') ";
 }
 if($start_date){
-    $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
+    $where[] = " DATE(tbreturn_repair.date_return) >= '$start_date' ";
 }
 if($end_date){
-    $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
+    $where[] = " DATE(tbreturn_repair.date_return) <= '$end_date' ";
 }
 if(count($where)){
     $where = "WHERE ".implode(" AND ", $where);

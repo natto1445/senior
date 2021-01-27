@@ -10,17 +10,16 @@ $end_date   = request('end_date');
 // ดึงข้อมูล
 $select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbpayment.numDay,tbpayment.balance_hirDeposit,tbpayment.Fines,tbpayment.repair,tbpayment.price_repair,tbpayment.total2 ";
 $from   = "FROM tbpayment ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID ";
+$join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbpayment.usrID ";
 $where = [];
-
 if($search){
-    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+    $where[] = " (tbpayment.payID LIKE '%$search%' OR tbuser.usrName LIKE '%$search%') ";
 }
 if($start_date){
-    $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
+    $where[] = " DATE(tbpayment.date_payment) >= '$start_date' ";
 }
 if($end_date){
-    $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
+    $where[] = " DATE(tbpayment.date_payment) <= '$end_date' ";
 }
 if(count($where)){
     $where = "WHERE ".implode(" AND ", $where);

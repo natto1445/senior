@@ -19,13 +19,13 @@ $where = [];
 
 
 if($search){
-    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+    $where[] = " (tbreturn_repair.returnID LIKE '%$search%' OR tbtaxi.carNum LIKE '%$search%') ";
 }
 if($start_date){
-    $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
+    $where[] = " DATE(tbreturn_repair.date_return) >= '$start_date' ";
 }
 if($end_date){
-    $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
+    $where[] = " DATE(tbreturn_repair.date_return) <= '$end_date' ";
 }
 
 if(count($where)){
@@ -49,9 +49,9 @@ include('../layout/header.php');
     
     <div class="row">
         <div class="col-md-12">
-            <form method="GET" action="hir_report.php">
+            <form method="GET" action="returnrepair_report.php">
                 <div class="form-row align-items-center">
-                    <!-- 
+                    
                     <div class="col-auto">
                         <label class="sr-only" for="search">ค้นหา</label>
                         <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
@@ -64,9 +64,9 @@ include('../layout/header.php');
                         <label class="sr-only" for="end_date">วันสิ้นสุด</label>
                         <input type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
                     </div>
-                    -->
+                    
                     <div class="col-auto">
-                        <!-- <button type="submit" class="btn btn-primary mb-2">ค้นหา</button> -->
+                        <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
                         <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน

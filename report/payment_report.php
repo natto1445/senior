@@ -14,18 +14,18 @@ $offset = ($page-1) * $perPage;
 // ดึงข้อมูล
 $select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbpayment.numDay,tbpayment.balance_hirDeposit,tbpayment.Fines,tbpayment.repair,tbpayment.price_repair,tbpayment.total2 ";
 $from   = "FROM tbpayment ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID ";
+$join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbpayment.usrID ";
 $where = [];
 
 
 if($search){
-    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+    $where[] = " (tbpayment.payID LIKE '%$search%' OR tbuser.usrName LIKE '%$search%') ";
 }
 if($start_date){
-    $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
+    $where[] = " DATE(tbpayment.date_payment) >= '$start_date' ";
 }
 if($end_date){
-    $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
+    $where[] = " DATE(tbpayment.date_payment) <= '$end_date' ";
 }
 
 if(count($where)){
@@ -49,9 +49,9 @@ include('../layout/header.php');
     
     <div class="row">
         <div class="col-md-12">
-            <form method="GET" action="hir_report.php">
+            <form method="GET" action="payment_report.php">
                 <div class="form-row align-items-center">
-                    <!-- 
+                    
                     <div class="col-auto">
                         <label class="sr-only" for="search">ค้นหา</label>
                         <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
@@ -64,9 +64,9 @@ include('../layout/header.php');
                         <label class="sr-only" for="end_date">วันสิ้นสุด</label>
                         <input type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
                     </div>
-                    -->
+                    
                     <div class="col-auto">
-                        <!-- <button type="submit" class="btn btn-primary mb-2">ค้นหา</button> -->
+                        <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
                         <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน
