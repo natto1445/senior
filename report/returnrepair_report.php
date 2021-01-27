@@ -205,7 +205,7 @@ include('../layout/header.php');
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">รายงาน</h5>
+                <h5 class="modal-title">รายงานรับคืนรถจากการซ่อม</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

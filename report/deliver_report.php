@@ -14,7 +14,7 @@ $offset = ($page-1) * $perPage;
 // ดึงข้อมูล
 $select = "SELECT tbdelivers.id,tbdelivers.delID,tbdelivers.delDate,tbdelivers.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbuser.usrName ";
 $from   = "FROM tbdelivers ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbdelivers.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbdelivers.usrID";
+$join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbdelivers.hirNum LEFT JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard LEFT JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbdelivers.usrID ";
 $where = [];
 
 
@@ -34,7 +34,7 @@ if(count($where)){
     $where = "";
 }
 
-$order  = "ORDER BY tbdeliverss.id DESC ";
+$order  = "ORDER BY tbdelivers.id DESC ";
 $limit  = "LIMIT $perPage ";
 $offset = "OFFSET $offset ";
 $query  = $select.$from.$join.$where.$order.$limit.$offset;
@@ -100,7 +100,7 @@ include('../layout/header.php');
                             <td><?php echo $deliver['id']; ?></td>
                             <td><?php echo $deliver['delID']; ?></td>
                             <td><?php echo $deliver['delDate']; ?></td>
-                            <td><?php echo $deliver['hirnum']; ?></td>
+                            <td><?php echo $deliver['hirNum']; ?></td>
                             <td><?php echo $deliver['cusName']; ?></td>
                             <td><?php echo $deliver['carNum']; ?></td>
                             <td><?php echo $deliver['usrName']; ?></td>
@@ -188,7 +188,7 @@ include('../layout/header.php');
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">รายงาน</h5>
+                <h5 class="modal-title">รายงานส่งหมอบรถ</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

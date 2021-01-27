@@ -12,9 +12,9 @@ $perPage = 10;
 $offset = ($page-1) * $perPage;
 
 // ดึงข้อมูล
-$select = "SELECT tbreturn.id,tbreturn.retID,tbreturn.recDate,tbreturn.retDate,tbreturn.hirnum,tbcustomer.cusName,tbtaxi.carNum,usrName.tbuser,tbreturn.dateRate,tbreturn.Fines ";
+$select = "SELECT tbreturn.id,tbreturn.retID,tbreturn.recDate,tbreturn.retDate,tbreturn.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbuser.usrName,tbreturn.dateRate,tbreturn.Fines ";
 $from   = "FROM tbreturn ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbreturn.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbreturn.usrID";
+$join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbreturn.hirNum LEFT JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard LEFT JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbreturn.usrID ";
 $where = [];
 
 
@@ -104,7 +104,7 @@ include('../layout/header.php');
                             <td><?php echo $carReturn['retID']; ?></td>
                             <td><?php echo $carReturn['recDate']; ?></td>
                             <td><?php echo $carReturn['retDate']; ?></td>
-                            <td><?php echo $carReturn['hirnum']; ?></td>
+                            <td><?php echo $carReturn['hirNum']; ?></td>
                             <td><?php echo $carReturn['cusName']; ?></td>
                             <td><?php echo $carReturn['carNum']; ?></td>
                             <td><?php echo $carReturn['usrName']; ?></td>
@@ -194,7 +194,7 @@ include('../layout/header.php');
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">รายงาน</h5>
+                <h5 class="modal-title">รายงานรับคืนรถ</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

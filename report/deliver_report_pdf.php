@@ -10,7 +10,7 @@ $end_date   = request('end_date');
 // ดึงข้อมูล
 $select = "SELECT tbdelivers.id,tbdelivers.delID,tbdelivers.delDate,tbdelivers.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbuser.usrName ";
 $from   = "FROM tbdelivers ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbdelivers.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbdelivers.usrID";
+$join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbdelivers.hirNum LEFT JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard LEFT JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbdelivers.usrID ";
 $where = [];
 // ชื่อพนักงาน tbuser.usrName เลขที่สัญญา tbcontract.hirNum เลขที่ชำระเงิน เลขที่ส่งซ่อม
 if($search){
@@ -100,7 +100,7 @@ $html = '
                         <td>'.$deliver['id'].'</td>
                         <td>'.$deliver['delID'].'</td>
                         <td>'.$deliver['delDate'].'</td>
-                        <td>'.$deliver['hirnum'].'</td>
+                        <td>'.$deliver['hirNum'].'</td>
                         <td>'.$deliver['cusName'].'</td>
                         <td>'.$deliver['carNum'].'</td>
                         <td>'.$deliver['usrName'].'</td>

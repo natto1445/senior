@@ -12,9 +12,9 @@ $perPage = 10;
 $offset = ($page-1) * $perPage;
 
 // ดึงข้อมูล
-$select = "SELECT tbrepair.id,tbrepair.repID,tbuser.usrName,tbrepair.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbrepair.text_repair,tbrepair.price_repair,tbrepair.dateRepair, tbrepair.dateSuc,tbrepair.repairStatus ";
+$select = "SELECT tbrepair.id,tbrepair.repID,tbuser.usrName,tbrepair.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbrepair.text_repair,tbrepair.price_repair,tbrepair.dateRepair, tbrepair.dateSuc,tbrepair.repair_status ";
 $from   = "FROM tbrepair ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbrepair.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID ";
+$join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbrepair.hirNum LEFT JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard LEFT JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbrepair.usrID ";
 $where = [];
 
 
@@ -104,14 +104,14 @@ include('../layout/header.php');
                             <td><?php echo $payment['id']; ?></td>
                             <td><?php echo $payment['repID']; ?></td>
                             <td><?php echo $payment['usrName']; ?></td>
-                            <td><?php echo $payment['hirnum']; ?></td>
+                            <td><?php echo $payment['hirNum']; ?></td>
                             <td><?php echo $payment['cusName']; ?></td>
                             <td><?php echo $payment['carNum']; ?></td>
                             <td><?php echo $payment['text_repair']; ?></td>
                             <td><?php echo $payment['price_repair']; ?></td>
                             <td><?php echo $payment['dateRepair']; ?></td>
                             <td><?php echo $payment['dateSuc']; ?></td>
-                            <td><?php echo $payment['repairStatus']; ?></td>
+                            <td><?php echo $payment['repair_status']; ?></td>
                         </tr>
                         <?php 
                         }
@@ -208,7 +208,7 @@ include('../layout/header.php');
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">รายงาน</h5>
+                <h5 class="modal-title">รายงานส่งซ่อมรถ</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

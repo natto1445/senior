@@ -8,9 +8,9 @@ $start_date = request('start_date');
 $end_date   = request('end_date');
 
 // ดึงข้อมูล
-$select = "SELECT tbreturn.id,tbreturn.retID,tbreturn.recDate,tbreturn.retDate,tbreturn.hirnum,tbcustomer.cusName,tbtaxi.carNum,usrName.tbuser,tbreturn.dateRate,tbreturn.Fines ";
+$select = "SELECT tbreturn.id,tbreturn.retID,tbreturn.recDate,tbreturn.retDate,tbreturn.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbuser.usrName,tbreturn.dateRate,tbreturn.Fines ";
 $from   = "FROM tbreturn ";
-$join   = "JOIN tbcontract ON tbcontract.hirNum = tbreturn.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbreturn.usrID";
+$join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbreturn.hirNum LEFT JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard LEFT JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbreturn.usrID ";
 $where = [];
 
 if($search){
@@ -104,7 +104,7 @@ $html = '
                         <td>'.$carReturn['retID'].'</td>
                         <td>'.$carReturn['recDate'].'</td>
                         <td>'.$carReturn['retDate'].'</td>
-                        <td>'.$carReturn['hirnum'].'</td>
+                        <td>'.$carReturn['hirNum'].'</td>
                         <td>'.$carReturn['cusName'].'</td>
                         <td>'.$carReturn['carNum'].'</td>
                         <td>'.$carReturn['usrName'].'</td>
