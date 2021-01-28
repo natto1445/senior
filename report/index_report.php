@@ -74,6 +74,35 @@ include('../condb/condb.php');
 
             </div>
         </div>
+        <br>
+        <div class="card bg-light text-dark">
+            <div class="card-body" style="width: 100%;">
+                <div>
+                    <h4><b>รายงาน ข้อมูลพื้นฐาน</b></h4>
+                </div>
+                <br>
+                <div class="card-columns">
+                    <div class="card bg-secondary" style="width: 343px; height: 120px" onclick="location.href='user_report.php';" style="cursor:pointer;">
+                        <div class="card-body text-center">
+                            <i class="fa fa-user" aria-hidden="true" style="font-size: 2rem; padding-top: 5px;"></i>
+                            <p class="card-text" style="padding-top: 5px;"><b>ข้อมูลพนักงาน</b></p>
+                        </div>
+                    </div>
+                    <div class="card bg-secondary" style="width: 343px; height: 120px" onclick="location.href='car_report.php';" style="cursor:pointer;">
+                        <div class="card-body text-center">
+                            <i class="fa fa-car" aria-hidden="true" style="font-size: 2rem; padding-top: 5px;"></i>
+                            <p class="card-text" style="padding-top: 5px;"><b>ข้อมูลรถ</b></p>
+                        </div>
+                    </div>
+                    <div class="card bg-secondary" style="width: 343px; height: 120px" onclick="location.href='customer_report.php';" style="cursor:pointer;">
+                        <div class="card-body text-center">
+                            <i class="fa fa-users" aria-hidden="true" style="font-size: 2rem; padding-top: 5px;"></i>
+                            <p class="card-text" style="padding-top: 5px;"><b>ข้อมูลผู้เช่า</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
