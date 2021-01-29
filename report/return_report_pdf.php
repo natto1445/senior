@@ -80,6 +80,7 @@ $html = '
 	</head>
 	<body>
 		<h1>รายงานส่งหมอบรถ</h1>
+        '.displaySearch($search, $start_date, $end_date).'
 		<table>
             <thead>
                 <tr>

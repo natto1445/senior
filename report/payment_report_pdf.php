@@ -79,6 +79,7 @@ $html = '
 	</head>
 	<body>
 		<h1>รายงานชำระเงิน</h1>
+        '.displaySearch($search, $start_date, $end_date).'
 		<table>
             <thead>
                 <tr>

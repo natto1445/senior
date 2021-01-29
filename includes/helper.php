@@ -32,3 +32,31 @@ function queryString($params = []){
 
     return '?'.implode('&', $query);
 }
+
+function dateFormat($date){
+    $date = explode('-', $date);
+    return @$date[2].'/'.@$date[1].'/'.@$date[0];
+}
+
+function displaySearch($search, $dateStart, $dateEnd){
+
+    if($search == '' and $dateStart == '' and $dateEnd == ''){
+        return '';
+    }
+
+    $show = 'ค้นหาจาก - ';
+
+    if($search){
+        $show = "ค้นหาจาก '$search' ";
+    }
+
+    if($dateStart and $dateEnd){
+        $show .= "ช่วงวันที่ ".dateFormat($dateStart)." - ".dateFormat($dateEnd);
+    } else if ($dateStart){
+        $show .= "ตั้งแต่วันที่ ".dateFormat($dateStart);
+    } else if ($dateEnd){
+        $show .= "ถึงวันที่ ".dateFormat($dateEnd);
+    }
+
+    return "<p>".$show."</p>";
+}

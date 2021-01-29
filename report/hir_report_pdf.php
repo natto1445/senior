@@ -12,7 +12,7 @@ $select = "SELECT tbcontract.*,tbcustomer.cusName,tbuser.usrName,tbtaxi.carNum "
 $from   = "FROM tbcontract ";
 $join   = "JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID ";
 $where = [];
-// ชื่อพนักงาน tbuser.usrName เลขที่สัญญา tbcontract.hirNum เลขที่ชำระเงิน เลขที่ส่งซ่อม
+
 if($search){
     $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
 }
@@ -80,6 +80,7 @@ $html = '
 	</head>
 	<body>
 		<h1>รายงานสัญญาเช่า</h1>
+        '.displaySearch($search, $start_date, $end_date).'
 		<table>
             <thead>
                 <tr>
