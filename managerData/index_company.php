@@ -16,18 +16,23 @@ include('../condb/condb.php');
     <!-- Responsive-->
     <link rel="stylesheet" href="../css/responsive.css">
     <script src="../js/sweetalert.min.js"></script>
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div class="menu">
         <?php include '../login/menu.php'; ?>
     </div>
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4><b>ข้อมูลบริษัท</b></h4>
+                    <h2><b>ข้อมูลบริษัท</b></h2>
                 </div>
                 <br>
                 <?php if (isset($_SESSION['status'])) : ?>
@@ -52,24 +57,20 @@ include('../condb/condb.php');
                                 <table class="table-borderless" cellpadding="20px">
                                     <tbody>
                                         <tr>
-                                            <td rowspan="5" style="width: 50%;"><img src="../images/company/<?php echo $row['comLogo']; ?>" class="img-thumbnail" alt="customer" width="100%"></td>
+                                            <td rowspan="2" style="width: 20%;"><img src="../images/company/<?php echo $row['comLogo']; ?>" class="img-thumbnail" alt="customer" width="100%"></td>
+                                            <td style="font-size: 18pt;"><b>รหัสบริษัท :</h4></b> <?php echo $row['comID']; ?></td>
+                                            <td style="font-size: 18pt;"><b>ชื่อบริษัท :</h4></b> <?php echo $row['comName']; ?></td>
                                         </tr>
                                         <tr>
-                                            <td style="padding-left: 20px;"><b>รหัสบริษัท :</b> <?php echo $row['comID']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-left: 20px;"><b>ชื่อบริษัท :</b> <?php echo $row['comName']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-left: 20px;"><b>ที่อยู่บริษัท :</b> <?php echo $row['comAdd']; ?></td>
+                                            <td style="font-size: 18pt;"><b>ชื่อเจ้าของบริษัท :</b> <?php echo $row['comOwner']; ?></td>
+                                            <td style="font-size: 18pt;"><b>ที่อยู่บริษัท :</b> <?php echo $row['comAdd']; ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div align="left" style="padding-top: 10px; padding-left: 105px;">
-                            <a style="width: 60px;" class="btn btn-warning" href="../managerData/edit_company.php?id=<?php echo $row['comID']; ?>" onclick="return confirm('คุณต้องการแกไขข้อมูล <?php echo $row['comName']; ?> ?')"><i class="fa fa-wrench" aria-hidden="true"></i></a>
-                            <a style="width: 60px;" class="btn btn-danger" href="../home.php"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        <div align="left" style="padding-top: 10px; padding-left: 10%;">
+                            <a style="width: 80px;" class="btn btn-warning" href="../managerData/edit_company.php?id=<?php echo $row['comID']; ?>" onclick="return confirm('คุณต้องการแกไขข้อมูล <?php echo $row['comName']; ?> ?')"> <i class="fa fa-wrench" aria-hidden="true"></i> </a>
                         </div>
                     <?php
                     }

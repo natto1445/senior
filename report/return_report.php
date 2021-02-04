@@ -44,8 +44,8 @@ include('../layout/header.php');
 <div class="menu">
     <?php include '../layout/menu.php'; ?>
 </div>
-<div class="container">
-    <h4 class="mt-3 mb-3">รายงานรับคืนรถ</h4>
+<div style="width: 80%;" class="center_div">
+    <h2 class="mt-3 mb-3">รายงานรับรถคืน</h2>
     
     <div class="row">
         <div class="col-md-12">
@@ -53,24 +53,26 @@ include('../layout/header.php');
                 <div class="form-row align-items-center">
                     
                     <div class="col-auto">
-                        <label class="sr-only" for="search">ค้นหา</label>
-                        <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
+                        <label style="font-size: 14pt;" class="sr-only" for="search">ค้นหา</label>
+                        <input style="font-size: 14pt;" type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="start_date">วันเริ่มต้น</label>
-                        <input type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
+                        <label style="font-size: 14pt;" class="sr-only" for="start_date">วันเริ่มต้น</label>
+                        <input style="font-size: 14pt;" type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="end_date">วันสิ้นสุด</label>
-                        <input type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
+                        <label style="font-size: 14pt;" class="sr-only" for="end_date">วันสิ้นสุด</label>
+                        <input style="font-size: 14pt;" type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
                     </div>
                 
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
+                        <button style="font-size: 14pt;" type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
-                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
+                        <button style="font-size: 14pt;" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน
                         </button>
+                        <a style="font-size: 14pt;" href="/report/return_report.php" class="btn btn-primary mb-2">รีเฟรช</a>
+                        <a style="font-size: 14pt;" href="/report/index_report.php" class="btn btn-primary mb-2">ย้อนกลับ</a>
                     </div>
                 </div>
             </form>
@@ -82,16 +84,16 @@ include('../layout/header.php');
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>ลำดับ</th>
-                        <th>เลขที่รับคืน</th>
-                        <th>วันที่ต้องคืน</th>
-                        <th>วันที่คืนรถ</th>
-                        <th>เลขที่สัญญา</th>
-                        <th>ชื่อผู้เช่า</th>
-                        <th>ทะเบียนรถที่เช่า</th>
-                        <th>ชื่อพนักงาน</th>
-                        <th>จำนวนวันคืนช้า</th>
-                        <th>ค่าปรับคืนช้า</th>
+                        <th style="font-size: 16pt;">ลำดับ</th>
+                        <th style="font-size: 16pt;">เลขที่รับคืน</th>
+                        <th style="font-size: 16pt;">วันที่ต้องคืน</th>
+                        <th style="font-size: 16pt;">วันที่คืนรถ</th>
+                        <th style="font-size: 16pt;">เลขที่สัญญา</th>
+                        <th style="font-size: 16pt;">ชื่อผู้เช่า</th>
+                        <th style="font-size: 16pt;">ทะเบียนรถที่เช่า</th>
+                        <th style="font-size: 16pt;">ชื่อพนักงาน</th>
+                        <th style="font-size: 16pt;">จำนวนวันคืนช้า</th>
+                        <th style="font-size: 16pt;">ค่าปรับคืนช้า</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,16 +102,16 @@ include('../layout/header.php');
                         while($carReturn = $result->fetch_assoc()){
                         ?>
                         <tr>
-                            <td><?php echo $carReturn['id']; ?></td>
-                            <td><?php echo $carReturn['retID']; ?></td>
-                            <td><?php echo $carReturn['recDate']; ?></td>
-                            <td><?php echo $carReturn['retDate']; ?></td>
-                            <td><?php echo $carReturn['hirNum']; ?></td>
-                            <td><?php echo $carReturn['cusName']; ?></td>
-                            <td><?php echo $carReturn['carNum']; ?></td>
-                            <td><?php echo $carReturn['usrName']; ?></td>
-                            <td><?php echo $carReturn['dateRate']; ?></td>
-                            <td><?php echo $carReturn['Fines']; ?></td>
+                            <td style="font-size: 14pt; text-align: center;"><?php echo $carReturn['id']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $carReturn['retID']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $carReturn['recDate']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $carReturn['retDate']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $carReturn['hirNum']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $carReturn['cusName']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $carReturn['carNum']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $carReturn['usrName']; ?></td>
+                            <td style="font-size: 14pt; text-align: center;"><?php echo $carReturn['dateRate']; ?></td>
+                            <td style="font-size: 14pt; text-align: right;"><?php echo $carReturn['Fines']; ?></td>
                         </tr>
                         <?php 
                         }
@@ -209,5 +211,10 @@ include('../layout/header.php');
         </div>
     </div>
 </div>
+<style type="text/css">
+    .center_div {
+        margin: auto;
+    }
+</style>
 
 <?php include('../layout/footer.php'); ?>

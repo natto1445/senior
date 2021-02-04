@@ -44,8 +44,8 @@ include('../layout/header.php');
 <div class="menu">
     <?php include '../layout/menu.php'; ?>
 </div>
-<div class="container">
-    <h4 class="mt-3 mb-3">รายงานรับคืนรถจากการซ่อม</h4>
+<div style="width: 80%;" class="center_div">
+    <h2 class="mt-3 mb-3">รายงานรับคืนรถจากการซ่อม</h2>
     
     <div class="row">
         <div class="col-md-12">
@@ -53,24 +53,26 @@ include('../layout/header.php');
                 <div class="form-row align-items-center">
                     
                     <div class="col-auto">
-                        <label class="sr-only" for="search">ค้นหา</label>
-                        <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
+                        <label style="font-size: 14pt;" class="sr-only" for="search">ค้นหา</label>
+                        <input style="font-size: 14pt;" type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="start_date">วันเริ่มต้น</label>
-                        <input type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
+                        <label style="font-size: 14pt;" class="sr-only" for="start_date">วันเริ่มต้น</label>
+                        <input style="font-size: 14pt;" type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="end_date">วันสิ้นสุด</label>
-                        <input type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
+                        <label style="font-size: 14pt;" class="sr-only" for="end_date">วันสิ้นสุด</label>
+                        <input style="font-size: 14pt;" type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
                     </div>
                     
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
+                        <button style="font-size: 14pt;" type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
-                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
+                        <button style="font-size: 14pt;" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน
                         </button>
+                        <a style="font-size: 14pt;" href="/report/returnrepair_report.php" class="btn btn-primary mb-2">รีเฟรช</a>
+                        <a style="font-size: 14pt;" href="/report/index_report.php" class="btn btn-primary mb-2">ย้อนกลับ</a>
                     </div>
                 </div>
             </form>
@@ -82,16 +84,15 @@ include('../layout/header.php');
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>ลำดับ</th>
-                        <th>เลขที่รับรถคืน</th>
-                        <th>เลขที่ส่งซ่อม</th>
-                        <th>เลขที่สัญญา</th>
-                        <th>ชื่อผู้เช่า</th>
-                        <th>ทะเบียนรถที่เช่า</th>
-                        <th>งานซ่อม</th>
-                        <th>ราคาซ่อม</th>
-                        <th>วันที่ส่งซ่อม</th>
-                        <th>วันที่รับคืนจริง</th>
+                        <th style="font-size: 16pt;">ลำดับ</th>
+                        <th style="font-size: 16pt;">เลขที่รับรถคืน</th>
+                        <th style="font-size: 16pt;">เลขที่ส่งซ่อม</th>
+                        <th style="font-size: 16pt;">ชื่อผู้เช่า</th>
+                        <th style="font-size: 16pt;">ทะเบียนรถที่เช่า</th>
+                        <th style="font-size: 16pt;">งานซ่อม</th>
+                        <th style="font-size: 16pt;">ราคาซ่อม</th>
+                        <th style="font-size: 16pt;">วันที่ส่งซ่อม</th>
+                        <th style="font-size: 16pt;">วันที่รับคืนจริง</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,16 +101,15 @@ include('../layout/header.php');
                         while($reternRepair = $result->fetch_assoc()){
                         ?>
                         <tr>
-                            <td><?php echo $reternRepair['id']; ?></td>
-                            <td><?php echo $reternRepair['returnID']; ?></td>
-                            <td><?php echo $reternRepair['repID']; ?></td>
-                            <td><?php echo $reternRepair['hirnum']; ?></td>
-                            <td><?php echo $reternRepair['cusName']; ?></td>
-                            <td><?php echo $reternRepair['carNum']; ?></td>
-                            <td><?php echo $reternRepair['text_repair']; ?></td>
-                            <td><?php echo $reternRepair['price_repair']; ?></td>
-                            <td><?php echo $reternRepair['dateRepair']; ?></td>
-                            <td><?php echo $reternRepair['date_return']; ?></td>
+                            <td style="font-size: 14pt; text-align:center;"><?php echo $reternRepair['id']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $reternRepair['returnID']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $reternRepair['repID']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $reternRepair['cusName']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $reternRepair['carNum']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $reternRepair['text_repair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $reternRepair['price_repair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $reternRepair['dateRepair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $reternRepair['date_return']; ?></td>
                         </tr>
                         <?php 
                         }
@@ -220,5 +220,10 @@ include('../layout/header.php');
         </div>
     </div>
 </div>
+<style type="text/css">
+    .center_div {
+        margin: auto;
+    }
+</style>
 
 <?php include('../layout/footer.php'); ?>

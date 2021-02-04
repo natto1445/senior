@@ -12,12 +12,13 @@
 
     $comID = $_POST["comID"];
 	$comName = $_POST["comName"];
+	$comOwner = $_POST["comOwner"];
 	$comAdd = $_POST["comAdd"];
 	$cusPic = $_POST["upload"];
     
     
 	
-	if($comID=="" || $comName=="" || $comAdd==""){
+	if($comID=="" || $comName=="" || $comAdd=="" || $comOwner==""){
 		$_SESSION['status'] = "กรุณากรอกข้อมูล !";
         $_SESSION['status_code'] = "info";
         header("Location: ../managerData/edit_company.php?id=$comID");
@@ -26,6 +27,7 @@
 		$sql = "UPDATE tbcompany SET 
 			comID = '".$_POST["comID"]."' ,
 			comName = '".$_POST["comName"]."' ,
+			comOwner = '".$_POST["comOwner"]."' ,
 			comAdd = '".$_POST["comAdd"]."' ,
             comLogo = '$name_file'
             WHERE comID = '".$_POST["comID"]."' ";
@@ -34,6 +36,7 @@
                 $sql = "UPDATE tbcompany SET 
                 comID = '".$_POST["comID"]."' ,
                 comName = '".$_POST["comName"]."' ,
+				comOwner = '".$_POST["comOwner"]."' ,
                 comAdd = '".$_POST["comAdd"]."'
                 WHERE comID = '".$_POST["comID"]."' ";
             }

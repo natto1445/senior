@@ -12,7 +12,7 @@ $perPage = 10;
 $offset = ($page-1) * $perPage;
 
 // ดึงข้อมูล
-$select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbpayment.numDay,tbpayment.balance_hirDeposit,tbpayment.Fines,tbpayment.repair,tbpayment.price_repair,tbpayment.total2 ";
+$select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbpayment.numDay,tbpayment.date_payment,tbpayment.Fines,tbpayment.repair,tbpayment.price_repair,tbpayment.total2 ";
 $from   = "FROM tbpayment ";
 $join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbpayment.usrID ";
 $where = [];
@@ -44,8 +44,8 @@ include('../layout/header.php');
 <div class="menu">
     <?php include '../layout/menu.php'; ?>
 </div>
-<div class="container">
-    <h4 class="mt-3 mb-3">รายงานชำระเงิน</h4>
+<div style="width: 80%;" class="center_div">
+    <h2 class="mt-3 mb-3">รายงานชำระเงิน</h2>
     
     <div class="row">
         <div class="col-md-12">
@@ -53,24 +53,26 @@ include('../layout/header.php');
                 <div class="form-row align-items-center">
                     
                     <div class="col-auto">
-                        <label class="sr-only" for="search">ค้นหา</label>
-                        <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
+                        <label style="font-size: 14pt;" class="sr-only" for="search">ค้นหา</label>
+                        <input style="font-size: 14pt;" type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="start_date">วันเริ่มต้น</label>
-                        <input type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
+                        <label style="font-size: 14pt;" class="sr-only" for="start_date">วันเริ่มต้น</label>
+                        <input style="font-size: 14pt;" type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="end_date">วันสิ้นสุด</label>
-                        <input type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
+                        <label style="font-size: 14pt;" class="sr-only" for="end_date">วันสิ้นสุด</label>
+                        <input style="font-size: 14pt;" type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
                     </div>
                     
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
+                        <button style="font-size: 14pt;" type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
-                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
+                        <button style="font-size: 14pt;" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน
                         </button>
+                        <a style="font-size: 14pt;" href="/report/payment_report.php" class="btn btn-primary mb-2">รีเฟรช</a>
+                        <a style="font-size: 14pt;" href="/report/index_report.php" class="btn btn-primary mb-2">ย้อนกลับ</a>
                     </div>
                 </div>
             </form>
@@ -82,17 +84,17 @@ include('../layout/header.php');
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>ลำดับ</th>
-                        <th>เลขที่ชำระเงิน</th>
-                        <th>เลขที่สัญญา</th>
-                        <th>ชื่อผู้เช่า</th>
-                        <th>ทะเบียนรถที่เช่า</th>
-                        <th>จำนวนวันที่เช่า</th>
-                        <th>ยอดคงเหลือที่ต้องจ่าย</th>
-                        <th>ค่าปรับคืนช้า</th>
-                        <th>การซ่อม</th>
-                        <th>ราคาซ่อม</th>
-                        <th>รวมค่าเช่าสุทธิ</th>
+                        <th style="font-size: 16pt;">ลำดับ</th>
+                        <th style="font-size: 16pt;">เลขที่ชำระเงิน</th>
+                        <th style="font-size: 16pt;">เลขที่สัญญา</th>
+                        <th style="font-size: 16pt;">วันที่ชำระ</th>
+                        <th style="font-size: 16pt;">ชื่อผู้เช่า</th>
+                        <th style="font-size: 16pt;">ทะเบียนรถที่เช่า</th>
+                        <th style="font-size: 16pt;">จำนวนวันที่เช่า</th>
+                        <th style="font-size: 16pt;">ค่าปรับคืนช้า</th>
+                        <th style="font-size: 16pt;">การซ่อม</th>
+                        <th style="font-size: 16pt;">ราคาซ่อม</th>
+                        <th style="font-size: 16pt;">รวมค่าเช่าสุทธิ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,17 +103,17 @@ include('../layout/header.php');
                         while($payment = $result->fetch_assoc()){
                         ?>
                         <tr>
-                            <td><?php echo $payment['id']; ?></td>
-                            <td><?php echo $payment['payID']; ?></td>
-                            <td><?php echo $payment['hirnum']; ?></td>
-                            <td><?php echo $payment['cusName']; ?></td>
-                            <td><?php echo $payment['carNum']; ?></td>
-                            <td><?php echo $payment['numDay']; ?></td>
-                            <td><?php echo $payment['balance_hirDeposit']; ?></td>
-                            <td><?php echo $payment['Fines']; ?></td>
-                            <td><?php echo $payment['repair']; ?></td>
-                            <td><?php echo $payment['price_repair']; ?></td>
-                            <td><?php echo $payment['total2']; ?></td>
+                            <td style="font-size: 14pt; text-align: center;"><?php echo $payment['id']; ?></td> 
+                            <td style="font-size: 14pt;"><?php echo $payment['payID']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['hirnum']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['date_payment']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['cusName']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['carNum']; ?></td>
+                            <td style="font-size: 14pt; text-align: center;"><?php echo $payment['numDay']; ?></td>
+                            <td style="font-size: 14pt; text-align: right;"><?php echo $payment['Fines']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['repair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['price_repair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['total2']; ?></td>
                         </tr>
                         <?php 
                         }
@@ -223,5 +225,10 @@ include('../layout/header.php');
         </div>
     </div>
 </div>
+<style type="text/css">
+    .center_div {
+        margin: auto;
+    }
+</style>
 
 <?php include('../layout/footer.php'); ?>

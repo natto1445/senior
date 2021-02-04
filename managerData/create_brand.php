@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="../css/responsive.css">
 
     <script src="../js/sweetalert.min.js"></script>
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 
 </head>
 
@@ -21,15 +26,15 @@
     <div class="menu">
         <?php include '../login/menu.php'; ?>
     </div>
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4>เพิ่มข้อมูลยี่ห้อ
+                    <h2><b>เพิ่มข้อมูลยี่ห้อ
                         <a class="text-danger" style="float: right; padding-left: 15px" href="../managerData/index_brand.php"><i class="fa fa-times" aria-hidden="true"></i></a>
                         <a class="text-secondary" style="float: right;" href="../managerData/create_brand.php"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    </h4>
+                        </b></h2>
                 </div>
                 <?php if (isset($_SESSION['status'])) : ?>
                     <script>
@@ -45,18 +50,18 @@
                 <form action="save_brand.php" method="post">
                     <div class="form-row col-md-12">
                         <div class="form-group col-md-6">
-                            <label for="eBrand">ชื่อแบรนด์ อังกฤษ</label>
-                            <input type="text" class="form-control" name="eBrand" id="eBrand" placeholder="อังกฤษ">
+                            <label style="font-size: 14pt;" for="eBrand"><b>ชื่อแบรนด์ อังกฤษ</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="eBrand" id="eBrand" placeholder="อังกฤษ">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="tBrand">ชื่อแบรนด์ ไทย</label>
-                            <input type="text" class="form-control" name="tBrand" id="tBrand" placeholder="ไทย">
+                            <label style="font-size: 14pt;" for="tBrand"><b>ชื่อแบรนด์ ไทย</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="tBrand" id="tBrand" placeholder="ไทย">
                         </div>
                     </div>
                     <div class="form-row col-md-8">
                         <div class="form-group col-md-10">
-                            <button type="submit" class="btn btn-outline-success">ตกลง</button>
-                            <button type="reset" class="btn btn-outline-warning">ยกเลิก</button>
+                            <button style="font-size: 14pt;" type="submit" class="btn btn-outline-success">ตกลง</button>
+                            <button style="font-size: 14pt;" type="reset" class="btn btn-outline-warning">ยกเลิก</button>
                         </div>
                     </div>
                 </form>

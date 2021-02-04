@@ -12,7 +12,7 @@ $perPage = 10;
 $offset = ($page-1) * $perPage;
 
 // ดึงข้อมูล
-$select = "SELECT tbrepair.id,tbrepair.repID,tbuser.usrName,tbrepair.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbrepair.text_repair,tbrepair.price_repair,tbrepair.dateRepair, tbrepair.dateSuc,tbrepair.repair_status ";
+$select = "SELECT tbrepair.id,tbrepair.repID,tbrepair.dateRepair,tbuser.usrName,tbrepair.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbrepair.text_repair,tbrepair.price_repair,tbrepair.dateRepair, tbrepair.dateSuc,tbrepair.repair_status ";
 $from   = "FROM tbrepair ";
 $join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbrepair.hirNum LEFT JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard LEFT JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbrepair.usrID ";
 $where = [];
@@ -44,8 +44,8 @@ include('../layout/header.php');
 <div class="menu">
     <?php include '../layout/menu.php'; ?>
 </div>
-<div class="container">
-    <h4 class="mt-3 mb-3">รายงานส่งซ่อมรถ</h4>
+<div style="width: 80%;" class="center_div">
+    <h2 class="mt-3 mb-3">รายงานส่งซ่อมรถ</h2>
     
     <div class="row">
         <div class="col-md-12">
@@ -53,24 +53,26 @@ include('../layout/header.php');
                 <div class="form-row align-items-center">
                     
                     <div class="col-auto">
-                        <label class="sr-only" for="search">ค้นหา</label>
-                        <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
+                        <label style="font-size: 14pt;" class="sr-only" for="search">ค้นหา</label>
+                        <input style="font-size: 14pt;" type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="start_date">วันเริ่มต้น</label>
-                        <input type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
+                        <label style="font-size: 14pt;" class="sr-only" for="start_date">วันเริ่มต้น</label>
+                        <input style="font-size: 14pt;" type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
                     </div>
                     <div class="col-auto">
-                        <label class="sr-only" for="end_date">วันสิ้นสุด</label>
-                        <input type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
+                        <label style="font-size: 14pt;" class="sr-only" for="end_date">วันสิ้นสุด</label>
+                        <input style="font-size: 14pt;" type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
                     </div>
                     
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
+                        <button style="font-size: 14pt;" type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
-                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
+                        <button style="font-size: 14pt;" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน
                         </button>
+                        <a style="font-size: 14pt;" href="/report/repair_report.php" class="btn btn-primary mb-2">รีเฟรช</a>
+                        <a style="font-size: 14pt;" href="/report/index_report.php" class="btn btn-primary mb-2">ย้อนกลับ</a>
                     </div>
                 </div>
             </form>
@@ -82,17 +84,17 @@ include('../layout/header.php');
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>ลำดับ</th>
-                        <th>เลขที่ส่งซ่อม</th>
-                        <th>ชื่อพนักงาน</th>
-                        <th>เลขที่สัญญา</th>
-                        <th>ชื่อผู้เช่า</th>
-                        <th>ทะเบียนรถที่เช่า</th>
-                        <th>งานซ่อม</th>
-                        <th>ราคาซ่อม</th>
-                        <th>วันที่ส่งซ่อม</th>
-                        <th>วันที่คาดว่าจะได้รถ</th>
-                        <th>สถานการณ์ซ่อม</th>
+                        <th style="font-size: 16pt;">ลำดับ</th>
+                        <th style="font-size: 16pt;">เลขที่ส่งซ่อม</th>
+                        <th style="font-size: 16pt;">วันที่ส่งซ่อม</th>
+                        <th style="font-size: 16pt;">เลขที่สัญญา</th>
+                        <th style="font-size: 16pt;">พนักงาน</th>
+                        <th style="font-size: 16pt;">ทะเบียนรถที่เช่า</th>
+                        <th style="font-size: 16pt;">งานซ่อม</th>
+                        <th style="font-size: 16pt;">ราคาซ่อม</th>
+                        <th style="font-size: 16pt;">วันที่ส่งซ่อม</th>
+                        <th style="font-size: 16pt;">วันที่คาดว่าจะได้รถ</th>
+                        <th style="font-size: 16pt;">สถานการณ์ซ่อม</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,17 +103,17 @@ include('../layout/header.php');
                         while($payment = $result->fetch_assoc()){
                         ?>
                         <tr>
-                            <td><?php echo $payment['id']; ?></td>
-                            <td><?php echo $payment['repID']; ?></td>
-                            <td><?php echo $payment['usrName']; ?></td>
-                            <td><?php echo $payment['hirNum']; ?></td>
-                            <td><?php echo $payment['cusName']; ?></td>
-                            <td><?php echo $payment['carNum']; ?></td>
-                            <td><?php echo $payment['text_repair']; ?></td>
-                            <td><?php echo $payment['price_repair']; ?></td>
-                            <td><?php echo $payment['dateRepair']; ?></td>
-                            <td><?php echo $payment['dateSuc']; ?></td>
-                            <td><?php echo $payment['repair_status']; ?></td>
+                            <td style="font-size: 14pt; text-align:center;"><?php echo $payment['id']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['repID']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['dateRepair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['hirNum']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['usrName']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['carNum']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['text_repair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['price_repair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['dateRepair']; ?></td>
+                            <td style="font-size: 14pt;"><?php echo $payment['dateSuc']; ?></td>
+                            <td style="font-size: 14pt; text-align:center;"><?php echo $payment['repair_status']; ?></td>
                         </tr>
                         <?php 
                         }
@@ -223,5 +225,10 @@ include('../layout/header.php');
         </div>
     </div>
 </div>
+<style type="text/css">
+    .center_div {
+        margin: auto;
+    }
+</style>
 
 <?php include('../layout/footer.php'); ?>

@@ -8,7 +8,7 @@ $start_date = request('start_date');
 $end_date   = request('end_date');
 
 // ดึงข้อมูล
-$select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbpayment.numDay,tbpayment.balance_hirDeposit,tbpayment.Fines,tbpayment.repair,tbpayment.price_repair,tbpayment.total2 ";
+$select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbpayment.numDay,tbpayment.date_payment,tbpayment.Fines,tbpayment.repair,tbpayment.price_repair,tbpayment.total2 ";
 $from   = "FROM tbpayment ";
 $join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbpayment.usrID ";
 $where = [];
@@ -86,10 +86,10 @@ $html = '
                     <th>ลำดับ</th>
                     <th>เลขที่ชำระเงิน</th>
                     <th>เลขที่สัญญา</th>
+                    <th>วันที่ชำระ</th>
                     <th>ชื่อผู้เช่า</th>
                     <th>ทะเบียนรถที่เช่า</th>
                     <th>จำนวนวันที่เช่า</th>
-                    <th>ยอดคงเหลือที่ต้องจ่าย</th>
                     <th>ค่าปรับคืนช้า</th>
                     <th>การซ่อม</th>
                     <th>ราคาซ่อม</th>
@@ -104,10 +104,10 @@ $html = '
                         <td>'.$payment['id'].'</td>
                         <td>'.$payment['payID'].'</td>
                         <td>'.$payment['hirnum'].'</td>
+                        <td>'.$payment['date_payment'].'</td>
                         <td>'.$payment['cusName'].'</td>
                         <td>'.$payment['carNum'].'</td>
                         <td>'.$payment['numDay'].'</td>
-                        <td>'.$payment['balance_hirDeposit'].'</td>
                         <td>'.$payment['Fines'].'</td>
                         <td>'.$payment['repair'].'</td>
                         <td>'.$payment['price_repair'].'</td>

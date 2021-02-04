@@ -1,0 +1,20 @@
+@page{
+    size: A4;
+    margin: 0;
+}
+#print{
+    display: none;
+    visibility: none;
+}
+#return{
+    display: none;
+    visibility: none;
+}
+#example_length{ 
+    display: none;
+    visibility: none;
+}
+#example_paginate{
+    display: none;
+    visibility: none;
+}

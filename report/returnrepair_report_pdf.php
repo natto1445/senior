@@ -88,7 +88,6 @@ $html = '
                     <th>ลำดับ</th>
                     <th>เลขที่รับรถคืน</th>
                     <th>เลขที่ส่งซ่อม</th>
-                    <th>เลขที่สัญญา</th>
                     <th>ชื่อผู้เช่า</th>
                     <th>ทะเบียนรถที่เช่า</th>
                     <th>งานซ่อม</th>
@@ -105,7 +104,6 @@ $html = '
                         <td>'.$reternRepair['id'].'</td>
                         <td>'.$reternRepair['returnID'].'</td>
                         <td>'.$reternRepair['repID'].'</td>
-                        <td>'.$reternRepair['hirnum'].'</td>
                         <td>'.$reternRepair['cusName'].'</td>
                         <td>'.$reternRepair['carNum'].'</td>
                         <td>'.$reternRepair['text_repair'].'</td>

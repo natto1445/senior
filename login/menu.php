@@ -40,16 +40,16 @@ if ($level == "admin" || $level == "employee") {
           if ($level == "admin") {
           ?>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
+              <a style="font-size: 14pt;" class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
                 ข้อมูลพื้นฐาน
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="../managerData/index_user.php">ข้อมูลผู้ใช้งาน</a>
-                <a class="dropdown-item" href="../managerData/index_company.php">ข้อมูลบริษัท</a>
-                <a class="dropdown-item" href="../managerData/index_brand.php">ข้อมูลยี่ห้อรถ</a>
-                <a class="dropdown-item" href="../managerData/index_generate.php">ข้อมูลรุ่นรถ</a>
-                <a class="dropdown-item" href="../managerData/index_taxi.php">ข้อมูลรถแท็กซี่</a>
-                <a class="dropdown-item" href="../managerData/index_customer.php">ข้อมูลผู้เช่า</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_user.php">ข้อมูลผู้ใช้งาน</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_company.php">ข้อมูลบริษัท</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_brand.php">ข้อมูลยี่ห้อรถ</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_generate.php">ข้อมูลรุ่นรถ</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_taxi.php">ข้อมูลรถแท็กซี่</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_customer.php">ข้อมูลผู้เช่า</a>
               </div>
             </li>
           <?php
@@ -60,36 +60,36 @@ if ($level == "admin" || $level == "employee") {
           if ($level == "employee") {
           ?>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
+              <a style="font-size: 14pt;" class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
                 ข้อมูลพื้นฐาน
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="../managerData/index_brand.php">ข้อมูลยี่ห้อรถ</a>
-                <a class="dropdown-item" href="../managerData/index_generate.php">ข้อมูลรุ่นรถ</a>
-                <a class="dropdown-item" href="../managerData/index_taxi.php">ข้อมูลรถแท็กซี่</a>
-                <a class="dropdown-item" href="../managerData/index_customer.php">ข้อมูลผู้เช่า</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_brand.php">ข้อมูลยี่ห้อรถ</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_generate.php">ข้อมูลรุ่นรถ</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_taxi.php">ข้อมูลรถแท็กซี่</a>
+                <a style="font-size: 14pt;" class="dropdown-item" href="../managerData/index_customer.php">ข้อมูลผู้เช่า</a>
               </div>
             </li>
           <?php
           }
           ?>
           <li class="nav-item">
-            <a class="nav-link text-light" href="../contract/index_contract.php">สัญญาเช่า</a>
+            <a style="font-size: 14pt;" class="nav-link text-light" href="../contract/index_contract.php">สัญญาเช่า</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="../deliver/create_deliver.php">ส่งมอบรถ</a>
+            <a style="font-size: 14pt;" class="nav-link text-light" href="../deliver/create_deliver.php">ส่งมอบรถ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="../return/create_return.php">รับรถคืน</a>
+            <a style="font-size: 14pt;" class="nav-link text-light" href="../return/create_return.php">รับรถคืน</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="../payment/index_payment.php">ชำระเงิน</a>
+            <a style="font-size: 14pt;" class="nav-link text-light" href="../payment/index_payment.php">ชำระเงิน</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="../repaircar/create_repair.php">ส่งซ่อมรถ</a>
+            <a style="font-size: 14pt;" class="nav-link text-light" href="../repaircar/create_repair.php">ส่งซ่อมรถ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="../return_repair/index_returnrepair.php">รับคืนจากซ่อม</a>
+            <a style="font-size: 14pt;" class="nav-link text-light" href="../return_repair/index_returnrepair.php">รับคืนจากซ่อม</a>
           </li>
 
           <!-- Dropdown -->
@@ -97,7 +97,7 @@ if ($level == "admin" || $level == "employee") {
           if ($level == "admin") {
           ?>
             <li class="nav-item">
-              <a class="nav-link text-light" href="../report/index_report.php">รายงาน</a>
+              <a style="font-size: 14pt;" class="nav-link text-light" href="../report/index_report.php">รายงาน</a>
             </li>
           <?php
           }
@@ -107,10 +107,10 @@ if ($level == "admin" || $level == "employee") {
       <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link text-light" href=""><i class="fa fa-user-circle" aria-hidden="true"> <?php echo $usrName; ?> </i></a>
+            <a style="font-size: 14pt;" class="nav-link text-light" href=""><i class="fa fa-user-circle" aria-hidden="true"> <?php echo $usrName; ?> </i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="../login/logout.php"><i class="fa fa-lock" aria-hidden="true"> ออกจากระบบ </i></a>
+            <a style="font-size: 14pt;" class="nav-link text-light" href="../login/logout.php"><i class="fa fa-lock" aria-hidden="true"> ออกจากระบบ </i></a>
           </li>
         </ul>
       </div>

@@ -1,5 +1,6 @@
 <?php
 include('../condb/condb.php');
+$month = date('m');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,21 +18,26 @@ include('../condb/condb.php');
     <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/dataTables.bootstrap4.min.css" />
     <script src="../js/sweetalert.min.js"></script>
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div class="menu">
         <?php include '../login/menu.php'; ?>
     </div>
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
         <div class="card bg-light text-dark">
             <div class="card-body" style="width: 100%;">
                 <div>
-                    <h4><b>ข้อมูลสัญญาเช่า</b>
+                    <h2><b>ข้อมูลสัญญาเช่า</b>
                         <a class="text-success" style="float: right; padding-left: 15px" href="../contract/create_contract.php"><i class="fa fa-file-o" aria-hidden="true"></i></a>
                         <a class="text-secondary" style="float: right;" href="../contract/index_contract.php"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    </h4>
+                    </h2>
                 </div>
                 <br>
                 <?php if (isset($_SESSION["save_contract_msg"])) : ?>
@@ -58,7 +64,7 @@ include('../condb/condb.php');
                 <div>
                     <?php
 
-                    $query = "SELECT * FROM tbcontract  JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID ORDER BY tbcontract.id DESC";
+                    $query = "SELECT * FROM tbcontract  JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID WHERE tbcontract.hirDate >='2021-$month-01' AND tbcontract.hirDate<='2021-$month-31'  ORDER BY tbcontract.id DESC";
                     $result = mysqli_query($con, $query);
 
 
@@ -68,14 +74,15 @@ include('../condb/condb.php');
                             <table class="table-borderless" id="example">
                                 <thead>
                                     <tr>
-                                        <th style="width: 13%;"><b>เลขสัญญา</b></th>
-                                        <th style="width: 15%;"><b>ชื่อผู้เช่า</b></th>
-                                        <th style="padding-left: 10px;"><b>วันที่เริ่ม</b></th>
-                                        <th style="padding-left: 10px;"><b>วันที่สิ้นสุด</b></th>
-                                        <th style="width: 15%; padding-left: 10px;"><b>ชื่อพนักงาน</b></th>
-                                        <th style="width: 15%; padding-left: 10px;"><b>ทะเบียนรถ</b></th>
-                                        <th style="padding-left: 10px;"><b>ราคารถ</b></th>
-                                        <th style="padding-left: 10px;"><b>จำนวนวัน</b></th>
+                                        <th style="width: 10%; font-size: 16pt;"><b>เลขสัญญา</b></th>
+                                        <th style="width: 12%; font-size: 16pt;"><b>ชื่อผู้เช่า</b></th>
+                                        <th style="width: 10%; font-size: 16pt;"><b>วันที่ทำสัญญา</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt; width: 10%;"><b>วันที่เริ่ม</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt; width: 10%;"><b>วันที่สิ้นสุด</b></th>
+                                        <th style="width: 12%; padding-left: 10px; font-size: 16pt;"><b>ชื่อพนักงาน</b></th>
+                                        <th style="width: 15%; padding-left: 10px; font-size: 16pt;"><b>ทะเบียนรถ</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt;"><b>ราคารถ</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt; "><b>จำนวนวัน</b></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -84,15 +91,16 @@ include('../condb/condb.php');
                                     while ($row = mysqli_fetch_array($result)) {
                                     ?>
                                         <tr>
-                                            <td style="width: 13%;"><?php echo $row['hirNum']; ?></td>
-                                            <td style="width: 15%;"><?php echo $row['cusName']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $row['hirStart']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $row['hirEnd']; ?></td>
-                                            <td style="width: 15%; padding-left: 10px;"><?php echo $row['usrName']; ?></td>
-                                            <td style="width: 15%; padding-left: 10px;"><?php echo $row['carNum']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $row['carRent']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $row['numDay']; ?></td>
-                                            <td style="padding-left: 30px;"> <a class="btn btn-success" href="../contract/preview.php?id=<?php echo $row['hirNum']; ?>" onclick="return confirm('คุณต้องการพิมพ์สัญญาเช่า <?php echo $row['hirNum']; ?> ?')"><i class="fa fa-print" aria-hidden="true"></i></a> </td>
+                                            <td style="width: 10%; font-size: 14pt; padding-top: 10px;"><?php echo $row['hirNum']; ?></td>
+                                            <td style="width: 12%; font-size: 14pt; padding-top: 10px;"><?php echo $row['cusName']; ?></td>
+                                            <td style="width: 10%; font-size: 14pt; padding-top: 10px;"><?php echo $row['hirDate']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; width: 10%; padding-top: 10px;"><?php echo $row['hirStart']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; width: 10%; padding-top: 10px;"><?php echo $row['hirEnd']; ?></td>
+                                            <td style="width: 12%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['usrName']; ?></td>
+                                            <td style="width: 15%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['carNum']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['carRent']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; text-align: center; padding-top: 10px;"><?php echo $row['numDay']; ?></td>
+                                            <td style="padding-left: 30px; font-size: 14pt; padding-top: 10px;"> <a style="width: 70px;" class="btn btn-success" href="../contract/preview.php?id=<?php echo $row['hirNum']; ?>" onclick="return confirm('คุณต้องการพิมพ์สัญญาเช่า <?php echo $row['hirNum']; ?> ?')"><i style="font-size: 1.5rem;" class="fa fa-print" aria-hidden="true"></i></a> </td>
                                         </tr>
                                     <?php
                                     }

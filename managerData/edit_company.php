@@ -33,15 +33,20 @@ $row = mysqli_fetch_array($result);
             reader.readAsDataURL(event.target.files[0]);
         }
     </script>
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div class="menu">
         <?php include '../login/menu.php'; ?>
     </div>
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
-        <div class="card bg-light text-dark">
+        <div class="card bg-light text-dark" style="padding-left: 10%;">
             <div class="card-body">
                 <div>
                     <h4><b>แก้ไขข้อมูลบริษัท</b>
@@ -61,31 +66,37 @@ $row = mysqli_fetch_array($result);
                 <?php endif ?>
                 <br>
                 <form action="update_company.php" method="post" enctype="multipart/form-data">
-                    <div class="form-row col-md-10">
-                        <div class="form-group col-md-4">
-                            <label for="comID">รหัสบริษัท</label>
-                            <input type="text" class="form-control" name="comID" id="comID" value="<?php echo $row['comID']; ?>" readonly>
+                    <div class="form-row col-md-12">
+                        <div class="form-group col-md-3">
+                            <label style="font-size: 14pt;" for="comID"><b>รหัสบริษัท</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="comID" id="comID" value="<?php echo $row['comID']; ?>" readonly>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="comName">ชื่อบริษัท</label>
-                            <input type="text" class="form-control" name="comName" id="comName" value="<?php echo $row['comName']; ?>">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="comAdd">ที่อยู่บริษัท</label>
-                            <input type="text" class="form-control" name="comAdd" id="comAdd" value="<?php echo $row['comAdd']; ?>">
+                        <div class="form-group col-md-3">
+                            <label style="font-size: 14pt;" for="comName"><b>ชื่อบริษัท</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="comName" id="comName" value="<?php echo $row['comName']; ?>">
                         </div>
                     </div>
-                    <div class="form-row col-md-10">
-                        <div class="col-md-4">
-                            <label for="name" class="control-label"><b>รูปบริษัท</b></label>
+                    <div class="form-row col-md-12">
+                        <div class="form-group col-md-3">
+                            <label style="font-size: 14pt;" for="comOwner"><b>ชื่อเจ้าของบริษัท</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="comOwner" id="comOwner" value="<?php echo $row['comOwner']; ?>">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label style="font-size: 14pt;" for="comAdd"><b>ที่อยู่บริษัท</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="comAdd" id="comAdd" value="<?php echo $row['comAdd']; ?>">
+                        </div>
+                    </div>
+                    <div class="form-row col-md-12">
+                        <div class="col-md-2">
+                            <label style="font-size: 14pt;" for="name" class="control-label"><b>รูปบริษัท</b></label>
                             <img src="../images/company/<?php echo $row['comLogo']; ?>" id="preview" class="img-fluid img-thumbnail" style="width: 240px;height: 240px"><br><br>
-                            <input type="file" name="upload" accept="image/*" onchange="preview_image(event)"/>
+                            <input style="font-size: 14pt;" type="file" name="upload" accept="image/*" onchange="preview_image(event)" />
                         </div>
                     </div>
                     <br>
                     <div class="form-row col-md-8">
                         <div class="form-group col-md-10">
-                            <button type="submit" class="btn btn-outline-success">ตกลง</button>
+                            <button style="font-size: 14pt;" type="submit" class="btn btn-outline-success">ตกลง</button>
                         </div>
                     </div>
                 </form>

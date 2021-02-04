@@ -1,5 +1,6 @@
 <?php
 include('../condb/condb.php');
+$date = date('d-m-Y');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,21 +18,30 @@ include('../condb/condb.php');
     <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/dataTables.bootstrap4.min.css" />
     <script src="../js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="print.css" media="print">
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div class="menu">
         <?php include '../login/menu.php'; ?>
     </div>
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
         <div class="card bg-light text-dark">
             <div class="card-body" style="width: 100%;" id="div_print">
                 <div>
-                    <h4><b>รายงานข้อมูลผู้เช่า</b></h4>
+                    <h2><b>รายงานข้อมูลผู้เช่า</b></h2>
                 </div>
                 <br>
                 <div>
+                    <a style="font-size: 14pt;">วันที่ออกรายงาน <?php echo $date ?></a>
+                    <br>
+                    <br>
                     <?php
                     $query = "SELECT * FROM tbcustomer ORDER BY id ASC";
                     $result = mysqli_query($con, $query);
@@ -39,16 +49,15 @@ include('../condb/condb.php');
                     <div class="card" style="width: 100%;">
                         <div class="card-body">
                             <div>
-                                <table class="table-borderless" id="example">
+                                <table class="table table-hover" id="example">
                                     <thead style="text-align: center;">
                                         <tr>
-                                            <th style="width: 5%;"><b>ลำดับ</b></th>
-                                            <th style="width: 18%;"><b>รหัสผู้เช่า</b></th>
-                                            <th style="width: 18%;"><b>ชื่อ นาสกุล</b></th>
-                                            <th style="width: 15%;"><b>เลขที่ใบขับขี่</b></th>
-                                            <th style="width: 18%;"><b>ที่อยู่</b></th>
-                                            <th style="width: 15%;"><b>เบอร์โทร</b></th>
-                                            <th style="width: 10%;"><b>สถานะ</b></th>
+                                            <th style="width: 5%;  font-size: 14pt;"><b>ลำดับ</b></th>
+                                            <th style="width: 18%; font-size: 14pt;"><b>ชื่อ นาสกุล</b></th>
+                                            <th style="width: 15%; font-size: 14pt;"><b>ใบขับขี่</b></th>
+                                            <th style="width: 18%; font-size: 14pt;"><b>ที่อยู่</b></th>
+                                            <th style="width: 15%; font-size: 14pt;"><b>เบอร์โทร</b></th>
+                                            <th style="width: 10%; font-size: 14pt;"><b>สถานะ</b></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,13 +65,12 @@ include('../condb/condb.php');
                                         while ($row = mysqli_fetch_array($result)) {
                                         ?>
                                             <tr>
-                                                <td style="width: 5%;"><?php echo $row['id']; ?></td>
-                                                <td style="width: 18%;"><?php echo $row['cusCard']; ?></td>
-                                                <td style="width: 18%;"><?php echo $row['cusName']; ?></td>
-                                                <td style="width: 15%;"><?php echo $row['cusDriver']; ?></td>
-                                                <td style="width: 18%;"><?php echo $row['cusAdd']; ?></td>
-                                                <td style="width: 15%;"><?php echo $row['cusTel']; ?></td>
-                                                <td style="width: 10%;"><?php echo $row['cusStatus']; ?></td>
+                                                <td style="width: 5%;  font-size: 12pt; text-align: center;"><?php echo $row['id']; ?></td>
+                                                <td style="width: 18%; font-size: 12pt;"><?php echo $row['cusName']; ?></td>
+                                                <td style="width: 15%; font-size: 12pt;"><?php echo $row['cusDriver']; ?></td>
+                                                <td style="width: 18%; font-size: 12pt;"><?php echo $row['cusAdd']; ?></td>
+                                                <td style="width: 15%; font-size: 12pt;"><?php echo $row['cusTel']; ?></td>
+                                                <td style="width: 10%; font-size: 12pt;"><?php echo $row['cusStatus']; ?></td>
                                             </tr>
                                         <?php
                                         }
@@ -72,7 +80,6 @@ include('../condb/condb.php');
                             </div>
                         </div>
                     </div>
-                    <br>
                     <?php
                     // mysqli_close($con);
                     ?>
@@ -80,10 +87,16 @@ include('../condb/condb.php');
             </div>
             <div>
                 <div class="card-body">
-                    <button onClick="printdiv('div_print');" id="print" class="btn btn-success float-left"><i class="fa fa-print"></i> ออกรายงาน</button>
+                    <div class="form-row col-md-2" style="padding-left: 0px;">
+                        <div class="form-group col-md-1.5">
+                            <button class="btn btn-outline-success float-left" type="button" name="button" id="print" onclick="window.print();"><i class="fa fa-print"></i> ออกรายงาน </button>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <a href="/report/index_report.php" id="return" class="btn btn-outline-primary mb-2">ย้อนกลับ</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br>
         </div>
     </div>
     <script src="bootstrap/js/jquery.min.js"></script>
@@ -93,26 +106,6 @@ include('../condb/condb.php');
         $(document).ready(function() {
             $('#example').DataTable();
         });
-    </script>
-    <script language="javascript">
-        function printdiv(printpage) {
-            document.getElementById('example_length').style.display = 'none';
-            document.getElementById('example_filter').style.display = 'none';
-            document.getElementById('example_info').style.display = 'none';
-            document.getElementById('example_paginate').style.display = 'none';
-            var headstr = "<html><head><title></title></head><body>";
-            var footstr = "</body>";
-            var newstr = document.all.item(printpage).innerHTML;
-            var oldstr = document.body.innerHTML;
-            document.body.innerHTML = headstr + newstr + footstr;
-            w = window.open("", "_blank", "k");
-            w.document.write(headstr + newstr + footstr);
-            w.print();
-            document.body.innerHTML = oldstr;
-            location.reload();
-            console.log(newstr);
-            return false;
-        }
     </script>
 
 </body>

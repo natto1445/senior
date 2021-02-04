@@ -14,7 +14,7 @@ $join   = "JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtax
 $where = [];
 
 if($search){
-    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%') ";
+    $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%' OR tbcontract.hirStatus LIKE '%$search%') ";
 }
 if($start_date){
     $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
@@ -109,7 +109,7 @@ if($result = $con->query($query)){
             <td>'.$contract['hirDate'].'</td>
             <td>'.$contract['hirStart'].'</td>
             <td>'.$contract['hirEnd'].'</td>
-            <td>'.$contract['hirPattren'].'</td>
+            <td>'.$contract['hirPattern'].'</td>
             <td>'.$contract['usrName'].'</td>
             <td>'.$contract['carNum'].'</td>
             <td>'.$contract['numDay'].'</td>

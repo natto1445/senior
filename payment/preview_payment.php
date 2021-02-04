@@ -131,7 +131,7 @@ $mpdf = new \Mpdf\Mpdf([
                         </tr>
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">1</td>
-                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><b>รถแท็กซี่</b> <?php echo $row['carNum'] ?></td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><b>รถแท็กซี่</b> <?php echo number_format($row['carNum']) ?></td>
                             <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['carRent'] ?> -.</td>
                         </tr>
                         <tr>
@@ -147,22 +147,22 @@ $mpdf = new \Mpdf\Mpdf([
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">4</td>
                             <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">รวมค่าเช่า</td>
-                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] * 2 ?> -.</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['hirDeposit'] * 2) ?> -.</td>
                         </tr>
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">5</td>
                             <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><u>หัก</u> ค่ามัดจำ 50%</td>
-                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] ?> -.</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['hirDeposit']) ?> -.</td>
                         </tr>
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">6</td>
                             <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">ค้างชำระ</td>
-                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['hirDeposit'] ?> -.</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['hirDeposit']) ?> -.</td>
                         </tr>
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">7</td>
-                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</td>
-                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['Fines'] ?> -.</td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">คืนช้าปรับวันละ 1,000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['Fines']) ?> -.</td>
                         </tr>
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">8</td>
@@ -171,12 +171,12 @@ $mpdf = new \Mpdf\Mpdf([
                                                                                                                             } else {
                                                                                                                                 echo $row['text_rePair'];
                                                                                                                             } ?></td>
-                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['price_rePair'] ?> -.</td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['price_rePair']) ?> -.</td>
                         </tr>
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">9</td>
                             <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"></td>
-                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo $row['total2'] ?> -.</b></td>
+                            <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['total2']) ?> -.</b></td>
                         </tr>
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">10</td>
@@ -188,6 +188,11 @@ $mpdf = new \Mpdf\Mpdf([
                     <table align="center">
                         <tr>
                             <td colspan="2" style="font-size: 14pt; padding-top: 10px;" align="center"><b>ของคุณที่ใช้บริการ...</b></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan="2" style="font-size: 14pt; padding-top: 10px; padding-left: 40px;" align="left"><b>ลงชื่อเจ้าของบริษัท</b> <u><?php echo $row2['comOwner']; ?></u></td>
                         </tr>
                     </table>
                     <br><br>

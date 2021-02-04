@@ -82,14 +82,16 @@ $row2 = mysqli_fetch_array($result2);
                 <div style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้อ 5 ผู้เช่าจะรับผิดชอบต่อความเสียหายใด ๆ ที่เกิดขึ้นแก่ชีวิต หรือความบาดเจ็บ ของบุคคลภายนอก หรือแก่ตัวผู้เช่าเองก็ตาม</div>
                 <div style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้อ 6 ผู้เช่าจะรับผิดชอบต่อความเสียหายใด ๆ ที่เกิดขึ้นแก่กรณีที่รถยนต์สูญหาย หรือถูกขโมย และ/หรือ ล้อรถ เครื่องมือ เครื่องอุปกรณ์ของผู้ให้เช่าหาย หรือถูกขโมย รับผิดชอบ 50% กรณีเสียหาย</div>
                 <div style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้อ 7 ผู้เช่าจะคืนรถยนต์ พร้อมด้วยอุปกรณ์ที่เช่าไปคืนแก่ผู้ให้เช่า ณ สถานที่ที่ให้เช่า ในสภาพเรียบร้อยใช้งานได้ตามปกติ</div>
-                <div style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้อ 8 ผู้เช่ายอมให้สัญญาว่าจะไม่นำรถที่เช่าไปให้คนอื่นเช่าช่วง หรือให้ผู้อื่นยืม หรือนำไปด้วยประการใดๆ เป็นอันขาด เว้นแต่จะได้รับอนุญาตจากผู้ให้เช่าเป็นลายลักษณ์อักษร</div>
-                <div style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สัญญานี้ทำขึ้นเป็นสองฉบับ มีข้อความถูกต้องตรงกัน และคู่สัญญาได้อ่านโดยตลอดแล้ว เห็นว่าถูกต้องตามเจตนารมณ์แห่งตนทุกประการ จึงได้ลงลายมือชื่อและประทับตราสำคัญต่อหน้าพยานเป็นสำคัญ</div><br><br><br>
+                <div style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้อ 8 ผู้เช่ายอมให้สัญญาว่าจะไม่นำรถที่เช่าไปให้คนอื่นเช่าช่วง หรือให้ผู้อื่นยืม หรือนำไปด้วยประการใดๆ เป็นอันขาด เว้นแต่จะได้รับอนุญาตจากผู้ให้เช่าเป็นลายลักษณ์อักษร</div><br><br><br><br>
+                <div style="font-size: 18pt;">ลงนาม <u><?php echo $row2['comOwner']; ?></u></div>
+                <div style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สัญญานี้ทำขึ้นเป็นสองฉบับ มีข้อความถูกต้องตรงกัน และคู่สัญญาได้อ่านโดยตลอดแล้ว เห็นว่าถูกต้องตามเจตนารมณ์แห่งตนทุกประการ จึงได้ลงลายมือชื่อและประทับตราสำคัญต่อหน้าพยานเป็นสำคัญ</div><br>
                 <div style="font-size: 18pt; padding-right: 20px;" align="right">ลงชื่อ………………………………………ผู้เช่า</div>
                 <div style="font-size: 18pt; padding-right: 70px;" align="right">(&nbsp;&nbsp;&nbsp;<?php echo $row['cusName']; ?>&nbsp;&nbsp;&nbsp;)</div>
                 <div style="font-size: 18pt; padding-right: 20px;" align="right">ลงชื่อ……………………………………ผู้ให้เช่า</div>
                 <div style="font-size: 18pt; padding-right: 70px;" align="right">(&nbsp;&nbsp;&nbsp;<?php echo $row['usrName']; ?>&nbsp;&nbsp;&nbsp;)</div>
                 <div style="font-size: 18pt; padding-right: 20px;" align="right">ลงชื่อ………………………………………พยาน</div>
-                <div style="font-size: 18pt; padding-right: 70px;" align="right">(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div>
+                <div style="font-size: 18pt; padding-right: 70px;" align="right">(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <div style="font-size: 18pt;">ลงนาม <u><?php echo $row2['comOwner']; ?></u></div>
             </div>
             <?php
             $html = ob_get_contents();

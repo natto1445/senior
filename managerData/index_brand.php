@@ -15,21 +15,26 @@
     <!-- Responsive-->
     <link rel="stylesheet" href="../css/responsive.css">
     <script src="../js/sweetalert.min.js"></script>
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div class="menu">
         <?php include '../login/menu.php';?>
     </div>
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4><b>ข้อมูลยี่ห้อรถ</b>
+                    <h2><b>ข้อมูลยี่ห้อรถ</b>
                         <a class="text-success" style="float: right; padding-left: 15px" href="../managerData/create_brand.php"><i class="fa fa-car" aria-hidden="true"></i></a>
                         <a class="text-secondary" style="float: right;" href="../managerData/index_brand.php" ><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    </h4>
+                    </h2>
                 </div>
                 <?php if (isset($_SESSION['status'])) : ?>
                     <script>
@@ -45,10 +50,10 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th width="20%" align="center">ชื่อยี่ห้อ อังกฤษ</th>
-                            <th width="20%" align="center">ชื่อยี่ห้อ ไทย</th>
-                            <th width="5%" align="center">แก้ไข</th>
-                            <th width="5%" align="center">ลบ</th>
+                            <th style="font-size: 16pt;" width="20%" align="center">ชื่อยี่ห้อ อังกฤษ</th>
+                            <th style="font-size: 16pt;" width="20%" align="center">ชื่อยี่ห้อ ไทย</th>
+                            <th style="font-size: 16pt;" width="5%" align="center">แก้ไข</th>
+                            <th style="font-size: 16pt;" width="5%" align="center">ลบ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,10 +64,10 @@
                         while($row = mysqli_fetch_array($result)) {
                     ?>
                         <tr>
-                            <td width="20%"><?php echo $row['eBrands'];?></td>
-                            <td width="20%"><?php echo $row['tBrands'];?></td>
-                            <td width="5%"><a class="text-warning" href="../managerData/edit_brand.php?id=<?php echo $row['eBrands'];?>" onclick="return confirm('คุณต้องการแก้ไขข้อมูล <?php echo $row['eBrands']; ?>')"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-                            <td width="5%"><a class="text-danger" href="../managerData/delete_brand.php?id=<?php echo $row['eBrands'];?>" onclick="return confirm('คุณต้องการลบข้อมูล <?php echo $row['eBrands']; ?>')"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td style="font-size: 14pt;" width="20%"><?php echo $row['eBrands'];?></td>
+                            <td style="font-size: 14pt;" width="20%"><?php echo $row['tBrands'];?></td>
+                            <td style="font-size: 1.5rem;" width="5%"><a class="text-warning" href="../managerData/edit_brand.php?id=<?php echo $row['eBrands'];?>" onclick="return confirm('คุณต้องการแก้ไขข้อมูล <?php echo $row['eBrands']; ?>')"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
+                            <td style="font-size: 1.5rem;" width="5%"><a class="text-danger" href="../managerData/delete_brand.php?id=<?php echo $row['eBrands'];?>" onclick="return confirm('คุณต้องการลบข้อมูล <?php echo $row['eBrands']; ?>')"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                         </tr>
                     <?php  
                         }            

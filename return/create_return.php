@@ -45,6 +45,11 @@ $time = date('H:i:s');
             reader.readAsDataURL(event.target.files[0]);
         }
     </script>
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 
 </head>
 
@@ -53,15 +58,15 @@ $time = date('H:i:s');
         <?php include '../login/menu.php'; ?>
     </div>
 
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4><b>รับรถคืนจากการเช่า</b>
+                    <h2><b>รับรถคืนจากการเช่า</b>
                         <a class="text-secondary" style="float: right; padding-left: 15px" href="../payment/index_payment.php"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></a>
                         <a class="text-secondary" style="float: right" href="../return/create_return.php"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    </h4>
+                    </h2>
                 </div>
 
                 <!-- แจ้งเตือนสถานะ -->
@@ -79,9 +84,9 @@ $time = date('H:i:s');
                 <br>
                 <form action="find_contract.php" method="post">
                     <div class="form-row col-md-10">
-                        <div class="form-group col-md-3">
-                            <label for="hirNum_find">ทะเบียนรถ</label>
-                            <select class="form-control" name="hirNum_find" id="hirNum_find">
+                        <div class="form-group col-md-2">
+                            <label style="font-size: 14pt;" for="hirNum_find"><b>ทะเบียนรถ</b></label>
+                            <select style="font-size: 14pt;" size="1" class="form-control" name="hirNum_find" id="hirNum_find">
                                 <option selected disabled value="">-กรุณาเลือกทะเบียน-</option>
                                 <?php while ($data = mysqli_fetch_assoc($contract)) { ?>
                                     <option value="<?php echo $data["hirNum"] ?>"><?php echo $data["carNum"] ?></option>
@@ -90,8 +95,8 @@ $time = date('H:i:s');
                             <input type="hidden" class="form-control" name="usrID" id="usrID" value="<?php echo $_SESSION["usrName"] ?>" readonly>
                         </div>
                         <div class="form-group col-md-1">
-                            <label for="">เลือก</label>
-                            <button type="button" name="submit_find" id="submit_find" class="btn btn-outline-success">ตกลง</button>
+                            <label style="font-size: 14pt;" for="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <button style="font-size: 14pt;" type="button" name="submit_find" id="submit_find" class="btn btn-outline-success">ตกลง</button>
                         </div>
                     </div>
                 </form>
@@ -112,99 +117,104 @@ $time = date('H:i:s');
                         <form action="save_return.php" method="post">
                             <div class="form-row col-md-12">
                                 <div class="form-group col-md-3">
-                                    <label for="hirNum">สัญญาเช่า</label>
-                                    <input type="text" class="form-control" name="hirNum" id="hirNum" value="<?php echo $row['hirNum']; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="hirNum"><b>สัญญาเช่า</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="hirNum" id="hirNum" value="<?php echo $row['hirNum']; ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="cusName">ชื่อผู้เช่า</label>
-                                    <input type="text" class="form-control" name="cusName" id="cusName" value="<?php echo $row['cusName']; ?>" readonly>
-                                    <input type="hidden" class="form-control" name="cusCard" id="cusCard" value="<?php echo $row['cusCard']; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="cusName"><b>ชื่อผู้เช่า</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="cusName" id="cusName" value="<?php echo $row['cusName']; ?>" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="cusCard" id="cusCard" value="<?php echo $row['cusCard']; ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="usrName">พนักงานให้เช่า</label>
-                                    <input type="text" class="form-control" name="usrName" id="usrName" value="<?php echo $row['usrName']; ?>" readonly>
-                                    <input type="hidden" class="form-control" name="usrID" id="usrID" value="<?php echo $_SESSION["usrID"] ?>">
+                                    <label style="font-size: 14pt;" for="usrName"><b>พนักงานให้เช่า</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="usrName" id="usrName" value="<?php echo $row['usrName']; ?>" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="usrID" id="usrID" value="<?php echo $_SESSION["usrID"] ?>">
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="carNum">ทะเบียนรถ</label>
-                                    <input type="text" class="form-control" name="carNum" id="carNum" value="<?php echo $row['carNum']; ?>" readonly>
-                                    <input type="hidden" class="form-control" name="carID" id="carID" value="<?php echo $row['carID']; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="carNum"><b>ทะเบียนรถ</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="carNum" id="carNum" value="<?php echo $row['carNum']; ?>" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="carID" id="carID" value="<?php echo $row['carID']; ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-row col-md-12">
                                 <div class="form-group col-md-3">
-                                    <label for="retID">เลขที่รับคืน</label>
-                                    <input type="text" class="form-control" name="retID" id="retID" value="RE-<?php echo $date ?>-00<?php echo $result + 1 ?>" readonly>
+                                    <label style="font-size: 14pt;" for="retID"><b>เลขที่รับคืน</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="retID" id="retID" value="RE-<?php echo $date ?>-00<?php echo $result + 1 ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="hirStart">วันที่เริ่มเช่า</label>
-                                    <input type="text" class="form-control" name="hirStart" id="hirStart" value="<?php echo $row['hirStart']; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="hirStart"><b>วันที่เริ่มเช่า</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="hirStart" id="hirStart" value="<?php echo $row['hirStart']; ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="hirEnd">วันที่สิ้นสุด</label>
-                                    <input type="text" class="form-control" name="hirEnd" id="hirEnd" value="<?php echo $row['hirEnd']; ?>" readonly>
-                                    <input type="hidden" class="form-control" name="usrID" id="usrID" value="<?php echo $_SESSION["usrID"] ?>">
+                                    <label style="font-size: 14pt;" for="hirEnd"><b>วันที่สิ้นสุด</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="hirEnd" id="hirEnd" value="<?php echo $row['hirEnd']; ?>" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="usrID" id="usrID" value="<?php echo $_SESSION["usrID"] ?>">
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="numDay">จำนวนวัน</label>
-                                    <input type="text" class="form-control" name="numDay" id="numDay" value="<?php echo $row['numDay']; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="numDay"><b>จำนวนวัน</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="numDay" id="numDay" value="<?php echo $row['numDay']; ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="carRent">ราคารถ/วัน</label>
-                                    <input type="text" class="form-control" name="carRent" id="carRent" value="<?php echo $row['carRent']; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="carRent"><b>ราคารถ/วัน</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="carRent" id="carRent" value="<?php echo $row['carRent']; ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-row col-md-12">
                                 <div class="form-group col-md-3">
-                                    <label for="datenow">วันที่เอามาคืน</label>
-                                    <input type="text" class="form-control" name="datenow" id="datenow" value="<?php echo $datenow ?>" readonly>
+                                    <label style="font-size: 14pt;" for="datenow"><b>วันที่เอามาคืน</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="datenow" id="datenow" value="<?php echo $datenow ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="timeEnd">เวลาที่ต้องคืน</label>
-                                    <input type="text" class="form-control" name="timeEnd" id="timeEnd" value="<?php echo $row['timeEnd']; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="timeEnd"><b>เวลาที่ต้องคืน</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="timeEnd" id="timeEnd" value="<?php echo $row['timeEnd']; ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="time">เวลาเอามาคืน</label>
-                                    <input type="time" class="form-control" name="time" id="time" value="<?php echo $time ?>" readonly>
+                                    <label style="font-size: 14pt;" for="time"><b>เวลาเอามาคืน</b></label>
+                                    <input style="font-size: 14pt;" type="time" class="form-control" name="time" id="time" value="<?php echo $time ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="numRate">วันคืนช้า</label>
-                                    <input type="text" class="form-control" name="numRate" id="numRate" value="" readonly>
+                                    <label style="font-size: 14pt;" for="numRate"><b>วันคืนช้า</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="numRate" id="numRate" value="" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="timeRate">เวลาคืนช้า</label>
-                                    <input type="text" class="form-control" name="timeRate" id="timeRate" value="" readonly>
+                                    <label style="font-size: 14pt;" for="timeRate"><b>เวลาคืนช้า</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="timeRate" id="timeRate" value="" readonly>
                                 </div>
                             </div>
 
                             <div class="form-row col-md-12">
                                 <div class="form-group col-md-3">
-                                    <label for="hirTotal">ราคาเช่าทั้งหมด</label>
-                                    <input type="text" class="form-control" name="hirTotal" id="hirTotal" value="<?php echo $row['hirDeposit']*2; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="hirTotal"><b>ราคาเช่าทั้งหมด</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="hirTotal1" id="hirTotal1" value="<?php echo number_format($row['hirDeposit'] * 2); ?>" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="hirTotal" id="hirTotal" value="<?php echo ($row['hirDeposit'] * 2); ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="hirDeposit">จำนวนมัดจำ</label>
-                                    <input type="text" class="form-control" name="hirDeposit" id="hirDeposit" value="<?php echo $row['hirDeposit']; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="hirDeposit"><b>จำนวนมัดจำ</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="hirDeposit1" id="hirDeposit1" value="<?php echo number_format($row['hirDeposit']); ?>" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="hirDeposit" id="hirDeposit" value="<?php echo $row['hirDeposit']; ?>" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="balance">ยอดคงเหลือ</label>
-                                    <input type="text" class="form-control" name="balance" id="balance" value="" readonly>
+                                    <label style="font-size: 14pt;" for="balance"><b>ยอดคงเหลือ</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="balance1" id="balance1" value="" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="balance" id="balance" value="" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="Fines">ค่าปรับ **1000/วัน**</label>
-                                    <input type="text" class="form-control" name="Fines" id="Fines" value="" readonly>
+                                    <label style="font-size: 14pt;" for="Fines"><b>ค่าปรับ **1000/วัน**</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="Fines1" id="Fines1" value="" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="Fines" id="Fines" value="" readonly>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="total">สุทธิ</label>
-                                    <input type="text" class="form-control" name="total" id="total" value="<?php echo (($row['carRent'] * $row['numDay']) - $row['hirDeposit']) + 1000; ?>" readonly>
+                                    <label style="font-size: 14pt;" for="total"><b>สุทธิ</b></label>
+                                    <input style="font-size: 14pt;" type="text" class="form-control" name="total1" id="total1" value="" readonly>
+                                    <input style="font-size: 14pt;" type="hidden" class="form-control" name="total" id="total" value="" readonly>
                                 </div>
                             </div>
                             <div class="form-row col-md-12">
                                 <div class="form-group col-md-5">
-                                    <button type="submit" class="btn btn-outline-success">รับคืน</button>
-                                    <a class="btn btn-outline-danger" href="../return/create_return.php">ยกเลิก</a>
+                                    <button style="font-size: 14pt;" type="submit" class="btn btn-outline-success">รับคืน</button>
+                                    <a style="font-size: 14pt;" class="btn btn-outline-danger" href="../return/create_return.php">ยกเลิก</a>
                                 </div>
                             </div>
                         </form>
@@ -240,6 +250,7 @@ $time = date('H:i:s');
                 let balance = hirTotal - hirDeposit
                 let Fines = 0
                 $("#balance").val(balance);
+                $("#balance1").val(balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                 if (datenow < dateReturn) {
                     let numday = 0
@@ -249,6 +260,7 @@ $time = date('H:i:s');
                     $("#numRate").val(numday);
                     $("#timeRate").val(timerate);
                     $("#Fines").val(Fines);
+                    $("#Fines1").val(Fines.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 } else if (datenow > dateReturn) {
                     console.log("มากกว่า")
                     const diffTime = Math.abs(new Date(datenow) - new Date(dateReturn))
@@ -259,6 +271,7 @@ $time = date('H:i:s');
                     $("#timeRate").val(timerate);
                     Fines = 1000 * diffDay
                     $("#Fines").val(Fines);
+                    $("#Fines1").val(Fines.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 } else {
                     console.log("เท่ากัน")
                     let recar = $("#timeEnd").val()
@@ -273,6 +286,7 @@ $time = date('H:i:s');
                         $("#numRate").val(numday);
                         $("#timeRate").val(timerate);
                         $("#Fines").val(Fines);
+                        $("#Fines1").val(Fines.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     } else {
                         start = recar.split(":");
                         end = relate.split(":");
@@ -298,6 +312,7 @@ $time = date('H:i:s');
                 }
                 let total = balance + Fines
                 $("#total").val(total);
+                $("#total1").val(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             });
         </script>
 

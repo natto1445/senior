@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('../condb/condb.php');
 include('../includes/helper.php');
 include('../layout/header.php');
@@ -9,7 +9,7 @@ $end_date   = request('end_date');
 $page       = request('page', 1);
 
 $perPage = 10;
-$offset = ($page-1) * $perPage;
+$offset = ($page - 1) * $perPage;
 
 // ดึงข้อมูล
 $select = "SELECT tbdelivers.id,tbdelivers.delID,tbdelivers.delDate,tbdelivers.hirNum,tbcustomer.cusName,tbtaxi.carNum,tbuser.usrName ";
@@ -18,164 +18,174 @@ $join   = "LEFT JOIN tbcontract ON tbcontract.hirNum = tbdelivers.hirNum LEFT JO
 $where = [];
 
 
-if($search){
+if ($search) {
     $where[] = " (tbdelivers.delID LIKE '%$search%' OR tbuser.usrName LIKE '%$search%') ";
 }
-if($start_date){
+if ($start_date) {
     $where[] = " DATE(tbdelivers.delDate) >= '$start_date' ";
 }
-if($end_date){
+if ($end_date) {
     $where[] = " DATE(tbdelivers.delDate) <= '$end_date' ";
 }
 
-if(count($where)){
-    $where = "WHERE ".implode(" AND ", $where);
-}else{
+if (count($where)) {
+    $where = "WHERE " . implode(" AND ", $where);
+} else {
     $where = "";
 }
 
 $order  = "ORDER BY tbdelivers.id DESC ";
 $limit  = "LIMIT $perPage ";
 $offset = "OFFSET $offset ";
-$query  = $select.$from.$join.$where.$order.$limit.$offset;
+$query  = $select . $from . $join . $where . $order . $limit . $offset;
 
 include('../layout/header.php');
 ?>
 <div class="menu">
     <?php include '../layout/menu.php'; ?>
 </div>
-<div class="container">
-    <h4 class="mt-3 mb-3">รายงานส่งหมอบรถ</h4>
-    
+<div style="width: 80%;" class="center_div">
+    <h2 class="mt-3 mb-3">รายงานส่งมอบรถ</h2>
+
     <div class="row">
         <div class="col-md-12">
             <form method="GET" action="deliver_report.php">
                 <div class="form-row align-items-center">
-                    
-                    <div class="col-auto">
-                        <label class="sr-only" for="search">ค้นหา</label>
-                        <input type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
-                    </div>
-                    <div class="col-auto">
-                        <label class="sr-only" for="start_date">วันที่ส่งหมอบ</label>
-                        <input type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
-                    </div>
-                    <div class="col-auto">
-                        <label class="sr-only" for="end_date">วันสิ้นสุดส่งหมอบ</label>
-                        <input type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
-                    </div>
-                    
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
-                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
+                    <div class="col-auto">
+                        <label style="font-size: 14pt;" class="sr-only" for="search">ค้นหา</label>
+                        <input style="font-size: 14pt;" type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
+                    </div>
+                    <div class="col-auto">
+                        <label style="font-size: 14pt;" class="sr-only" for="start_date">วันที่ส่งหมอบ</label>
+                        <input style="font-size: 14pt;" type="date" name="start_date" class="form-control mb-2" id="start_date" value="<?php echo $start_date; ?>">
+                    </div>
+                    <div class="col-auto">
+                        <label style="font-size: 14pt;" class="sr-only" for="end_date">วันสิ้นสุดส่งหมอบ</label>
+                        <input style="font-size: 14pt;" type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
+                    </div>
+
+                    <div class="col-auto">
+                        <button style="font-size: 14pt;" type="submit" class="btn btn-primary mb-2">ค้นหา</button>
+
+                        <button style="font-size: 14pt;" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#reportModal">
                             ออกรายงาน
                         </button>
+                        <a style="font-size: 14pt;" href="/report/deliver_report.php" class="btn btn-primary mb-2">รีเฟรช</a>
+                        <a style="font-size: 14pt;" href="/report/index_report.php" class="btn btn-primary mb-2">ย้อนกลับ</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>ลำดับ</th>
-                        <th>เลขที่ส่งมอบ</th>
-                        <th>วันที่ส่งมอบ</th>
-                        <th>เลขที่สัญญา</th>
-                        <th>ชื่อผู้เช่า</th>
-                        <th>ทะเบียนรถที่เช่า</th>
-                        <th>ชื่อพนักงาน</th>
+                        <th style="font-size: 16pt;">ลำดับ</th>
+                        <th style="font-size: 16pt;">เลขที่ส่งมอบ</th>
+                        <th style="font-size: 16pt;">วันที่ส่งมอบ</th>
+                        <th style="font-size: 16pt;">เลขที่สัญญา</th>
+                        <th style="font-size: 16pt;">ชื่อผู้เช่า</th>
+                        <th style="font-size: 16pt;">ทะเบียนรถที่เช่า</th>
+                        <th style="font-size: 16pt;">ชื่อพนักงาน</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    if($result = $con->query($query)){
-                        while($deliver = $result->fetch_assoc()){
+                    if ($result = $con->query($query)) {
+                        while ($deliver = $result->fetch_assoc()) {
+                    ?>
+                            <tr>
+                                <td style="font-size: 14pt; text-align:center;"><?php echo $deliver['id']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $deliver['delID']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $deliver['delDate']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $deliver['hirNum']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $deliver['cusName']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $deliver['carNum']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $deliver['usrName']; ?></td>
+                            </tr>
+                        <?php
+                        }
+                    } else {
                         ?>
                         <tr>
-                            <td><?php echo $deliver['id']; ?></td>
-                            <td><?php echo $deliver['delID']; ?></td>
-                            <td><?php echo $deliver['delDate']; ?></td>
-                            <td><?php echo $deliver['hirNum']; ?></td>
-                            <td><?php echo $deliver['cusName']; ?></td>
-                            <td><?php echo $deliver['carNum']; ?></td>
-                            <td><?php echo $deliver['usrName']; ?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                        <?php 
-                        }
-                    }else{
-                        ?>
-                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                        <?php
+                    <?php
                     }
                     ?>
                 </tbody>
             </table>
 
-            <?php 
+            <?php
             // Pagination 
-            
+
             $select = "SELECT count(*) as total ";
-            $query  = $select.$from.$join.$where;
+            $query  = $select . $from . $join . $where;
             $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
             $row    = mysqli_fetch_object($result);
             $total  = $row->total;
 
             $lastPage = 1;
             $max = (int) ceil($total / $perPage);
-            if($max > 1){
+            if ($max > 1) {
                 $lastPage = $max;
             }
             $hasPages = $lastPage > 1;
             $onFirstPage = $page <= 1;
             $hasMorePages = $page < $lastPage;
 
-            if($hasPages){
+            if ($hasPages) {
             ?>
                 <ul class="pagination">
-                    <?php 
-                    if($onFirstPage){
+                    <?php
+                    if ($onFirstPage) {
                     ?>
                         <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
-                    <?php 
-                    }else{
+                    <?php
+                    } else {
                     ?>
                         <li class="page-item">
-                            <a class="page-link" href="<?php echo queryString(['page'=>($page-1),'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" rel="prev">&laquo;</a>
+                            <a class="page-link" href="<?php echo queryString(['page' => ($page - 1), 'search' => $search, 'start_date' => $start_date, 'end_date' => $end_date]); ?>" rel="prev">&laquo;</a>
                         </li>
-                    <?php 
+                        <?php
                     }
 
                     foreach (range(1, $lastPage) as $pagerang) {
-                        if($page == $pagerang){
+                        if ($page == $pagerang) {
                         ?>
                             <li class="page-item active"><span class="page-link"><?php echo $page; ?></span></li>
                         <?php
-                        }else{
+                        } else {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?php echo queryString(['page'=>$pagerang,'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>"><?php echo $pagerang; ?></a>
+                                <a class="page-link" href="<?php echo queryString(['page' => $pagerang, 'search' => $search, 'start_date' => $start_date, 'end_date' => $end_date]); ?>"><?php echo $pagerang; ?></a>
                             </li>
                         <?php
                         }
                     }
 
-                    if($hasMorePages){
+                    if ($hasMorePages) {
+                        ?>
+                        <li class="page-item"><a class="page-link" href="<?php echo queryString(['page' => ($page + 1), 'search' => $search, 'start_date' => $start_date, 'end_date' => $end_date]); ?>" rel="next">&raquo;</a></li>
+                    <?php
+                    } else {
                     ?>
-                        <li class="page-item"><a class="page-link" href="<?php echo queryString(['page'=>($page+1),'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" rel="next">&raquo;</a></li>
-                    <?php 
-                }else{
-                    ?>
-                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-                    <?php 
-                    } 
+                        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                    <?php
+                    }
                     ?>
                 </ul>
-            <?php   
+            <?php
             }
             ?>
 
@@ -194,7 +204,7 @@ include('../layout/header.php');
                 </button>
             </div>
             <div class="modal-body">
-                <iframe src="deliver_report_pdf.php<?php echo queryString(['search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" name="report" style="width: 100%;min-height: 600px;"></iframe>
+                <iframe src="deliver_report_pdf.php<?php echo queryString(['search' => $search, 'start_date' => $start_date, 'end_date' => $end_date]); ?>" name="report" style="width: 100%;min-height: 600px;"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
@@ -203,5 +213,10 @@ include('../layout/header.php');
         </div>
     </div>
 </div>
+<style type="text/css">
+    .center_div {
+        margin: auto;
+    }
+</style>
 
 <?php include('../layout/footer.php'); ?>

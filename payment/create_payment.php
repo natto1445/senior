@@ -131,7 +131,7 @@ $date_payment = date('Y-m-d');
                             <input type="hidden" name="carID" value="<?php echo $row['carID'] ?>">
                         </div>
                         <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['carRent'] ?> -.</div>
+                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo number_format($row['carRent']) ?> -.</div>
                         </div>
                         <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;">จำนวนวัน</div>
@@ -140,17 +140,28 @@ $date_payment = date('Y-m-d');
                             <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['numDay'] ?> วัน</div>
                         </div>
                         <div class="col-sm-8 border">
+                            <div align="left" style="font-size: 14pt; padding-left: 150px;">รูปแบบการเช่า</div>
+                        </div>
+                        <div class="col-sm-4 border">
+                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirPattern'] ?></div>
+                        </div>
+                        <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;">รวมค่าเช่า</div>
                         </div>
                         <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirTotal'] ?> -.</div>
+                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php if ($row['hirPattern'] != "แบบเต็มวัน") {
+                                                                                                    echo number_format($row['carRent'] * $row['numDay'] / 2);
+                                                                                                } else {
+                                                                                                    echo number_format($row['carRent'] * $row['numDay']);
+                                                                                                }
+                                                                                                ?> -.</div>
                             <input type="hidden" name="totalhir" value="<?php echo $row['carRent'] * $row['numDay'] ?>">
                         </div>
                         <div class="col-sm-8 border">
                             <div align="left" style="font-size: 14pt; padding-left: 150px;"><u>หัก</u> ค่ามัดจำ 50%</div>
                         </div>
                         <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirDeposit'] ?> -.</div>
+                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo number_format($row['hirDeposit']) ?> -.</div>
                             <input type="hidden" name="hirDeposit" value="<?php echo $row['hirDeposit'] ?>">
                         </div>
                     </div>
@@ -159,14 +170,14 @@ $date_payment = date('Y-m-d');
                             <div align="left" style="font-size: 14pt; padding-left: 150px;">ค้างชำระ</div>
                         </div>
                         <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['hirDeposit'] ?> -.</div>
+                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo number_format($row['hirDeposit']) ?> -.</div>
                             <input type="hidden" name="balance_hirDeposit" value="<?php echo $row['hirDeposit'] ?>">
                         </div>
                         <div class="col-sm-8 border">
-                            <div align="left" style="font-size: 14pt; padding-left: 150px;">คืนช้าปรับวันละ 1000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</div>
+                            <div align="left" style="font-size: 14pt; padding-left: 150px;">คืนช้าปรับวันละ 1,000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</div>
                         </div>
                         <div class="col-sm-4 border">
-                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo $row['Fines'] ?> -.</div>
+                            <div align="right" style="font-size: 14pt; padding-right: 110px;"><?php echo number_format($row['Fines']) ?> -.</div>
                             <input type="hidden" name="Fines" value="<?php echo $row['Fines'] ?>">
                         </div>
                         <div class="col-sm-8 border">
@@ -192,7 +203,7 @@ $date_payment = date('Y-m-d');
                     </div>
                     <br>
                     <div align="center" style="font-size: 12pt; padding-top: 5px;">ขอบคุณที่ใช้บริการ...</div>
-
+                    <div align="left" style="font-size: 12pt; padding-top: 5px; padding-left: 10px;">ลงชื่อเจ้าของบริษัท <u><?php echo $row2['comOwner']; ?></u></div>
                 </div>
             </div>
             <br>
@@ -208,10 +219,10 @@ $date_payment = date('Y-m-d');
 
             $("#price_rePair100").change(function() {
                 let price_rePai0r100 = $(this).val()
-                let price_rePair = price_rePai0r100/2
+                let price_rePair = price_rePai0r100 / 2
                 $("#price_rePair").val(price_rePair);
                 let total = parseFloat(price_rePair) + parseFloat(balance);
-                $("#total").html(total + " -.");
+                $("#total").html(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " -.");
                 $("#total2").val(total + " -.");
                 if (price_rePair > 0) {
                     console.log("มีการซ่อมรถ")
@@ -232,8 +243,7 @@ $date_payment = date('Y-m-d');
             console.log(balance)
 
             let total = parseFloat(price_rePair) + parseFloat(balance);
-            console.log(total)
-            $("#total").html(total + " -.");
+            $("#total").html(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " -.");
             $("#total2").val(total);
 
         });

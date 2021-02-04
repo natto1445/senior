@@ -41,6 +41,11 @@ $datenow = date('Y-m-d');
             reader.readAsDataURL(event.target.files[0]);
         }
     </script>
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 
 </head>
 
@@ -62,14 +67,14 @@ $datenow = date('Y-m-d');
     <?php endif ?>
 
 
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4><b>ค้นหารถแท็กซี่</b>
+                    <h2><b>ค้นหารถแท็กซี่</b>
                         <a class="text-secondary" style="float: right; padding-right: 15px" href="../contract/create_contract.php"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    </h4>
+                    </h2>
                 </div>
 
                 <!-- แจ้งเตือนข้อมูลรถแท็กซี่ -->
@@ -100,16 +105,16 @@ $datenow = date('Y-m-d');
                 <form action="find_taxi.php" method="post">
                     <div class="form-row col-md-10">
                         <div class="form-group col-md-4">
-                            <label for="hirStart_find">วันที่เริ่มเช่า</label>
-                            <input type="date" class="form-control" name="hirStart_find" id="hirStart_find">
+                            <label style="font-size: 14pt;" for="hirStart_find"><b>วันที่เริ่มเช่า</b></label>
+                            <input style="font-size: 14pt;" type="date" class="form-control" name="hirStart_find" id="hirStart_find">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="hirEnd_find">วันที่สิ้นสุด</label>
-                            <input type="date" class="form-control" name="hirEnd_find" id="hirEnd_find">
+                            <label style="font-size: 14pt;" for="hirEnd_find"><b>วันที่สิ้นสุด</b></label>
+                            <input style="font-size: 14pt;" type="date" class="form-control" name="hirEnd_find" id="hirEnd_find">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="hirPattern_find">รูปแบบการเช่า</label>
-                            <select id="hirPattern_find" name="hirPattern_find" class="form-control">
+                            <label style="font-size: 14pt;" for="hirPattern_find"><b>รูปแบบการเช่า</b></label>
+                            <select style="font-size: 14pt;" size="1" id="hirPattern_find" name="hirPattern_find" class="form-control">
                                 <option selected disabled>-กรุณาเลือกรูปแบบ-</option>
                                 <option value="แบบเต็มวัน">แบบเต็มวัน</option>
                                 <option value="แบบกะเช้า">แบบกะเช้า</option>
@@ -119,8 +124,8 @@ $datenow = date('Y-m-d');
                     </div>
                     <div class="form-row col-md-8">
                         <div class="form-group col-md-10">
-                            <button type="button" name="submit_find" id="submit_find" class="btn btn-outline-success">ตกลง</button>
-                            <button type="reset" class="btn btn-outline-warning">ยกเลิก</button>
+                            <button style="font-size: 14pt;" type="button" name="submit_find" id="submit_find" class="btn btn-outline-success">ตกลง</button>
+                            <button style="font-size: 14pt;" type="reset" class="btn btn-outline-warning">ยกเลิก</button>
                         </div>
                     </div>
                 </form>
@@ -136,7 +141,7 @@ $datenow = date('Y-m-d');
                     var pattern_text = $('#hirPattern_find option:selected').text();
                     if (hirStart_text == "" || hirEnd_text == "" || pattern_text == "-กรุณาเลือกรูปแบบ-") {
                         swal({
-                            title: "กรุณาป้อนข้อมูลการค้นหาให้ครบถ้วน",
+                            title: "กรุณาป้อนข้อมูลค้นหาให้ครบถ้วน",
                             icon: "info",
                             button: "OK",
                         });
@@ -157,26 +162,26 @@ $datenow = date('Y-m-d');
             while ($row = mysqli_fetch_assoc($query)) {
         ?>
 
-                <div class="card" style="width: 100%;">
+                <div class="center_div" style="width: 60%;">
                     <div class="card-body">
                         <table class="table-borderless">
                             <tbody>
                                 <tr>
                                     <td rowspan="3" style="width: 240px;"><img src="../images/taxi/<?php echo $row['carPic']; ?>" class="img-thumbnail" alt="taxi" width="100%"></td>
-                                    <td style="padding-left: 20px;">ยี่ห้อ : <?php echo $row['carBrand']; ?></td>
-                                    <td style="padding-left: 20px;">รุ่น : <?php echo $row['carGen']; ?></td>
+                                    <td style="padding-left: 20px; font-size: 14pt;"><b>ยี่ห้อ :</b> <?php echo $row['carBrand']; ?></td>
+                                    <td style="padding-left: 20px; font-size: 14pt;"><b>รุ่น :</b> <?php echo $row['carGen']; ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-left: 20px;">รหัสรถ : <?php echo $row['carID']; ?> <input value="<?php echo $row['carID']; ?>" type="hidden" name="carID" id="carID" readonly></td>
-                                    <td style="padding-left: 20px;">ทะเบียน : <?php echo $row['carNum']; ?> <input value="<?php echo $row['carNum']; ?>" type="hidden" name="carNum" id="carNum" readonly></td>
-                                    <td style="padding-left: 20px;">ปีจดทะเบียน : <?php echo $row['carYN']; ?></td>
+                                    <td style="padding-left: 20px; font-size: 14pt; padding-top: 15px;"><b>รหัสรถ :</b> <?php echo $row['carID']; ?> <input value="<?php echo $row['carID']; ?>" type="hidden" name="carID" id="carID" readonly></td>
+                                    <td style="padding-left: 20px; font-size: 14pt; padding-top: 15px;"><b>ทะเบียน :</b> <?php echo $row['carNum']; ?> <input value="<?php echo $row['carNum']; ?>" type="hidden" name="carNum" id="carNum" readonly></td>
+                                    <td style="padding-left: 20px; font-size: 14pt; padding-top: 15px;"><b>ปีจดทะเบียน :</b> <?php echo $row['carYN']; ?></td>
                                 </tr>
                                 <tr>
 
-                                    <td style="padding-left: 20px;">ราคา : <?php echo $row['carRent']; ?> <input value="<?php echo $row['carRent']; ?>" type="hidden" name="carRent" id="carRent" readonly></td>
-                                    <td style="padding-left: 20px;">สถานะ : <?php echo $row['carStatus']; ?></td>
+                                    <td style="padding-left: 20px; font-size: 14pt;"><b>ราคา :</b> <?php echo $row['carRent']; ?> <input value="<?php echo $row['carRent']; ?>" type="hidden" name="carRent" id="carRent" readonly></td>
+                                    <td style="padding-left: 20px; font-size: 14pt;"><b>สถานะ :</b> <?php echo $row['carStatus']; ?></td>
                                     <td style="padding-left: 20px;">
-                                        <button type="submit" id="car_select" class="btn btn-success">เลือก</button>
+                                        <button font-size: 14pt; type="submit" id="car_select" class="btn btn-success">เลือก</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -271,7 +276,7 @@ $datenow = date('Y-m-d');
         <div class="card bg-light text-dark">
             <div class="card-body">
                 <div>
-                    <h4><b>ทำสัญญาเช่า</b></h4>
+                    <h2><b>ทำสัญญาเช่า</b></h2>
                 </div>
                 <?php if (isset($_SESSION['status'])) : ?>
                     <script>
@@ -287,44 +292,44 @@ $datenow = date('Y-m-d');
                 <form action="save_contract.php" method="post">
                     <div class="form-row col-md-12">
                         <div class="form-group col-md-3">
-                            <label for="hirNum">เลขที่สัญญา</label>
-                            <input type="text" class="form-control" name="hirNum" id="hirNum" value="CT-<?php echo $date ?>-00<?php echo $data['maxid'] + 1 ?>" readonly>
+                            <label style="font-size: 14pt;" for="hirNum"><b>เลขที่สัญญา</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="hirNum" id="hirNum" value="CT-<?php echo $date ?>-00<?php echo $data['maxid'] + 1 ?>" readonly>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="hirDate">วันที่ทำสัญญา</label>
-                            <input type="text" class="form-control" name="hirDate" id="hirDate" value="<?php echo $datenow ?>" readonly>
+                            <label style="font-size: 14pt;" for="hirDate"><b>วันที่ทำสัญญา</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="hirDate" id="hirDate" value="<?php echo $datenow ?>" readonly>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="hirStart">วันที่เริ่มเช่า</label>
-                            <input type="text" class="form-control" name="hirStart" id="hirStart" readonly>
+                            <label style="font-size: 14pt;" for="hirStart"><b>วันที่เริ่มเช่า</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="hirStart" id="hirStart" readonly>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="hirEnd">วันที่สิ้นสุด</label>
-                            <input type="text" class="form-control" name="hirEnd" id="hirEnd" readonly>
-                        </div>
-                    </div>
-                    <div class="form-row col-md-12">
-                        <div class="form-group col-md-3">
-                            <label for="hirPattern">รูปแบบการเช่า</label>
-                            <input type="text" class="form-control" name="hirPattern" id="hirPattern" readonly>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="timeStart">เวลาเริ่มเช่า</label>
-                            <input type="text" class="form-control" name="timeStart" id="timeStart" readonly>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="timeEnd">เวลาสิ้นสุด</label>
-                            <input type="text" class="form-control" name="timeEnd" id="timeEnd" readonly>
+                            <label style="font-size: 14pt;" for="hirEnd"><b>วันที่สิ้นสุด</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="hirEnd" id="hirEnd" readonly>
                         </div>
                     </div>
                     <div class="form-row col-md-12">
                         <div class="form-group col-md-3">
-                            <label for="usrID">ชื่อพนักงาน</label>
-                            <input type="text" class="form-control" name="usrID" id="usrID" value="<?php echo $_SESSION["usrName"] ?>" readonly>
+                            <label style="font-size: 14pt;" for="hirPattern"><b>รูปแบบการเช่า</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="hirPattern" id="hirPattern" readonly>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="cusCard">ชื่อผู้เช่า</label>
-                            <select class="form-control" name="cusCard" id="cusCard">
+                            <label style="font-size: 14pt;" for="timeStart"><b>เวลาเริ่มเช่า</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="timeStart" id="timeStart" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label style="font-size: 14pt;" for="timeEnd"><b>เวลาสิ้นสุด</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="timeEnd" id="timeEnd" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row col-md-12">
+                        <div class="form-group col-md-3">
+                            <label style="font-size: 14pt;" for="usrID"><b>ชื่อพนักงาน</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="usrID" id="usrID" value="<?php echo $_SESSION["usrName"] ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label style="font-size: 14pt;" for="cusCard"><b>ชื่อผู้เช่า</b></label>
+                            <select style="font-size: 14pt;" size="1" class="form-control" name="cusCard" id="cusCard">
                                 <option selected disabled value="">-กรุณาเลือกผู้เช่า-</option>
                                 <?php while ($data = mysqli_fetch_assoc($cus)) { ?>
                                     <option value="<?php echo $data["cusCard"] ?>"><?php echo $data["cusName"] ?></option>
@@ -332,36 +337,36 @@ $datenow = date('Y-m-d');
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="carID">หมายเลขทะเบียนรถ</label>
-                            <input type="text" class="form-control" name="carNum" id="hircarNum" readonly>
+                            <label style="font-size: 14pt;" for="carID"><b>หมายเลขทะเบียนรถ</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="carNum" id="hircarNum" readonly>
                         </div>
                     </div>
                     <div class="form-row col-md-12">
                         <div class="form-group col-md-3">
-                            <label for="numDay">จำนวนวันที่เช่า</label>
-                            <input type="text" class="form-control" name="numDay" id="numDay" readonly>
+                            <label style="font-size: 14pt;" for="numDay"><b>จำนวนวันที่เช่า</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="numDay" id="numDay" readonly>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="carRent">ราคารถแท็กซี่/วัน</label>
-                            <input type="text" class="form-control" name="carRent" id="hirCarRent" readonly>
+                            <label style="font-size: 14pt;" for="carRent"><b>ราคารถแท็กซี่/วัน</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="carRent" id="hirCarRent" readonly>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="hirDeposit">ราคามัดจำ</label>
-                            <input type="text" class="form-control" name="hirDeposit" id="hirDeposit" readonly>
+                            <label style="font-size: 14pt;" for="hirDeposit"><b>ราคามัดจำ</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="hirDeposit" id="hirDeposit" readonly>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="hirStatus">สถานะ</label>
-                            <input type="text" class="form-control" name="hirStatus" id="hirStatus" value="จองรถ" readonly>
+                            <label style="font-size: 14pt;" for="hirStatus"><b>สถานะ</b></label>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="hirStatus" id="hirStatus" value="จองรถ" readonly>
                         </div>
 
                         <div class="form-group col-md-3">
-                            <input type="text" class="form-control" name="hirCarID" id="hirCarID" hidden>
+                            <input style="font-size: 14pt;" type="text" class="form-control" name="hirCarID" id="hirCarID" hidden>
                         </div>
                     </div>
                     <div class="form-row col-md-8">
                         <div class="form-group col-md-10">
-                            <button type="button" id="save_contract" name="save_contract" class="btn btn-outline-success">ตกลง</button>
-                            <button type="reset" class="btn btn-outline-warning">ยกเลิก</button>
+                            <button style="font-size: 14pt;" type="button" id="save_contract" name="save_contract" class="btn btn-outline-success">ตกลง</button>
+                            <button style="font-size: 14pt;" type="reset" class="btn btn-outline-warning">ยกเลิก</button>
                         </div>
                     </div>
                 </form>

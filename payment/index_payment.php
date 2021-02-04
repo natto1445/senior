@@ -17,21 +17,26 @@ include('../condb/condb.php');
     <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/dataTables.bootstrap4.min.css" />
     <script src="../js/sweetalert.min.js"></script>
+    <style type="text/css">
+        .center_div {
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div class="menu">
         <?php include '../login/menu.php'; ?>
     </div>
-    <div class="container">
+    <div style="width: 80%;" class="center_div">
         <br>
         <div class="card bg-light text-dark">
             <div class="card-body" style="width: 100%;">
                 <div>
-                    <h4><b>สัญญาที่ยังไม่ชำระเงิน</b>
+                    <h2><b>สัญญาที่ยังไม่ชำระเงิน</b>
                         <a class="text-secondary" style="float: right; padding-left: 15px" href="../return/create_return.php"><i class="fa fa-car" aria-hidden="true"></i></a>
                         <a class="text-secondary" style="float: right;" href="../payment/index_payment.php"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    </h4>
+                    </h2>
                 </div>
                 <br>
                 <div>
@@ -46,14 +51,15 @@ include('../condb/condb.php');
 
                                 <thead>
                                     <tr>
-                                        <th style="width: 12%;"><b>เลขสัญญา</b></th>
-                                        <th style="width: 13%;"><b>ชื่อผู้เช่า</b></th>
-                                        <th style="padding-left: 10px; width: 18%;"><b>ทะเบียนรถ</b></th>
-                                        <th style="padding-left: 10px;"><b>วันที่เริ่มเช่า</b></th>
-                                        <th style="width: 13%; padding-left: 10px;"><b>วันที่คืนรถ</b></th>
-                                        <th style="width: 10%; padding-left: 10px;"><b>ค่าปรับ</b></th>
-                                        <th style="padding-left: 10px;"><b>ยอดสุทธิ</b></th>
-                                        <th style="padding-left: 10px;"><b>สถานะ</b></th>
+                                        <th style="width: 12%; font-size: 16pt;"><b>เลขสัญญา</b></th>
+                                        <th style="width: 13%; font-size: 16pt;"><b>ชื่อผู้เช่า</b></th>
+                                        <th style="padding-left: 10px; width: 14%; font-size: 16pt;"><b>ทะเบียนรถ</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt; width: 10%;"><b>วันที่เริ่มเช่า</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt; width: 10%;"><b>วันที่สิ้นสุด</b></th>
+                                        <th style="width: 10%; padding-left: 10px; font-size: 16pt;"><b>วันที่คืนรถ</b></th>
+                                        <th style="width: 10%; padding-left: 10px; font-size: 16pt;"><b>ค่าปรับ</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt;"><b>ยอดสุทธิ</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt;"><b>สถานะ</b></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -62,15 +68,16 @@ include('../condb/condb.php');
                                     while ($row = mysqli_fetch_array($result)) {
                                     ?>
                                         <tr>
-                                            <td style="width: 12%;"><?php echo $row['hirNum']; ?></td>
-                                            <td style="width: 13%;"><?php echo $row['cusName']; ?></td>
-                                            <td style="padding-left: 10px; width: 18%;"><?php echo $row['carNum']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $row['hirStart']; ?></td>
-                                            <td style="width: 13%; padding-left: 10px;"><?php echo $row['retDate']; ?></td>
-                                            <td style="width: 10%; padding-left: 10px;"><?php echo $row['Fines']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $row['total']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $row['deliver']; ?></td>
-                                            <td style="padding-left: 30px;"> <a class="btn btn-success" href="../payment/create_payment.php?id=<?php echo $row['retID']; ?>" onclick="return confirm('คุณต้องการชำระเงินสัญญาเช่า <?php echo $row['hirNum']; ?> ?')"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></a> </td>
+                                            <td style="width: 12%; font-size: 14pt; padding-top: 10px;"><?php echo $row['hirNum']; ?></td>
+                                            <td style="width: 13%; font-size: 14pt; padding-top: 10px;"><?php echo $row['cusName']; ?></td>
+                                            <td style="padding-left: 10px; width: 14%; font-size: 14pt; padding-top: 10px;"><?php echo $row['carNum']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px; width: 10%;"><?php echo $row['hirStart']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px; width: 10%;"><?php echo $row['hirEnd']; ?></td>
+                                            <td style="width: 10%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['retDate']; ?></td>
+                                            <td style="width: 10%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['Fines']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['total']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['deliver']; ?></td>
+                                            <td style="padding-left: 30px; font-size: 14pt; padding-top: 10px;"> <a style="width: 70px;" class="btn btn-success" href="../payment/create_payment.php?id=<?php echo $row['retID']; ?>" onclick="return confirm('คุณต้องการชำระเงินสัญญาเช่า <?php echo $row['hirNum']; ?> ?')"><i style="font-size: 1.5rem;" class="fa fa-credit-card-alt" aria-hidden="true"></i></a> </td>
                                         </tr>
                                     <?php
                                     }
@@ -87,9 +94,9 @@ include('../condb/condb.php');
         <div class="card bg-light text-dark">
             <div class="card-body" style="width: 100%;">
                 <div>
-                    <h4>
+                    <h2>
                         <b>สัญญาที่ชำระแล้ว</b>
-                    </h4>
+                    </h2>
                 </div>
                 <br>
                 <div>
@@ -103,15 +110,17 @@ include('../condb/condb.php');
                             <table class="table-borderless" id="example">
                                 <thead>
                                     <tr>
-                                        <th style="width: 12%;"><b>เลขที่ชำระ</b></th>
-                                        <th style="width: 12%;"><b>เลขสัญญา</b></th>
-                                        <th style="width: 13%;"><b>ชื่อผู้เช่า</b></th>
-                                        <th style="padding-left: 10px; width: 15%;"><b>ทะเบียนรถ</b></th>
+                                        <th style="width: 10%; font-size: 16pt;"><b>เลขที่ชำระ</b></th>
+                                        <th style="width: 10%; font-size: 16pt;"><b>เลขสัญญา</b></th>
+                                        <th style="width: 13%; font-size: 16pt;"><b>ชื่อผู้เช่า</b></th>
+                                        <th style="padding-left: 10px; width: 12%; font-size: 16pt;"><b>ทะเบียนรถ</b></th>
                                         <!-- <th style="padding-left: 10px;"><b>วันที่เริ่มเช่า</b></th> -->
-                                        <th style="width: 10%; padding-left: 10px;"><b>วันที่คืนรถ</b></th>
-                                        <th style="width: 8%; padding-left: 10px;"><b>ค่าปรับ</b></th>
-                                        <th style="padding-left: 10px;"><b>ยอดสุทธิ</b></th>
-                                        <th style="padding-left: 10px;"><b>สถานะ</b></th>
+                                        <th style="width: 8%; padding-left: 10px; font-size: 16pt;"><b>วันที่เริ่มเช่า</b></th>
+                                        <th style="width: 8%; padding-left: 10px; font-size: 16pt;"><b>วันที่สิ้นสุด</b></th>
+                                        <th style="width: 10%; padding-left: 10px; font-size: 16pt;"><b>วันที่คืนรถ</b></th>
+                                        <th style="width: 6%; padding-left: 10px; font-size: 16pt;"><b>ค่าปรับ</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt;"><b>ยอดสุทธิ</b></th>
+                                        <th style="padding-left: 10px; font-size: 16pt;"><b>สถานะ</b></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -121,17 +130,19 @@ include('../condb/condb.php');
                                     while ($data = mysqli_fetch_array($result_sql)) {
                                     ?>
                                         <tr>
-                                            <td style="width: 12%;"><?php echo $data['payID']; ?></td>
-                                            <td style="width: 12%;"><?php echo $data['hirNum']; ?></td>
-                                            <td style="width: 13%;"><?php echo $data['cusName']; ?></td>
-                                            <td style="padding-left: 10px; width: 15%;"><?php echo $data['carNum']; ?></td>
+                                            <td style="width: 10%; font-size: 14pt; padding-top: 10px;"><?php echo $data['payID']; ?></td>
+                                            <td style="width: 10%; font-size: 14pt; padding-top: 10px;"><?php echo $data['hirNum']; ?></td>
+                                            <td style="width: 13%; font-size: 14pt; padding-top: 10px;"><?php echo $data['cusName']; ?></td>
+                                            <td style="padding-left: 10px; width: 12%; font-size: 14pt; padding-top: 10px;"><?php echo $data['carNum']; ?></td>
                                             <!-- <td style="padding-left: 10px;"><?php //echo $data['hirStart']; 
                                                                                     ?></td> -->
-                                            <td style="width: 10%; padding-left: 10px;"><?php echo $data['retDate']; ?></td>
-                                            <td style="width: 8%; padding-left: 10px;"><?php echo $data['Fines']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $data['total']; ?></td>
-                                            <td style="padding-left: 10px;"><?php echo $data['deliver']; ?></td>
-                                            <td style="padding-left: 30px;"> <a class="btn btn-success" href="../payment/print_payment.php?id=<?php echo $data['payID']; ?>" onclick="return confirm('คุณต้องการพิมพ์ใบเสร็จ <?php echo $data['payID']; ?> อีกครั้งใช่ไหม ?')"><i class="fa fa-file-text-o" aria-hidden="true"></i></a> </td>
+                                            <td style="width: 8%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['hirStart']; ?></td>                                        
+                                            <td style="width: 8%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['hirEnd']; ?></td>                                        
+                                            <td style="width: 10%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['retDate']; ?></td>
+                                            <td style="width: 6%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['Fines']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['total']; ?></td>
+                                            <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['deliver']; ?></td>
+                                            <td style="padding-left: 30px; font-size: 14pt; padding-top: 10px;"> <a style="width: 70px;" class="btn btn-success" href="../payment/print_payment.php?id=<?php echo $data['payID']; ?>" onclick="return confirm('คุณต้องการพิมพ์ใบเสร็จ <?php echo $data['payID']; ?> อีกครั้งใช่ไหม ?')"><i style="font-size: 1.5rem;" class="fa fa-file-text-o" aria-hidden="true"></i></a> </td>
                                         </tr>
                                     <?php
                                     }
