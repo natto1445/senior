@@ -96,7 +96,9 @@ include('../layout/header.php');
                 </thead>
                 <tbody>
                     <?php
+                    $row_cnt = 0;
                     if ($result = $con->query($query)) {
+                        $row_cnt = mysqli_num_rows($result);
                         while ($contract = $result->fetch_assoc()) {
                     ?>
                             <tr>
@@ -177,6 +179,8 @@ include('../layout/header.php');
                     }
                     ?>
                 </ul>
+
+                <span>แสดง <?php echo $row_cnt; ?> รายการจากทั้งหมด <?php echo $total; ?> รายการ</span>
             <?php
             }
             ?>

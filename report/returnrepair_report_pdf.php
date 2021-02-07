@@ -77,11 +77,25 @@ $html = '
 		tr:nth-child(even) {
 		  	background-color: #dddddd;
 		}
+        .left{
+            display:inline-block;
+            float:left;
+            width:500px;
+        }
+        .right{
+            display:inline-block;
+            float:right;
+            width:150px;
+            text-align:right;
+        }
 		</style>
 	</head>
 	<body>
 		<h1>รายงานรับคืนรถจากการซ่อม</h1>
-        '.displaySearch($search, $start_date, $end_date).'
+        <div>
+            <div class="left">'.displaySearch($search, $start_date, $end_date).'</div>
+            <div class="right">วันที่ออกรายงาน '.date('d-m-Y').'</div>
+        </div>
 		<table>
             <thead>
                 <tr>

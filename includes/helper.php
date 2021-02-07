@@ -58,5 +58,5 @@ function displaySearch($search, $dateStart, $dateEnd){
         $show .= "ถึงวันที่ ".dateFormat($dateEnd);
     }
 
-    return "<p>".$show."</p>";
+    return $show;
 }
