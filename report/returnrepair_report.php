@@ -195,11 +195,11 @@ include('../layout/header.php');
                     ?>
                 </ul>
 
-                <span>แสดง <?php echo $row_cnt; ?> รายการจากทั้งหมด <?php echo $total; ?> รายการ</span>
+                
             <?php   
             }
             ?>
-
+            <span>แสดง <?php echo $row_cnt; ?> รายการจากทั้งหมด <?php echo $total; ?> รายการ</span>
         </div>
     </div>
 </div>
