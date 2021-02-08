@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('../condb/condb.php');
 include('../includes/helper.php');
 include('../vendor/autoload.php');
@@ -12,23 +12,23 @@ $select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusNa
 $from   = "FROM tbpayment ";
 $join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID LEFT JOIN tbuser ON tbuser.usrID = tbpayment.usrID ";
 $where = [];
-if($search){
+if ($search) {
     $where[] = " (tbpayment.payID LIKE '%$search%' OR tbuser.usrName LIKE '%$search%') ";
 }
-if($start_date){
+if ($start_date) {
     $where[] = " DATE(tbpayment.date_payment) >= '$start_date' ";
 }
-if($end_date){
+if ($end_date) {
     $where[] = " DATE(tbpayment.date_payment) <= '$end_date' ";
 }
-if(count($where)){
-    $where = "WHERE ".implode(" AND ", $where);
-}else{
+if (count($where)) {
+    $where = "WHERE " . implode(" AND ", $where);
+} else {
     $where = "";
 }
 
 $order  = "ORDER BY tbpayment.id DESC ";
-$query  = $select.$from.$join.$where.$order;
+$query  = $select . $from . $join . $where . $order;
 
 header("Content-type:application/pdf");
 header("Content-disposition: attachment;filename=payment_report.pdf");
@@ -91,9 +91,10 @@ $html = '
 	<body>
 		<h1>รายงานชำระเงิน</h1>
         <div>
-            <div class="left">'.displaySearch($search, $start_date, $end_date).'</div>
-            <div class="right">วันที่ออกรายงาน '.date('d-m-Y').'</div>
+            <div class="left">' . displaySearch($search, $start_date, $end_date) . '</div>
+            <div class="right">วันที่ออกรายงาน ' . date('d-m-Y') . '</div>
         </div>
+        <br>
 		<table>
             <thead>
                 <tr>
@@ -111,47 +112,56 @@ $html = '
                 </tr>
             </thead>
             <tbody>';
-            if( $result = $con->query($query)){
-                while($payment = $result->fetch_assoc()){
-                    $html .= '
+$row_cnt = 0;
+if ($result = $con->query($query)) {
+    $row_cnt = mysqli_num_rows($result);
+    while ($payment = $result->fetch_assoc()) {
+        $html .= '
                     <tr>
-                        <td>'.$payment['id'].'</td>
-                        <td>'.$payment['payID'].'</td>
-                        <td>'.$payment['hirnum'].'</td>
-                        <td>'.$payment['date_payment'].'</td>
-                        <td>'.$payment['cusName'].'</td>
-                        <td>'.$payment['carNum'].'</td>
-                        <td>'.$payment['numDay'].'</td>
-                        <td>'.$payment['Fines'].'</td>
-                        <td>'.$payment['repair'].'</td>
-                        <td>'.$payment['price_repair'].'</td>
-                        <td>'.$payment['total2'].'</td>
+                        <td>' . $payment['id'] . '</td>
+                        <td>' . $payment['payID'] . '</td>
+                        <td>' . $payment['hirnum'] . '</td>
+                        <td>' . $payment['date_payment'] . '</td>
+                        <td>' . $payment['cusName'] . '</td>
+                        <td>' . $payment['carNum'] . '</td>
+                        <td>' . $payment['numDay'] . '</td>
+                        <td>' . $payment['Fines'] . '</td>
+                        <td>' . $payment['repair'] . '</td>
+                        <td>' . number_format($payment['price_repair']) . '</td>
+                        <td>' . number_format($payment['total2']) . '</td>
                     </tr>';
-                }
-            }else{
-                $html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
-            }
+    }
+} else {
+    $html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+}
 
-            $sum_price_repair = 0;
-            $sum_total2 = 0;
+$sum_price_repair = 0;
+$sum_total2 = 0;
 
-            $select = "SELECT SUM(tbpayment.price_repair) as sum_price_repair ";
-            $query  = $select.$from.$join.$where;
-            $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
-            $row    = mysqli_fetch_object($result);
-            $sum_price_repair  = $row->sum_price_repair;
+$select = "SELECT SUM(tbpayment.price_repair) as sum_price_repair ";
+$query  = $select . $from . $join . $where;
+$result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
+$row    = mysqli_fetch_object($result);
+$sum_price_repair  = $row->sum_price_repair;
 
-            $select = "SELECT SUM(tbpayment.total2) as sum_total2 ";
-            $query  = $select.$from.$join.$where;
-            $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
-            $row    = mysqli_fetch_object($result);
-            $sum_total2  = $row->sum_total2;
+$select = "SELECT SUM(tbpayment.total2) as sum_total2 ";
+$query  = $select . $from . $join . $where;
+$result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
+$row    = mysqli_fetch_object($result);
+$sum_total2  = $row->sum_total2;
 
-            $html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>'.$sum_price_repair.'</td><td>'.$sum_total2.'</td></tr>';
+$select_cout = "SELECT count(id) as total FROM tbpayment";
+$result = mysqli_query($con, $select_cout);
+$row = mysqli_fetch_array($result);
+echo $row['total'];
+
+$html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>ยอดรวม</td><td>' . number_format($sum_price_repair) . '</td><td>' . number_format($sum_total2) . '</td></tr>';
 $html .= '</tbody>
 </table>
+<br>
+แสดง ' . $row_cnt . ' รายการ จากทั้งหมด ' . $row['total'] . ' รายการ
 </body>
 </html>';
 
 $mpdf->WriteHTML($html);
-$mpdf->Output('test.pdf',"I");
+$mpdf->Output('test.pdf', "I");

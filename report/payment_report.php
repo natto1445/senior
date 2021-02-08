@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('../condb/condb.php');
 include('../includes/helper.php');
 include('../layout/header.php');
@@ -9,7 +9,7 @@ $end_date   = request('end_date');
 $page       = request('page', 1);
 
 $perPage = 10;
-$offset = ($page-1) * $perPage;
+$offset = ($page - 1) * $perPage;
 
 // ดึงข้อมูล
 $select = "SELECT tbpayment.id,tbpayment.payID,tbpayment.hirnum,tbcustomer.cusName,tbtaxi.carNum,tbpayment.numDay,tbpayment.date_payment,tbpayment.Fines,tbpayment.repair,tbpayment.price_repair,tbpayment.total2 ";
@@ -18,26 +18,26 @@ $join   = "JOIN tbcontract ON tbcontract.hirNum = tbpayment.hirNum JOIN tbcustom
 $where = [];
 
 
-if($search){
+if ($search) {
     $where[] = " (tbpayment.payID LIKE '%$search%' OR tbuser.usrName LIKE '%$search%') ";
 }
-if($start_date){
+if ($start_date) {
     $where[] = " DATE(tbpayment.date_payment) >= '$start_date' ";
 }
-if($end_date){
+if ($end_date) {
     $where[] = " DATE(tbpayment.date_payment) <= '$end_date' ";
 }
 
-if(count($where)){
-    $where = "WHERE ".implode(" AND ", $where);
-}else{
+if (count($where)) {
+    $where = "WHERE " . implode(" AND ", $where);
+} else {
     $where = "";
 }
 
 $order  = "ORDER BY tbpayment.id DESC ";
 $limit  = "LIMIT $perPage ";
 $offset = "OFFSET $offset ";
-$query  = $select.$from.$join.$where.$order.$limit.$offset;
+$query  = $select . $from . $join . $where . $order . $limit . $offset;
 
 include('../layout/header.php');
 ?>
@@ -46,12 +46,12 @@ include('../layout/header.php');
 </div>
 <div style="width: 80%;" class="center_div">
     <h2 class="mt-3 mb-3">รายงานชำระเงิน</h2>
-    
+
     <div class="row">
         <div class="col-md-12">
             <form method="GET" action="payment_report.php">
                 <div class="form-row align-items-center">
-                    
+
                     <div class="col-auto">
                         <label style="font-size: 14pt;" class="sr-only" for="search">ค้นหา</label>
                         <input style="font-size: 14pt;" type="text" name="search" class="form-control mb-2" id="search" value="<?php echo $search; ?>" autocomplete="off">
@@ -64,7 +64,7 @@ include('../layout/header.php');
                         <label style="font-size: 14pt;" class="sr-only" for="end_date">วันสิ้นสุด</label>
                         <input style="font-size: 14pt;" type="date" name="end_date" class="form-control mb-2" id="end_date" value="<?php echo $end_date; ?>">
                     </div>
-                    
+
                     <div class="col-auto">
                         <button style="font-size: 14pt;" type="submit" class="btn btn-primary mb-2">ค้นหา</button>
 
@@ -78,7 +78,7 @@ include('../layout/header.php');
             </form>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-bordered">
@@ -100,55 +100,55 @@ include('../layout/header.php');
                 <tbody>
                     <?php
                     $row_cnt = 0;
-                    if($result = $con->query($query)){
+                    if ($result = $con->query($query)) {
                         $row_cnt = mysqli_num_rows($result);
-                        while($payment = $result->fetch_assoc()){
-                        ?>
-                        <tr>
-                            <td style="font-size: 14pt; text-align: center;"><?php echo $payment['id']; ?></td> 
-                            <td style="font-size: 14pt;"><?php echo $payment['payID']; ?></td>
-                            <td style="font-size: 14pt;"><?php echo $payment['hirnum']; ?></td>
-                            <td style="font-size: 14pt;"><?php echo $payment['date_payment']; ?></td>
-                            <td style="font-size: 14pt;"><?php echo $payment['cusName']; ?></td>
-                            <td style="font-size: 14pt;"><?php echo $payment['carNum']; ?></td>
-                            <td style="font-size: 14pt; text-align: center;"><?php echo $payment['numDay']; ?></td>
-                            <td style="font-size: 14pt; text-align: right;"><?php echo $payment['Fines']; ?></td>
-                            <td style="font-size: 14pt;"><?php echo $payment['repair']; ?></td>
-                            <td style="font-size: 14pt;"><?php echo $payment['price_repair']; ?></td>
-                            <td style="font-size: 14pt;"><?php echo $payment['total2']; ?></td>
-                        </tr>
-                        <?php 
-                        }
-                    }else{
-                        ?>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        while ($payment = $result->fetch_assoc()) {
+                    ?>
+                            <tr>
+                                <td style="font-size: 14pt; text-align: center;"><?php echo $payment['id']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $payment['payID']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $payment['hirnum']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $payment['date_payment']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $payment['cusName']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $payment['carNum']; ?></td>
+                                <td style="font-size: 14pt; text-align: center;"><?php echo $payment['numDay']; ?></td>
+                                <td style="font-size: 14pt; text-align: right;"><?php echo $payment['Fines']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo $payment['repair']; ?></td>
+                                <td style="font-size: 14pt;"><?php echo number_format($payment['price_repair']); ?></td>
+                                <td style="font-size: 14pt;"><?php echo number_format($payment['total2']); ?></td>
+                            </tr>
                         <?php
+                        }
+                    } else {
+                        ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php
                     }
                     ?>
-                    <?php 
+                    <?php
                     $sum_price_repair = 0;
                     $sum_total2 = 0;
 
                     $select = "SELECT SUM(tbpayment.price_repair) as sum_price_repair ";
-                    $query  = $select.$from.$join.$where;
+                    $query  = $select . $from . $join . $where;
                     $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
                     $row    = mysqli_fetch_object($result);
                     $sum_price_repair  = $row->sum_price_repair;
 
                     $select = "SELECT SUM(tbpayment.total2) as sum_total2 ";
-                    $query  = $select.$from.$join.$where;
+                    $query  = $select . $from . $join . $where;
                     $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
                     $row    = mysqli_fetch_object($result);
                     $sum_total2  = $row->sum_total2;
@@ -163,75 +163,75 @@ include('../layout/header.php');
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td><?php echo $sum_price_repair; ?></td>
-                        <td><?php echo $sum_total2; ?></td>
+                        <td style="font-size: 14pt;">ยอดรวม</td>
+                        <td style="font-size: 14pt;"><?php echo number_format($sum_price_repair); ?></td>
+                        <td style="font-size: 14pt;"><?php echo number_format($sum_total2); ?></td>
                     </tr>
                 </tbody>
             </table>
 
-            <?php 
+            <?php
             // Pagination 
-            
+
             $select = "SELECT count(*) as total ";
-            $query  = $select.$from.$join.$where;
+            $query  = $select . $from . $join . $where;
             $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
             $row    = mysqli_fetch_object($result);
             $total  = $row->total;
 
             $lastPage = 1;
             $max = (int) ceil($total / $perPage);
-            if($max > 1){
+            if ($max > 1) {
                 $lastPage = $max;
             }
             $hasPages = $lastPage > 1;
             $onFirstPage = $page <= 1;
             $hasMorePages = $page < $lastPage;
 
-            if($hasPages){
+            if ($hasPages) {
             ?>
                 <ul class="pagination">
-                    <?php 
-                    if($onFirstPage){
+                    <?php
+                    if ($onFirstPage) {
                     ?>
                         <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
-                    <?php 
-                    }else{
+                    <?php
+                    } else {
                     ?>
                         <li class="page-item">
-                            <a class="page-link" href="<?php echo queryString(['page'=>($page-1),'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" rel="prev">&laquo;</a>
+                            <a class="page-link" href="<?php echo queryString(['page' => ($page - 1), 'search' => $search, 'start_date' => $start_date, 'end_date' => $end_date]); ?>" rel="prev">&laquo;</a>
                         </li>
-                    <?php 
+                        <?php
                     }
 
                     foreach (range(1, $lastPage) as $pagerang) {
-                        if($page == $pagerang){
+                        if ($page == $pagerang) {
                         ?>
                             <li class="page-item active"><span class="page-link"><?php echo $page; ?></span></li>
                         <?php
-                        }else{
+                        } else {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?php echo queryString(['page'=>$pagerang,'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>"><?php echo $pagerang; ?></a>
+                                <a class="page-link" href="<?php echo queryString(['page' => $pagerang, 'search' => $search, 'start_date' => $start_date, 'end_date' => $end_date]); ?>"><?php echo $pagerang; ?></a>
                             </li>
                         <?php
                         }
                     }
 
-                    if($hasMorePages){
+                    if ($hasMorePages) {
+                        ?>
+                        <li class="page-item"><a class="page-link" href="<?php echo queryString(['page' => ($page + 1), 'search' => $search, 'start_date' => $start_date, 'end_date' => $end_date]); ?>" rel="next">&raquo;</a></li>
+                    <?php
+                    } else {
                     ?>
-                        <li class="page-item"><a class="page-link" href="<?php echo queryString(['page'=>($page+1),'search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" rel="next">&raquo;</a></li>
-                    <?php 
-                }else{
-                    ?>
-                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-                    <?php 
-                    } 
+                        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                    <?php
+                    }
                     ?>
                 </ul>
 
-                
-            <?php   
+
+            <?php
             }
             ?>
             <span>แสดง <?php echo $row_cnt; ?> รายการจากทั้งหมด <?php echo $total; ?> รายการ</span>
@@ -250,7 +250,7 @@ include('../layout/header.php');
                 </button>
             </div>
             <div class="modal-body">
-                <iframe src="payment_report_pdf.php<?php echo queryString(['search'=>$search,'start_date'=>$start_date,'end_date'=>$end_date]); ?>" name="report" style="width: 100%;min-height: 600px;"></iframe>
+                <iframe src="payment_report_pdf.php<?php echo queryString(['search' => $search, 'start_date' => $start_date, 'end_date' => $end_date]); ?>" name="report" style="width: 100%;min-height: 600px;"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('../condb/condb.php');
 include('../includes/helper.php');
 include('../vendor/autoload.php');
@@ -13,23 +13,28 @@ $from   = "FROM tbcontract ";
 $join   = "JOIN tbcustomer ON tbcontract.cusCard = tbcustomer.cusCard JOIN tbtaxi ON tbcontract.carID = tbtaxi.carID JOIN tbuser ON tbuser.usrID = tbcontract.usrID ";
 $where = [];
 
-if($search){
+if ($search) {
     $where[] = " (tbuser.usrName LIKE '%$search%' OR tbcontract.hirNum LIKE '%$search%' OR tbcontract.hirStatus LIKE '%$search%') ";
 }
-if($start_date){
+if ($start_date) {
     $where[] = " DATE(tbcontract.hirStart) >= '$start_date' ";
 }
-if($end_date){
+if ($end_date) {
     $where[] = " DATE(tbcontract.hirEnd) <= '$end_date' ";
 }
-if(count($where)){
-    $where = "WHERE ".implode(" AND ", $where);
-}else{
+if (count($where)) {
+    $where = "WHERE " . implode(" AND ", $where);
+} else {
     $where = "";
 }
 
 $order  = "ORDER BY tbcontract.id DESC ";
-$query  = $select.$from.$join.$where.$order;
+$query  = $select . $from . $join . $where . $order;
+
+$select_cout = "SELECT count(id) as total FROM tbcontract";
+$result = mysqli_query($con, $select_cout);
+$row = mysqli_fetch_array($result);
+echo $row['total'];
 
 header("Content-type:application/pdf");
 header("Content-disposition: attachment;filename=contract_report.pdf");
@@ -92,9 +97,10 @@ $html = '
 	<body>
 		<h1>รายงานสัญญาเช่า</h1>
         <div>
-            <div class="left">'.displaySearch($search, $start_date, $end_date).'</div>
-            <div class="right">วันที่ออกรายงาน '.date('d-m-Y').'</div>
+            <div class="left">' . displaySearch($search, $start_date, $end_date) . '</div>
+            <div class="right">วันที่ออกรายงาน ' . date('d-m-Y') . '</div>
         </div>
+        <br>
 		<table>
             <thead>
                 <tr>
@@ -113,31 +119,35 @@ $html = '
                 </tr>
             </thead>
             <tbody>';
-if($result = $con->query($query)){
-    while($contract = $result->fetch_assoc()){
+$row_cnt = 0;
+if ($result = $con->query($query)) {
+    $row_cnt = mysqli_num_rows($result);
+    while ($contract = $result->fetch_assoc()) {
         $html .= '
         <tr>
-            <td>'.$contract['id'].'</td>
-            <td>'.$contract['hirNum'].'</td>
-            <td>'.$contract['cusName'].'</td>
-            <td>'.$contract['hirDate'].'</td>
-            <td>'.$contract['hirStart'].'</td>
-            <td>'.$contract['hirEnd'].'</td>
-            <td>'.$contract['hirPattern'].'</td>
-            <td>'.$contract['usrName'].'</td>
-            <td>'.$contract['carNum'].'</td>
-            <td>'.$contract['numDay'].'</td>
-            <td>'.($contract['hirDeposit']*2).'</td>
-            <td>'.$contract['hirStatus'].'</td>
+            <td>' . $contract['id'] . '</td>
+            <td>' . $contract['hirNum'] . '</td>
+            <td>' . $contract['cusName'] . '</td>
+            <td>' . $contract['hirDate'] . '</td>
+            <td>' . $contract['hirStart'] . '</td>
+            <td>' . $contract['hirEnd'] . '</td>
+            <td>' . $contract['hirPattern'] . '</td>
+            <td>' . $contract['usrName'] . '</td>
+            <td>' . $contract['carNum'] . '</td>
+            <td>' . $contract['numDay'] . '</td>
+            <td>' . ($contract['hirDeposit'] * 2) . '</td>
+            <td>' . $contract['hirStatus'] . '</td>
         </tr>';
     }
-}else{
+} else {
     $html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
 }
 $html .= '</tbody>
 </table>
+<br>
+แสดง ' . $row_cnt . ' รายการ จากทั้งหมด ' . $row['total'] . ' รายการ
 </body>
 </html>';
 
 $mpdf->WriteHTML($html);
-$mpdf->Output('test.pdf',"I");
+$mpdf->Output('test.pdf', "I");

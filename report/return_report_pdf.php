@@ -31,6 +31,11 @@ if(count($where)){
 $order  = "ORDER BY tbreturn.id DESC ";
 $query  = $select.$from.$join.$where.$order;
 
+$select_cout = "SELECT count(id) as total FROM tbreturn";
+$result = mysqli_query($con, $select_cout);
+$row = mysqli_fetch_array($result);
+echo $row['total'];
+
 header("Content-type:application/pdf");
 header("Content-disposition: attachment;filename=return_report.pdf");
 
@@ -95,6 +100,7 @@ $html = '
             <div class="left">'.displaySearch($search, $start_date, $end_date).'</div>
             <div class="right">วันที่ออกรายงาน '.date('d-m-Y').'</div>
         </div>
+        <br>
 		<table>
             <thead>
                 <tr>
@@ -111,7 +117,9 @@ $html = '
                 </tr>
             </thead>
             <tbody>';
+            $row_cnt = 0;
             if( $result = $con->query($query)){
+                $row_cnt = mysqli_num_rows($result);
                 while($carReturn = $result->fetch_assoc()){
                     $html .= '
                     <tr>
@@ -132,6 +140,8 @@ $html = '
             }
 $html .= '</tbody>
 </table>
+<br>
+แสดง ' . $row_cnt . ' รายการ จากทั้งหมด ' . $row['total'] . ' รายการ
 </body>
 </html>';
 

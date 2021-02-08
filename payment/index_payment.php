@@ -77,7 +77,7 @@ include('../condb/condb.php');
                                             <td style="width: 10%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['Fines']; ?></td>
                                             <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['total']; ?></td>
                                             <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $row['deliver']; ?></td>
-                                            <td style="padding-left: 30px; font-size: 14pt; padding-top: 10px;"> <a style="width: 70px;" class="btn btn-success" href="../payment/create_payment.php?id=<?php echo $row['retID']; ?>" onclick="return confirm('คุณต้องการชำระเงินสัญญาเช่า <?php echo $row['hirNum']; ?> ?')"><i style="font-size: 1.5rem;" class="fa fa-credit-card-alt" aria-hidden="true"></i></a> </td>
+                                            <td style="padding-left: 30px; font-size: 14pt; padding-top: 10px;"> <a style="width: 60px;" class="btn btn-success" href="../payment/create_payment.php?id=<?php echo $row['retID']; ?>" onclick="return confirm('คุณต้องการชำระเงินสัญญาเช่า <?php echo $row['hirNum']; ?> ?')"><i style="font-size: 1.5rem;" class="fa fa-credit-card-alt" aria-hidden="true"></i></a> </td>
                                         </tr>
                                     <?php
                                     }
@@ -136,8 +136,8 @@ include('../condb/condb.php');
                                             <td style="padding-left: 10px; width: 12%; font-size: 14pt; padding-top: 10px;"><?php echo $data['carNum']; ?></td>
                                             <!-- <td style="padding-left: 10px;"><?php //echo $data['hirStart']; 
                                                                                     ?></td> -->
-                                            <td style="width: 8%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['hirStart']; ?></td>                                        
-                                            <td style="width: 8%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['hirEnd']; ?></td>                                        
+                                            <td style="width: 8%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['hirStart']; ?></td>
+                                            <td style="width: 8%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['hirEnd']; ?></td>
                                             <td style="width: 10%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['retDate']; ?></td>
                                             <td style="width: 6%; padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['Fines']; ?></td>
                                             <td style="padding-left: 10px; font-size: 14pt; padding-top: 10px;"><?php echo $data['total']; ?></td>

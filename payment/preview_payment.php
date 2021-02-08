@@ -122,11 +122,16 @@ $mpdf = new \Mpdf\Mpdf([
                             <td style="font-size: 16pt;" width="30%"></td>
                         </tr>
                     </table>
-                    <br>
-                    <table align="center" border="1">
+                    <table>
+                        <tr style="width: 100%;">
+                            <td style="font-size: 14pt; padding-left: 40px;" width="70%"><b><u>รายละเอียด</u></b></td>
+                            <td style="font-size: 14pt;" width="40%"></td>
+                        </tr>
+                    </table>
+                    <table align="center">
                         <tr>
                             <th style="font-size: 14pt; text-align: center;" width="60px">ลำดับ</th>
-                            <th style="font-size: 14pt; text-align: center;" width="320px">รายละเอียด</th>
+                            <th style="font-size: 14pt; text-align: center;" width="320px">รายการ</th>
                             <th style="font-size: 14pt; text-align: center;" width="210px">ราคา</th>
                         </tr>
                         <tr>
@@ -159,6 +164,19 @@ $mpdf = new \Mpdf\Mpdf([
                             <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">ค้างชำระ</td>
                             <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['hirDeposit']) ?> -.</td>
                         </tr>
+                    </table>
+                    <table>
+                        <tr style="width: 100%;">
+                            <td style="font-size: 14pt; padding-left: 40px;" width="70%"><b><u>ค่าปรับ</u></b></td>
+                            <td style="font-size: 14pt;" width="40%"></td>
+                        </tr>
+                    </table>
+                    <table align="center">
+                        <tr>
+                            <th style="font-size: 14pt; text-align: center;" width="60px"></th>
+                            <th style="font-size: 14pt; text-align: center;" width="320px">รายการ</th>
+                            <th style="font-size: 14pt; text-align: center;" width="210px">ราคา</th>
+                        </tr>
                         <tr>
                             <td style="font-size: 14pt; text-align: center;" width="60px">7</td>
                             <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">คืนช้าปรับวันละ 1,000 <u>คืนช้า</u> <?php echo $row['dateRate'] ?> วัน</td>
@@ -174,14 +192,9 @@ $mpdf = new \Mpdf\Mpdf([
                             <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['price_rePair']) ?> -.</td>
                         </tr>
                         <tr>
-                            <td style="font-size: 14pt; text-align: center;" width="60px">9</td>
-                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"></td>
+                            <td style="font-size: 14pt; text-align: center;" width="60px"></td>
+                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px"><?php echo convertAmountToLetter($row['total2']); ?>-.</td>
                             <td style="font-size: 14pt; text-align: right; padding-right: 85px;" width="210px"><?php echo number_format($row['total2']) ?> -.</b></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 14pt; text-align: center;" width="60px">10</td>
-                            <td style="font-size: 14pt; text-align: left; padding-left: 30px;" width="320px">ยอดชำระสุทธิ</td>
-                            <td style="font-size: 14pt; text-align: center;" width="210px"><?php echo convertAmountToLetter($row['total2']); ?>-.</b></td>
                         </tr>
                     </table>
                     <br>
