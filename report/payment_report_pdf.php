@@ -131,6 +131,23 @@ $html = '
             }else{
                 $html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
             }
+
+            $sum_price_repair = 0;
+            $sum_total2 = 0;
+
+            $select = "SELECT SUM(tbpayment.price_repair) as sum_price_repair ";
+            $query  = $select.$from.$join.$where;
+            $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
+            $row    = mysqli_fetch_object($result);
+            $sum_price_repair  = $row->sum_price_repair;
+
+            $select = "SELECT SUM(tbpayment.total2) as sum_total2 ";
+            $query  = $select.$from.$join.$where;
+            $result = $con->query($query); // ดึงจำนวนแถวทั้งหมด
+            $row    = mysqli_fetch_object($result);
+            $sum_total2  = $row->sum_total2;
+
+            $html .= '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>'.$sum_price_repair.'</td><td>'.$sum_total2.'</td></tr>';
 $html .= '</tbody>
 </table>
 </body>
